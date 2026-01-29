@@ -33,21 +33,27 @@ const AboutSection = () => {
             <div className="space-y-4 text-muted-foreground">
               <p>
                 I'm an undergraduate <span className="text-foreground">Computer Science and Engineering</span> student 
-                at <span className="text-primary">IIT Jodhpur</span>, driven by a passion for 
-                <span className="text-foreground"> Machine Learning</span>, <span className="text-foreground">Deep Learning</span>, 
-                and building AI systems that solve real-world problems.
+                at <span className="text-primary">IIT Jodhpur</span>, passionate about bridging 
+                <span className="text-foreground"> Machine Learning</span> with the 
+                <span className="text-foreground"> physical world</span>—building AI systems that understand and interact with real-world physics.
               </p>
               <p>
-                My expertise spans <span className="text-foreground">Large Language Models</span>, 
-                <span className="text-foreground"> Physics-Informed Neural Networks</span>, and 
-                <span className="text-foreground"> GPU-accelerated inference pipelines</span>—from RAG-based 
-                voice assistants using vLLM to neural surrogate models for aerodynamic simulation.
+                My focus lies in <span className="text-foreground">embodied AI</span> and 
+                <span className="text-foreground"> scientific machine learning</span>: using neural networks 
+                to model physical phenomena, accelerate simulations, and enable intelligent robotic systems 
+                that perceive, reason, and act in unstructured environments.
               </p>
               <p>
-                In UAV research, I leverage <span className="text-primary">NeuralFoil</span>—a physics-informed 
-                neural network trained on XFoil data—to predict airfoil performance at 
-                <span className="text-foreground font-mono"> 1000×</span> the speed of traditional CFD, 
-                enabling rapid design iteration through ML-driven optimization.
+                From <span className="text-foreground">Physics-Informed Neural Networks</span> that learn 
+                governing equations to <span className="text-foreground">neural surrogate models</span> replacing 
+                computationally expensive CFD solvers, I work at the intersection where 
+                <span className="text-primary">data-driven learning meets physical constraints</span>.
+              </p>
+              <p>
+                In UAV research, I leverage <span className="text-primary">NeuralFoil</span>—a PINN trained 
+                on XFoil data—to predict airfoil aerodynamics at 
+                <span className="text-foreground font-mono"> 1000×</span> the speed of traditional simulation, 
+                enabling ML-driven design optimization for real flight systems.
               </p>
             </div>
 
