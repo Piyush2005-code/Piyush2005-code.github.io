@@ -1,13 +1,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Code, Cpu, Database, Cog, Terminal, Box } from "lucide-react";
-import TiltCard from "./TiltCard";
 
 interface SkillCategory {
   icon: React.ReactNode;
   title: string;
   skills: string[];
-  color: "primary" | "accent";
+  color: string;
 }
 
 const skillCategories: SkillCategory[] = [
@@ -65,11 +64,8 @@ const SkillsSection = () => {
       {/* Background */}
       <div className="absolute inset-0 bg-secondary/30" />
       <div className="absolute inset-0 grid-pattern opacity-20" />
-      <motion.div 
-        className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full blur-[200px] opacity-20"
-        style={{ background: 'radial-gradient(circle, hsl(165 100% 50% / 0.3) 0%, transparent 70%)' }}
-        animate={{ x: [0, 30, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full blur-[200px] opacity-20"
+        style={{ background: 'radial-gradient(circle, hsl(165 100% 50% / 0.3) 0%, transparent 70%)' }} 
       />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -92,44 +88,36 @@ const SkillsSection = () => {
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
+              className="neon-card p-6 group"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
             >
-              <TiltCard 
-                className="neon-card p-6 h-full" 
-                glowColor={category.color}
-                intensity={10}
-              >
-                {/* Icon + Title */}
-                <div className="flex items-center gap-4 mb-5">
-                  <motion.div 
-                    className={`p-3 rounded ${category.color === 'primary' ? 'bg-primary/10 text-primary border-primary/20' : 'bg-accent/10 text-accent border-accent/20'} border transition-colors`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    {category.icon}
-                  </motion.div>
-                  <h3 className="text-lg font-display font-semibold text-foreground">
-                    {category.title}
-                  </h3>
+              {/* Icon + Title */}
+              <div className="flex items-center gap-4 mb-5">
+                <div className={`p-3 rounded bg-${category.color}/10 text-${category.color} border border-${category.color}/20 group-hover:bg-${category.color}/20 transition-colors`}>
+                  {category.icon}
                 </div>
+                <h3 className="text-lg font-display font-semibold text-foreground">
+                  {category.title}
+                </h3>
+              </div>
 
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <motion.span
-                      key={skill}
-                      className={`px-3 py-1.5 text-xs font-mono bg-background/50 text-muted-foreground border border-border/50 rounded-sm cursor-default ${category.color === 'primary' ? 'hover:border-primary/40 hover:text-primary' : 'hover:border-accent/40 hover:text-accent'} transition-all duration-200`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: index * 0.1 + i * 0.05 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </TiltCard>
+              {/* Skills */}
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, i) => (
+                  <motion.span
+                    key={skill}
+                    className={`px-3 py-1.5 text-xs font-mono bg-background/50 text-muted-foreground border border-border/50 rounded-sm hover:border-${category.color}/40 hover:text-${category.color} transition-all duration-200`}
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ delay: index * 0.1 + i * 0.05 }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -150,15 +138,11 @@ const SkillsSection = () => {
             {courses.map((course, index) => (
               <motion.span
                 key={course}
-                className="px-5 py-2.5 font-mono text-sm neon-card text-muted-foreground cursor-default"
+                className="px-5 py-2.5 font-mono text-sm neon-card text-muted-foreground"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.08, 
-                  y: -3,
-                  boxShadow: "0 0 25px hsl(165 100% 50% / 0.3)"
-                }}
+                whileHover={{ scale: 1.05 }}
               >
                 {course}
               </motion.span>
