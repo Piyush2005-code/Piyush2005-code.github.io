@@ -92,7 +92,7 @@ const SkillsSection = () => {
               "Data Structures & Algorithms",
               "Linear Algebra & O.D.E",
               "Probability & Stochastic Processes",
-              "Introduction to Computer Science",
+              "Introduction to Computer Science"
             ].map((course) => (
               <span
                 key={course}

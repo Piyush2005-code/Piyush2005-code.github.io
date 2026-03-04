@@ -2,7 +2,6 @@ import { ExternalLink, Github } from "lucide-react";
 import jarvisInterface from "@/assets/jarvis-interface.png";
 import llmChartGenerator from "@/assets/llm-chart-generator.png";
 import osScheduler from "@/assets/os-scheduler.png";
-import wingCad from "@/assets/wing-cad.png";
 import wingDrawing from "@/assets/wing-drawing.png";
 import pressureContours from "@/assets/pressure-contours.png";
 import cfdSimulation from "@/assets/cfd-simulation.png";
@@ -13,6 +12,9 @@ import cropDetectionImage from "@/assets/Crop_Detection_image.jpg";
 import cropDetectionMask from "@/assets/Crop_Detection_Segmentation_mask.jpg";
 import cropDetectionYolo from "@/assets/Crop_Detection_YOLO_Object_Detection.png";
 import unetModel from "@/assets/UNet model.png";
+import wingSideView from "@/assets/Wing_Side_view.jpeg"
+import FarmAerialImage from "@/assets/Farm_top_image.jpg"
+
 
 interface Project {
   title: string;
@@ -77,7 +79,7 @@ const projects: Project[] = [
     subtitle: "2025 • Computer Vision / Deep Learning",
     description:
       "A computer vision system for detecting and segmenting stressed or diseased crop regions from aerial and field imagery. Uses a U-Net CNN to generate pixel-wise binary masks highlighting yellow-stressed vegetation, with a full end-to-end pipeline from synthetic dataset generation to real-time video inference with overlay visualization.",
-    images: [cropDetectionImage, cropDetectionMask, cropDetectionYolo, unetModel],
+    images: [FarmAerialImage, cropDetectionMask, cropDetectionYolo, unetModel],
     tags: ["PyTorch", "U-Net", "OpenCV", "Semantic Segmentation", "Synthetic Data", "CUDA / MPS"],
     github: "https://github.com/Piyush2005-code/Computer-Vision-for-stressed-crop-detection.git",
     achievements: [
@@ -94,7 +96,7 @@ const projects: Project[] = [
     subtitle: "Inter IIT Tech Meet 14.0",
     description:
       "Surveyed high-lift wing configurations targeting lift coefficients greater than 5, benchmarking against state-of-the-art designs. Designed the complete end-to-end CAD model of the full wing assembly and validated aerodynamic performance through iterative CFD simulations.",
-    images: [wingCad, wingDrawing, pressureContours, cfdSimulation],
+    images: [wingSideView, wingDrawing, pressureContours, cfdSimulation],
     tags: ["CAD", "CFD", "ANSYS Fluent", "Aerodynamics", "Wing Design"],
     achievements: [
       "Studied fixed-wing flight dynamics and surveyed high-lift wing configurations achieving lift coefficients greater than 5",
