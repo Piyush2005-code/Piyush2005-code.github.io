@@ -13,12 +13,12 @@ const AboutSection = () => {
             <div className="relative glass-card glow-border p-4 overflow-hidden">
               <img
                 src={quadcopterHero}
-                alt="Quadcopter CAD Design"
+                alt="System Architecture Diagram"
                 className="w-full h-auto rounded object-cover"
               />
               <div className="absolute bottom-4 left-4 right-4 p-3 bg-background/80 backdrop-blur-sm rounded">
-                <p className="font-mono text-xs text-primary">// Quadcopter Design Project</p>
-                <p className="text-sm text-muted-foreground mt-1">Custom UAV CAD Model</p>
+                <p className="font-mono text-xs text-primary">// AI Systems Engineering</p>
+                <p className="text-sm text-muted-foreground mt-1">Building Infrastructure for ML Workloads</p>
               </div>
             </div>
           </div>
@@ -27,28 +27,27 @@ const AboutSection = () => {
           <div>
             <p className="section-heading">About Me</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-              Engineering <span className="text-gradient">Intelligent Systems</span>
+              Engineering <span className="text-gradient">AI Systems</span>
             </h2>
 
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I'm an undergraduate <span className="text-foreground">Computer Science and Engineering</span> student
-                at <span className="text-primary">IIT Jodhpur</span>, with a growing foundation in
-                <span className="text-foreground"> Artificial Intelligence</span>, systems engineering, and intelligent physical systems.
+                I am an undergraduate <span className="text-foreground">Computer Science</span> student
+                at <span className="text-primary">IIT Jodhpur</span> focused on
+                <span className="text-foreground"> AI systems</span>, operating systems, and computer architecture.
               </p>
               <p>
-                I've built <span className="text-foreground">scalable AI and LLM-powered applications</span>—including
-                real-time GPU-optimized voice assistants, RAG pipelines, and computer vision models such as
-                <span className="text-foreground"> YOLOv8</span> and <span className="text-foreground">U-Net</span>—alongside
-                core systems work spanning OS scheduling simulators and
-                <span className="text-foreground"> ARM64 unikernel design</span> for ML inference on embedded devices.
+                My work explores how modern AI workloads interact with hardware and system software.
+                I build infrastructure for machine learning including
+                <span className="text-foreground"> GPU-accelerated inference pipelines</span>,
+                <span className="text-foreground"> lightweight operating systems for ML workloads</span>, and
+                <span className="text-foreground"> distributed AI systems</span>.
               </p>
               <p>
-                Currently exploring <span className="text-foreground">operating systems</span>, embedded firmware,
-                and low-level systems with the goal of building
-                <span className="text-primary"> thoughtfully designed AI-systems</span> for constrained hardware.
-                I also have a keen passion for <span className="text-foreground">design</span>, expressed through
-                <span className="text-foreground"> CAD modelling</span>.
+                My interests include <span className="text-primary">ML systems</span>,
+                <span className="text-foreground"> GPU architecture</span>,
+                <span className="text-foreground"> AI inference infrastructure</span>, and
+                <span className="text-primary"> operating system design</span> for high-performance computing environments.
               </p>
             </div>
           </div>
