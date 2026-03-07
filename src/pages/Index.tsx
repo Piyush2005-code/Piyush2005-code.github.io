@@ -1,6 +1,8 @@
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import ResearchInterestsSection from "@/components/ResearchInterestsSection";
 import AboutSection from "@/components/AboutSection";
+import ResearchSection from "@/components/ResearchSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactSection from "@/components/ContactSection";
@@ -14,7 +16,9 @@ const Index = () => {
       <BackgroundMusic />
       <main>
         <HeroSection />
+        <ResearchInterestsSection />
         <AboutSection />
+        <ResearchSection />
         <ProjectsSection />
         <SkillsSection />
         <ContactSection />
