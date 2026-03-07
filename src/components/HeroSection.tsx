@@ -42,7 +42,7 @@ const HeroSection = () => {
           <p className="max-w-2xl mx-auto text-xl md:text-2xl text-foreground mb-8 font-medium">
             <span className="text-primary">Artificial Intelligence</span>
             <span className="text-muted-foreground mx-3">×</span>
-            <span className="text-electric-blue">Robotic Systems</span>
+            <span className="text-electric-blue">Computer Hardware</span>
           </p>
 
           <p className="max-w-xl mx-auto text-muted-foreground mb-10 font-mono text-sm">

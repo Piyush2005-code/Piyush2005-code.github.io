@@ -4,7 +4,7 @@ const interests = [
   "Operating Systems",
   "Computer Architecture",
   "GPU Architecture",
-  "Robotics",
+  "Embedded Systems",
   "Design",
 ];
 

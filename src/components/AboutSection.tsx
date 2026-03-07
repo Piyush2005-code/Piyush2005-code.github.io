@@ -47,7 +47,10 @@ const AboutSection = () => {
                 My interests include <span className="text-primary">ML systems</span>,
                 <span className="text-foreground"> GPU architecture</span>,
                 <span className="text-foreground"> AI inference infrastructure</span>, and
-                <span className="text-primary"> operating system design</span> for high-performance computing environments.
+                <span className="text-primary"> operating system design</span> for high-performance and low-power computing environments.
+              </p>
+              <p>
+                I also have a keen passion for design and aesthetics which has so far been expressed through <span className="text-foreground">CAD Modelling</span> in the domain of <span className="text-foreground">Robotics</span>.
               </p>
             </div>
           </div>
