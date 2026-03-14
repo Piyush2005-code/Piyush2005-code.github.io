@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/yourusername/ai-robotics-visionary.git"
   },
-  "homepage": "https://piyushsinghbhati.com",
+  "homepage": "https://piyushsinghbhati.github.io",
   "keywords": ["portfolio", "ai", "robotics", "react", "typescript", "vite"],
   "scripts": {
     "dev": "vite",
