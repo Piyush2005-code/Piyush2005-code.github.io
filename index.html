@@ -1762,7 +1762,8 @@
                 class="hl">distributed AI systems</span>.</p>
             <p>My interests include <span class="accent">ML systems</span>, <span class="hl">GPU architecture</span>,
               <span class="hl">AI inference infrastructure</span>, and <span class="accent">operating system
-                design</span> for high-performance and low-power computing environments.</p>
+                design</span> for high-performance and low-power computing environments.
+            </p>
             <p>I also have a keen passion for design and aesthetics expressed through <span class="hl">CAD
                 Modelling</span> in the domain of <span class="hl">Robotics</span>.</p>
           </div>
@@ -1836,25 +1837,25 @@
           </div>
         </div>
         <div class="proj-content">
-          <div class="proj-meta">2025–Ongoing · Embedded Systems / OS</div>
+          <div class="proj-meta">2025–Ongoing · Embedded Systems / OS · Open Source</div>
           <h3 class="proj-title">ARM64 Unikernel for ML Inference</h3>
-          <p class="proj-desc">Architecting a single-address-space ARM64 unikernel optimized for deterministic ML
-            inference on embedded devices. Implemented the full bare-metal boot sequence through UART driver on QEMU, a
-            cooperative scheduler, and benchmarking comparing Unikraft vs Linux VMs across inference workloads.</p>
+          <p class="proj-desc">Architected a bare-metal ARM64 unikernel (&lt;256KB) for deterministic ML inference,
+            featuring a custom zero-dependency ONNX runtime and optimized SIMD kernels for microsecond-level execution.
+          </p>
           <ul class="proj-achievements">
-            <li>Implemented ARMv8-A boot sequence, MMU setup (4KB granularity), identity-mapped page tables, and early
-              UART driver on QEMU virt platform</li>
-            <li>Designed and fully tested an OS-agnostic UART communication protocol with CRC validation, bounded
-              parsing, and max-payload handling</li>
-            <li>Built a cooperative scheduler prototype; analyzed context-switch overhead (less than 0.1% runtime cost)
+            <li>Implemented ARMv8-A boot (EL3&rarr;EL1), MMU setup, GICv2, and timer with full interrupt handling</li>
+            <li>Designed a cooperative priority scheduler with custom 104B context switching and sub-8&mu;s switch
+              latency</li>
+            <li>Developed a zero-dependency ONNX runtime (40+ ops) with custom protobuf parser and 128MB pre-allocated
+              tensor arena</li>
+            <li>Optimized Conv2D/GEMM kernels (cache-aligned, NEON SIMD) with hardware-timer profiling for &mu;s-level
+              analysis</li>
+            <li>Achieved ~269&mu;s inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines
             </li>
-            <li>Benchmarked Unikraft vs Linux VMs across inference workloads; analyzed P50/P99 latency and scheduling
-              variance</li>
           </ul>
           <div class="proj-tags">
-            <span class="proj-tag">C (C11)</span><span class="proj-tag">ARM64 Assembly</span><span
-              class="proj-tag">QEMU</span><span class="proj-tag">GCC Cross-Toolchain</span><span class="proj-tag">NEON
-              SIMD</span><span class="proj-tag">Unikraft</span>
+            <span class="proj-tag">C11</span><span class="proj-tag">ARM64 Assembly</span><span class="proj-tag">NEON
+              SIMD</span><span class="proj-tag">QEMU</span><span class="proj-tag">GCC</span>
           </div>
           <div class="proj-links">
             <a href="https://github.com/Piyush2005-code/MiniOS" target="_blank" class="proj-link">
@@ -1951,8 +1952,7 @@
         <div class="proj-imgs">
           <div class="proj-imgs-grid single">
             <div class="proj-img-wrap">
-              <img src="src/llm-chart-generator.png" alt="LLM Chart Generator"
-                onerror="this.style.display='none'" />
+              <img src="src/llm-chart-generator.png" alt="LLM Chart Generator" onerror="this.style.display='none'" />
               <div class="proj-img-overlay"></div>
             </div>
           </div>
@@ -1995,12 +1995,12 @@
                 onerror="this.style.display='none'" />
               <div class="proj-img-overlay"></div>
             </div>
-            <div class="proj-img-wrap"><img src="src/Crop_Detection_Segmentation_mask.jpg"
-                alt="Segmentation mask" onerror="this.style.display='none'" />
+            <div class="proj-img-wrap"><img src="src/Crop_Detection_Segmentation_mask.jpg" alt="Segmentation mask"
+                onerror="this.style.display='none'" />
               <div class="proj-img-overlay"></div>
             </div>
-            <div class="proj-img-wrap"><img src="src/Crop_Detection_YOLO_Object_Detection.png"
-                alt="YOLO detection" onerror="this.style.display='none'" />
+            <div class="proj-img-wrap"><img src="src/Crop_Detection_YOLO_Object_Detection.png" alt="YOLO detection"
+                onerror="this.style.display='none'" />
               <div class="proj-img-overlay"></div>
             </div>
             <div class="proj-img-wrap"><img src="src/UNet model.png" alt="U-Net model"
