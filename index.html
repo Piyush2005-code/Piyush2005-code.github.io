@@ -137,6 +137,11 @@
       transition: background .3s, backdrop-filter .3s, border-color .3s;
     }
 
+    /* Hide navbar behind modal when open */
+    body.modal-open nav {
+      z-index: 0;
+    }
+
     nav.scrolled {
       background: rgba(4, 8, 15, 0.88);
       backdrop-filter: blur(20px);
@@ -946,157 +951,353 @@
       background: var(--bg)
     }
 
-    .project-item {
+    .proj-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-      padding: 4rem 0;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
 
-    .project-item:last-child {
-      border-bottom: none
-    }
-
-    .project-item.reverse .proj-imgs {
-      order: 2
-    }
-
-    .project-item.reverse .proj-content {
-      order: 1
-    }
-
-    @media(max-width:900px) {
-      .project-item {
-        grid-template-columns: 1fr;
-        gap: 2rem
-      }
-
-      .project-item.reverse .proj-imgs {
-        order: 0
-      }
-
-      .project-item.reverse .proj-content {
-        order: 0
+    @media(max-width:1000px) {
+      .proj-grid {
+        grid-template-columns: repeat(2, 1fr)
       }
     }
 
-    .proj-imgs-grid {
-      display: grid;
-      gap: .75rem
+    @media(max-width:600px) {
+      .proj-grid {
+        grid-template-columns: 1fr
+      }
     }
 
-    .proj-imgs-grid.multi {
-      grid-template-columns: 1fr 1fr
-    }
-
-    .proj-img-wrap {
-      border: 1px solid var(--border);
+    .proj-card {
       background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
       overflow: hidden;
-      border-radius: 3px;
-      position: relative;
+      cursor: pointer;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      display: flex;
+      flex-direction: column;
     }
 
-    .proj-img-wrap img {
-      width: 100%;
+    .proj-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(0, 212, 255, .4);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 212, 255, .1);
+    }
+
+    .proj-card-img {
+      position: relative;
       height: 200px;
+      overflow: hidden;
+      background: var(--card2);
+      flex-shrink: 0;
+    }
+
+    .proj-card-img img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
       transition: transform .5s, filter .4s;
-      filter: saturate(.9);
+      filter: saturate(.85);
     }
 
-    .proj-img-wrap:hover img {
-      transform: scale(1.04);
+    .proj-card:hover .proj-card-img img {
+      transform: scale(1.07);
       filter: saturate(1.1)
     }
 
-    .proj-imgs-grid.single .proj-img-wrap img {
-      height: 260px
-    }
-
-    .proj-img-overlay {
+    .proj-card-img-ov {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(0, 212, 255, .04), rgba(26, 127, 232, .04));
+      background: linear-gradient(180deg, transparent 45%, rgba(4, 8, 15, .65) 100%);
       pointer-events: none;
     }
 
-    .proj-meta {
+    .proj-card-body {
+      padding: 1.3rem 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1
+    }
+
+    .proj-card-meta {
       font-family: var(--font-mono);
-      font-size: .65rem;
+      font-size: .6rem;
       color: var(--cyan);
       letter-spacing: .12em;
       text-transform: uppercase;
-      margin-bottom: .75rem
+      margin-bottom: .55rem;
     }
 
-    .proj-title {
+    .proj-card-title {
       font-family: var(--font-head);
-      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-size: 1.08rem;
       font-weight: 700;
       color: var(--txt);
-      margin-bottom: .75rem;
-      line-height: 1.1
+      margin-bottom: .6rem;
+      line-height: 1.25;
     }
 
-    .proj-desc {
-      font-size: .9rem;
+    .proj-card-desc {
+      font-size: .8rem;
       color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 1.5rem
+      line-height: 1.7;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 1rem;
     }
 
-    .proj-achievements {
+    .proj-card-hint {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: var(--font-mono);
+      font-size: .63rem;
+      color: var(--cyan);
+      letter-spacing: .08em;
+      opacity: .6;
+      transition: opacity .2s, gap .2s;
+    }
+
+    .proj-card:hover .proj-card-hint {
+      opacity: 1;
+      gap: .75rem
+    }
+
+    .proj-card-hint svg {
+      width: 12px;
+      height: 12px;
+      transition: transform .2s
+    }
+
+    .proj-card:hover .proj-card-hint svg {
+      transform: translateX(4px)
+    }
+
+    /* ── MODAL ── */
+    .proj-modal-ov {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(4, 8, 15, .83);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .proj-modal-ov.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .proj-modal {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(.93) translateY(22px);
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border2) transparent;
+    }
+
+    .proj-modal-ov.open .proj-modal {
+      transform: scale(1) translateY(0)
+    }
+
+    .proj-modal::-webkit-scrollbar {
+      width: 4px
+    }
+
+    .proj-modal::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 2px
+    }
+
+    /* sticky close header inside modal */
+    .proj-modal-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      padding: .65rem 1rem;
+      flex-shrink: 0;
+    }
+
+    .proj-modal-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border2);
+      background: rgba(6, 13, 26, .95);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: border-color .2s, color .2s, background .2s;
+      flex-shrink: 0;
+    }
+
+    .proj-modal-close:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0, 212, 255, .08)
+    }
+
+    .proj-modal-close svg {
+      width: 15px;
+      height: 15px
+    }
+
+    .proj-modal-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.9)
+    }
+
+    .proj-modal-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .4rem;
+      padding: .4rem;
+      background: var(--bg2);
+    }
+
+    .proj-modal-imgs img {
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.9);
+      border-radius: 2px;
+    }
+
+    @media(max-width:600px) {
+      .proj-modal-img {
+        height: 180px
+      }
+
+      .proj-modal-imgs img {
+        height: 110px
+      }
+    }
+
+    .proj-modal-body {
+      padding: 2rem 2.5rem 2.5rem;
+    }
+
+    @media(max-width:600px) {
+      .proj-modal-body {
+        padding: 1.4rem 1.2rem 2rem
+      }
+    }
+
+    .proj-modal-meta {
+      font-family: var(--font-mono);
+      font-size: .63rem;
+      color: var(--cyan);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+
+    .proj-modal-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--txt);
+      margin-bottom: .9rem;
+      line-height: 1.15;
+    }
+
+    .proj-modal-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.6rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proj-modal-ach-lbl {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      color: var(--dim);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+
+    .proj-modal-ach {
       list-style: none;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
       display: flex;
       flex-direction: column;
-      gap: .6rem
+      gap: .65rem;
     }
 
-    .proj-achievements li {
+    .proj-modal-ach li {
       display: flex;
       align-items: flex-start;
       gap: .75rem;
-      font-size: .82rem;
+      font-size: .84rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    .proj-achievements li::before {
+    .proj-modal-ach li::before {
       content: '▹';
       color: var(--cyan);
       flex-shrink: 0;
       margin-top: .05rem
     }
 
-    .proj-tags {
+    .proj-modal-tags {
       display: flex;
       flex-wrap: wrap;
       gap: .4rem;
-      margin-bottom: 1.5rem
+      margin-bottom: 1.6rem
     }
 
-    .proj-tag {
-      padding: .3rem .75rem;
+    .proj-modal-tag {
+      padding: .28rem .7rem;
       font-family: var(--font-mono);
-      font-size: .65rem;
+      font-size: .63rem;
       border: 1px solid var(--border);
       background: rgba(10, 22, 40, .5);
       color: var(--dim);
       border-radius: 2px;
     }
 
-    .proj-links {
+    .proj-modal-links {
       display: flex;
       gap: 1.5rem;
       align-items: center
     }
 
-    .proj-link {
+    .proj-modal-link {
       display: flex;
       align-items: center;
       gap: .5rem;
@@ -1108,14 +1309,16 @@
       transition: color .2s;
     }
 
-    .proj-link:hover {
+    .proj-modal-link:hover {
       color: var(--cyan)
     }
 
-    .proj-link svg {
+    .proj-modal-link svg {
       width: 16px;
       height: 16px
     }
+
+
 
     /* ── SKILLS ── */
     #skills {
@@ -1823,302 +2026,131 @@
     <div class="section-max">
       <div class="section-head reveal">
         <div class="section-label">Featured Work</div>
-        <h2 class="section-title">Projects & <span class="grad">Research</span></h2>
+        <h2 class="section-title">Projects &amp; <span class="grad">Research</span></h2>
       </div>
-
-      <!-- Project 1 -->
-      <div class="project-item reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid single">
-            <div class="proj-img-wrap">
-              <img src="src/Embedded_Hardware.avif" alt="ARM64 Unikernel" onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
+      <div class="proj-grid">
+        <div class="proj-card reveal" onclick="openModal(0)">
+          <div class="proj-card-img"><img src="src/Embedded_Hardware.avif" alt="ARM64"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">2025–Ongoing · Embedded Systems / OS</div>
+            <h3 class="proj-card-title">ARM64 Unikernel for ML Inference</h3>
+            <p class="proj-card-desc">Bare-metal ARM64 unikernel (&lt;256KB) for deterministic ML inference with custom
+              ONNX runtime and NEON SIMD kernels achieving ~269µs latency.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
-        <div class="proj-content">
-          <div class="proj-meta">2025–Ongoing · Embedded Systems / OS · Open Source</div>
-          <h3 class="proj-title">ARM64 Unikernel for ML Inference</h3>
-          <p class="proj-desc">Architected a bare-metal ARM64 unikernel (&lt;256KB) for deterministic ML inference,
-            featuring a custom zero-dependency ONNX runtime and optimized SIMD kernels for microsecond-level execution.
-          </p>
-          <ul class="proj-achievements">
-            <li>Implemented ARMv8-A boot (EL3&rarr;EL1), MMU setup, GICv2, and timer with full interrupt handling</li>
-            <li>Designed a cooperative priority scheduler with custom 104B context switching and sub-8&mu;s switch
-              latency</li>
-            <li>Developed a zero-dependency ONNX runtime (40+ ops) with custom protobuf parser and 128MB pre-allocated
-              tensor arena</li>
-            <li>Optimized Conv2D/GEMM kernels (cache-aligned, NEON SIMD) with hardware-timer profiling for &mu;s-level
-              analysis</li>
-            <li>Achieved ~269&mu;s inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines
-            </li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">C11</span><span class="proj-tag">ARM64 Assembly</span><span class="proj-tag">NEON
-              SIMD</span><span class="proj-tag">QEMU</span><span class="proj-tag">GCC</span>
+        <div class="proj-card reveal" style="transition-delay:.05s" onclick="openModal(1)">
+          <div class="proj-card-img"><img src="src/os-scheduler.png" alt="OS Scheduler"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
           </div>
-          <div class="proj-links">
-            <a href="https://github.com/Piyush2005-code/MiniOS" target="_blank" class="proj-link">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              Source Code
-            </a>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">2025 · Systems Programming</div>
+            <h3 class="proj-card-title">OS Scheduling Algorithm Simulator</h3>
+            <p class="proj-card-desc">Classical OS scheduling algorithms with interactive UI, real-time Gantt charts,
+              and cross-platform Electron desktop app.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-item reverse reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid single">
-            <div class="proj-img-wrap">
-              <img src="src/os-scheduler.png" alt="OS Scheduler" onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
+        <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(2)">
+          <div class="proj-card-img"><img src="src/jarvis-interface.png" alt="JARVIS"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">2025 · AI/ML Project</div>
+            <h3 class="proj-card-title">JARVIS Voice Assistant</h3>
+            <p class="proj-card-desc">Real-time voice assistant with sub-second GPU-accelerated inference on NVIDIA
+              A5000, RAG-based context, and 500+ concurrent user support.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
-        <div class="proj-content">
-          <div class="proj-meta">2025 · Systems Programming</div>
-          <h3 class="proj-title">OS Scheduling Algorithm Simulator</h3>
-          <p class="proj-desc">Implemented classical OS scheduling algorithms with interactive UI-based visualization.
-            Features real-time Gantt chart generation for analyzing scheduling behavior and algorithm comparison.</p>
-          <ul class="proj-achievements">
-            <li>Implemented FCFS, Round Robin, and Priority scheduling algorithms with configurable parameters</li>
-            <li>Built real-time Gantt chart visualization for process scheduling analysis</li>
-            <li>Created interactive UI for comparing algorithm performance metrics</li>
-            <li>Developed desktop application using Electron for cross-platform support</li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">React</span><span class="proj-tag">TypeScript</span><span
-              class="proj-tag">Electron</span><span class="proj-tag">Algorithm Visualization</span><span
-              class="proj-tag">Operating Systems</span>
+        <div class="proj-card reveal" style="transition-delay:.15s" onclick="openModal(3)">
+          <div class="proj-card-img"><img src="src/llm-chart-generator.png" alt="LLM Charts"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
           </div>
-          <div class="proj-links">
-            <a href="https://github.com/Piyush2005-code/Operating-System-Scheduling-Algorithms.git" target="_blank"
-              class="proj-link">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              Source Code
-            </a>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">2025 · Deep Learning</div>
+            <h3 class="proj-card-title">LLM-Based Chart Generation</h3>
+            <p class="proj-card-desc">Automated chart generation from uploaded PDFs using LLMs and semantic NLP
+              extraction with real-time visualization rendering.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="project-item reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid single">
-            <div class="proj-img-wrap">
-              <img src="src/jarvis-interface.png" alt="JARVIS" onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
+        <div class="proj-card reveal" style="transition-delay:.2s" onclick="openModal(4)">
+          <div class="proj-card-img"><img src="src/Farm_top_image.jpg" alt="Crop Detection"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">2025 · Computer Vision</div>
+            <h3 class="proj-card-title">Crop Stress Detection — U-Net</h3>
+            <p class="proj-card-desc">Pixel-wise semantic segmentation of stressed crops from aerial imagery using a
+              7.7M-param U-Net with real-time video inference.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
-        <div class="proj-content">
-          <div class="proj-meta">2025 · AI/ML Project</div>
-          <h3 class="proj-title">JARVIS Voice Assistant</h3>
-          <p class="proj-desc">Engineered a real-time voice assistant with sub-second latency leveraging GPU-accelerated
-            inference pipelines. Built end-to-end ML infrastructure supporting real-time audio processing, natural
-            language understanding, and context-aware response generation.</p>
-          <ul class="proj-achievements">
-            <li>Implemented GPU inference on NVIDIA A5000 with sub-second latency using optimized CUDA kernels</li>
-            <li>Deployed containerized ML inference stack supporting 500+ concurrent users with 98% uptime</li>
-            <li>Integrated Retrieval-Augmented Generation (RAG) for context-aware, knowledge-grounded responses</li>
-            <li>Built real-time audio processing pipeline using AudioFlamingo3 for voice-to-text transcription</li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">NVIDIA AudioFlamingo3</span><span class="proj-tag">vLLM</span><span
-              class="proj-tag">RAG</span><span class="proj-tag">Docker</span><span
-              class="proj-tag">Kubernetes</span><span class="proj-tag">PyTorch</span>
+        <div class="proj-card reveal" style="transition-delay:.25s" onclick="openModal(5)">
+          <div class="proj-card-img"><img src="src/Wing_Side_view.jpeg" alt="Wing Design"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
           </div>
-          <div class="proj-links">
-            <a href="https://github.com/AISocietyIITJ/Jarvis2.O" target="_blank" class="proj-link">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              Source Code
-            </a>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">Inter IIT Tech Meet 14.0 · Aeronautics</div>
+            <h3 class="proj-card-title">Fixed-Wing STOL Wing Design</h3>
+            <p class="proj-card-desc">High-lift wing configuration achieving CL = 8.1258 with full CAD assembly and CFD
+              validation using ANSYS Fluent.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="project-item reverse reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid single">
-            <div class="proj-img-wrap">
-              <img src="src/llm-chart-generator.png" alt="LLM Chart Generator" onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
+        <div class="proj-card reveal" style="transition-delay:.3s" onclick="openModal(6)">
+          <div class="proj-card-img"><img src="src/quadcopter-isometric.png" alt="Quadcopter"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
           </div>
-        </div>
-        <div class="proj-content">
-          <div class="proj-meta">2025 · Deep Learning Project</div>
-          <h3 class="proj-title">LLM-Based Chart Generation Web App</h3>
-          <p class="proj-desc">Built an automated chart generation pipeline that uses Large Language Models to analyze
-            uploaded PDF documents and generate meaningful data visualizations. Leverages NLP for document understanding
-            and automated insight extraction.</p>
-          <ul class="proj-achievements">
-            <li>Implemented LLM-based document parsing using transformer architectures for semantic understanding</li>
-            <li>Built NLP pipeline for extracting structured data from unstructured PDF content</li>
-            <li>Designed automated chart selection algorithm using ML-based data type classification</li>
-            <li>Created responsive frontend-backend workflow with real-time data visualization rendering</li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">LLMs</span><span class="proj-tag">NLP</span><span class="proj-tag">PDF
-              Parsing</span><span class="proj-tag">React</span><span class="proj-tag">Node.js</span><span
-              class="proj-tag">Data Visualization</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Piyush2005-code/Chart-Generation-using-LLMs.git" target="_blank"
-              class="proj-link">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              Source Code
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 5 — Crop Detection -->
-      <div class="project-item reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid multi">
-            <div class="proj-img-wrap"><img src="src/Farm_top_image.jpg" alt="Farm aerial"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/Crop_Detection_Segmentation_mask.jpg" alt="Segmentation mask"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/Crop_Detection_YOLO_Object_Detection.png" alt="YOLO detection"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/UNet model.png" alt="U-Net model"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-          </div>
-        </div>
-        <div class="proj-content">
-          <div class="proj-meta">2025 · Computer Vision / Deep Learning</div>
-          <h3 class="proj-title">Crop Stress Detection — U-Net Semantic Segmentation</h3>
-          <p class="proj-desc">A computer vision system for detecting and segmenting stressed or diseased crop regions
-            from aerial and field imagery. Uses a U-Net CNN to generate pixel-wise binary masks highlighting
-            yellow-stressed vegetation, with a full end-to-end pipeline from synthetic dataset generation to real-time
-            video inference.</p>
-          <ul class="proj-achievements">
-            <li>Designed a U-Net-based semantic segmentation model (~7.7M params) with skip connections for pixel-level
-              crop stress detection</li>
-            <li>Built a synthetic dataset generation pipeline simulating realistic yellow-stressed patches using
-              Gaussian blending and rotational augmentation (4× expansion)</li>
-            <li>Full training pipeline with AdamW optimizer, BCEWithLogitsLoss, Dice coefficient tracking, and 80/10/10
-              train–val–test split</li>
-            <li>Developed real-time video inference pipeline (OpenCV + batch processing) generating overlay MP4 outputs
-            </li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">PyTorch</span><span class="proj-tag">U-Net</span><span
-              class="proj-tag">OpenCV</span><span class="proj-tag">Semantic Segmentation</span><span
-              class="proj-tag">Synthetic Data</span><span class="proj-tag">CUDA / MPS</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Piyush2005-code/Computer-Vision-for-stressed-crop-detection.git" target="_blank"
-              class="proj-link">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              Source Code
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 6 — Wing -->
-      <div class="project-item reverse reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid multi">
-            <div class="proj-img-wrap"><img src="src/Wing_Side_view.jpeg" alt="Wing side view"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/wing-drawing.png" alt="Wing drawing"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/pressure-contours.png" alt="Pressure contours"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/cfd-simulation.png" alt="CFD simulation"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-          </div>
-        </div>
-        <div class="proj-content">
-          <div class="proj-meta">Inter IIT Tech Meet 14.0 · Aeronautics</div>
-          <h3 class="proj-title">Fixed-Wing STOL Aircraft Wing Design</h3>
-          <p class="proj-desc">Surveyed high-lift wing configurations targeting lift coefficients greater than 5,
-            benchmarking against state-of-the-art designs. Designed the complete end-to-end CAD model of the full wing
-            assembly and validated aerodynamic performance through iterative CFD simulations.</p>
-          <ul class="proj-achievements">
-            <li>Studied fixed-wing flight dynamics and surveyed high-lift wing configurations achieving lift
-              coefficients greater than 5</li>
-            <li>Achieved a maximum lift coefficient of 8.1258 under realistic thrust-device interaction conditions</li>
-            <li>Designed the complete end-to-end CAD model of the full wing assembly</li>
-            <li>Validated aerodynamic performance through iterative CFD simulations using ANSYS Fluent</li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">CAD</span><span class="proj-tag">CFD</span><span class="proj-tag">ANSYS
-              Fluent</span><span class="proj-tag">Aerodynamics</span><span class="proj-tag">Wing Design</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 7 — Quadcopter -->
-      <div class="project-item reveal">
-        <div class="proj-imgs">
-          <div class="proj-imgs-grid multi">
-            <div class="proj-img-wrap"><img src="src/quadcopter-isometric.png" alt="Quadcopter isometric"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-            <div class="proj-img-wrap"><img src="src/quadcopter-front.png" alt="Quadcopter front"
-                onerror="this.style.display='none'" />
-              <div class="proj-img-overlay"></div>
-            </div>
-          </div>
-        </div>
-        <div class="proj-content">
-          <div class="proj-meta">Personal Project · Robotics</div>
-          <h3 class="proj-title">Quadcopter CAD Design & Development</h3>
-          <p class="proj-desc">Complete design and development of a custom quadcopter with detailed CAD modeling,
-            structural analysis, and component integration for autonomous flight capabilities.</p>
-          <ul class="proj-achievements">
-            <li>Designed full assembly CAD model with structural optimization</li>
-            <li>Optimized frame geometry for payload capacity and flight stability</li>
-            <li>Implemented modular component design for easy maintenance and upgrades</li>
-          </ul>
-          <div class="proj-tags">
-            <span class="proj-tag">CAD</span><span class="proj-tag">UAV Design</span><span class="proj-tag">Fusion
-              360</span><span class="proj-tag">Robotics</span><span class="proj-tag">Autonomous Systems</span>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">Personal Project · Robotics</div>
+            <h3 class="proj-card-title">Quadcopter CAD Design</h3>
+            <p class="proj-card-desc">Custom quadcopter with full CAD modeling, structural analysis, and modular
+              component design optimized for autonomous flight.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <!-- SKILLS -->
   <section id="skills">
     <div class="section-max">
@@ -2218,6 +2250,8 @@
           <span class="coursework-pill">Linear Algebra & O.D.E</span>
           <span class="coursework-pill">Probability & Stochastic Processes</span>
           <span class="coursework-pill">Introduction to Computer Science</span>
+          <span class="coursework-pill">Software Engineering</span>
+          <span class="coursework-pill">Pattern Recognition and Machine Learning</span>
         </div>
       </div>
     </div>
@@ -2361,6 +2395,85 @@
       });
     });
 
+
+    // ── PROJECT MODALS ──
+    const GH = '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>';
+    const PROJECTS = [
+      {
+        meta: '2025\u2013Ongoing \u00b7 Embedded Systems / OS', title: 'ARM64 Unikernel for ML Inference',
+        imgs: ['src/Embedded_Hardware.avif'],
+        desc: 'Architected a bare-metal ARM64 unikernel (<256KB) for deterministic ML inference, featuring a custom zero-dependency ONNX runtime and optimized SIMD kernels for microsecond-level execution.',
+        ach: ['Implemented ARMv8-A boot (EL3\u2192EL1), MMU setup, GICv2, and timer with full interrupt handling', 'Designed a cooperative priority scheduler with custom 104B context switching and sub-8\u00b5s switch latency', 'Developed a zero-dependency ONNX runtime (40+ ops) with custom protobuf parser and 128MB pre-allocated tensor arena (no runtime malloc)', 'Optimized Conv2D/GEMM kernels (cache-aligned, NEON SIMD) with hardware-timer profiling for \u00b5s-level analysis', 'Achieved ~269\u00b5s inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines'],
+        tags: ['C11', 'ARM64 Assembly', 'NEON SIMD', 'QEMU', 'GCC'], link: 'https://github.com/Piyush2005-code/MiniOS'
+      },
+      {
+        meta: '2025 \u00b7 Systems Programming', title: 'OS Scheduling Algorithm Simulator',
+        imgs: ['src/os-scheduler.png'],
+        desc: 'Implemented classical OS scheduling algorithms with interactive UI-based visualization. Features real-time Gantt chart generation for analyzing scheduling behavior and algorithm comparison.',
+        ach: ['Implemented FCFS, Round Robin, and Priority scheduling algorithms with configurable parameters', 'Built real-time Gantt chart visualization for process scheduling analysis', 'Created interactive UI for comparing algorithm performance metrics', 'Developed desktop application using Electron for cross-platform support'],
+        tags: ['React', 'TypeScript', 'Electron', 'Algorithm Visualization', 'Operating Systems'], link: 'https://github.com/Piyush2005-code/Operating-System-Scheduling-Algorithms.git'
+      },
+      {
+        meta: '2025 \u00b7 AI/ML Project', title: 'JARVIS Voice Assistant',
+        imgs: ['src/jarvis-interface.png'],
+        desc: 'Engineered a real-time voice assistant with sub-second latency leveraging GPU-accelerated inference pipelines. Built end-to-end ML infrastructure for audio processing, NLU, and context-aware response generation.',
+        ach: ['Implemented GPU inference on NVIDIA A5000 with sub-second latency using optimized CUDA kernels', 'Deployed containerized ML inference stack supporting 500+ concurrent users with 98% uptime', 'Integrated Retrieval-Augmented Generation (RAG) for context-aware, knowledge-grounded responses', 'Built real-time audio processing pipeline using AudioFlamingo3 for voice-to-text transcription'],
+        tags: ['NVIDIA AudioFlamingo3', 'vLLM', 'RAG', 'Docker', 'Kubernetes', 'PyTorch'], link: 'https://github.com/AISocietyIITJ/Jarvis2.O'
+      },
+      {
+        meta: '2025 \u00b7 Deep Learning Project', title: 'LLM-Based Chart Generation Web App',
+        imgs: ['src/llm-chart-generator.png'],
+        desc: 'Built an automated chart generation pipeline using LLMs to analyze uploaded PDF documents and generate meaningful data visualizations, leveraging NLP for document understanding and automated insight extraction.',
+        ach: ['Implemented LLM-based document parsing using transformer architectures for semantic understanding', 'Built NLP pipeline for extracting structured data from unstructured PDF content', 'Designed automated chart selection algorithm using ML-based data type classification', 'Created responsive frontend-backend workflow with real-time data visualization rendering'],
+        tags: ['LLMs', 'NLP', 'PDF Parsing', 'React', 'Node.js', 'Data Visualization'], link: 'https://github.com/Piyush2005-code/Chart-Generation-using-LLMs.git'
+      },
+      {
+        meta: '2025 \u00b7 Computer Vision / Deep Learning', title: 'Crop Stress Detection \u2014 U-Net Semantic Segmentation',
+        imgs: ['src/Farm_top_image.jpg', 'src/Crop_Detection_Segmentation_mask.jpg', 'src/Crop_Detection_YOLO_Object_Detection.png', 'src/UNet model.png'],
+        desc: 'A computer vision system for detecting and segmenting stressed crop regions from aerial imagery using a U-Net CNN generating pixel-wise binary masks, with a full pipeline from synthetic dataset generation to real-time video inference.',
+        ach: ['Designed a U-Net-based segmentation model (~7.7M params) with skip connections for pixel-level crop stress detection', 'Built a synthetic dataset pipeline using Gaussian blending and rotational augmentation (4\u00d7 expansion)', 'Full training pipeline with AdamW optimizer, BCEWithLogitsLoss, Dice coefficient tracking, 80/10/10 split', 'Developed real-time video inference pipeline (OpenCV + batch processing) generating overlay MP4 outputs'],
+        tags: ['PyTorch', 'U-Net', 'OpenCV', 'Semantic Segmentation', 'Synthetic Data', 'CUDA / MPS'], link: 'https://github.com/Piyush2005-code/Computer-Vision-for-stressed-crop-detection.git'
+      },
+      {
+        meta: 'Inter IIT Tech Meet 14.0 \u00b7 Aeronautics', title: 'Fixed-Wing STOL Aircraft Wing Design',
+        imgs: ['src/Wing_Side_view.jpeg', 'src/wing-drawing.png', 'src/pressure-contours.png', 'src/cfd-simulation.png'],
+        desc: 'Surveyed high-lift wing configurations targeting CL > 5, benchmarking against state-of-the-art designs. Designed complete end-to-end CAD model and validated aerodynamic performance through iterative CFD simulations.',
+        ach: ['Studied fixed-wing flight dynamics and surveyed high-lift configurations achieving CL > 5', 'Achieved a maximum lift coefficient of 8.1258 under realistic thrust-device interaction conditions', 'Designed the complete end-to-end CAD model of the full wing assembly', 'Validated aerodynamic performance through iterative CFD simulations using ANSYS Fluent'],
+        tags: ['CAD', 'CFD', 'ANSYS Fluent', 'Aerodynamics', 'Wing Design'], link: null
+      },
+      {
+        meta: 'Personal Project \u00b7 Robotics', title: 'Quadcopter CAD Design & Development',
+        imgs: ['src/quadcopter-isometric.png', 'src/quadcopter-front.png'],
+        desc: 'Complete design and development of a custom quadcopter with detailed CAD modeling, structural analysis, and modular component integration for autonomous flight capabilities.',
+        ach: ['Designed full assembly CAD model with structural optimization for weight and rigidity', 'Optimized frame geometry for payload capacity and flight stability', 'Implemented modular component design for easy maintenance and upgrades'],
+        tags: ['CAD', 'UAV Design', 'Fusion 360', 'Robotics', 'Autonomous Systems'], link: null
+      }
+    ];
+    function openModal(idx) {
+      const p = PROJECTS[idx];
+      const ia = document.getElementById('pm-img-area');
+      if (p.imgs.length === 1) {
+        ia.innerHTML = `<img class="proj-modal-img" src="${p.imgs[0]}" alt="${p.title}" onerror="this.style.display='none'"/>`;
+      } else {
+        ia.innerHTML = `<div class="proj-modal-imgs">${p.imgs.map(s => `<img src="${s}" alt="" onerror="this.style.display='none'"/>`).join('')}</div>`;
+      }
+      document.getElementById('pm-meta').textContent = p.meta;
+      document.getElementById('pm-title').textContent = p.title;
+      document.getElementById('pm-desc').textContent = p.desc;
+      document.getElementById('pm-ach').innerHTML = p.ach.map(a => `<li>${a}</li>`).join('');
+      document.getElementById('pm-tags').innerHTML = p.tags.map(t => `<span class="proj-modal-tag">${t}</span>`).join('');
+      document.getElementById('pm-links').innerHTML = p.link ? `<a class="proj-modal-link" href="${p.link}" target="_blank">${GH} Source Code</a>` : '';
+      document.getElementById('proj-modal').classList.add('open');
+      document.body.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('proj-modal').classList.remove('open');
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
     // ── MUSIC ──
     const audio = document.getElementById('bg-audio');
     const btn = document.getElementById('music-btn');
@@ -2374,6 +2487,30 @@
       playing = !playing;
     });
   </script>
+
+  <!-- PROJECT MODAL (body-level to escape stacking contexts) -->
+  <div class="proj-modal-ov" id="proj-modal" onclick="if(event.target===this)closeModal()">
+    <div class="proj-modal">
+      <div class="proj-modal-header">
+        <button class="proj-modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg></button>
+      </div>
+      <div id="pm-img-area"></div>
+      <div class="proj-modal-body">
+        <div class="proj-modal-meta" id="pm-meta"></div>
+        <h3 class="proj-modal-title" id="pm-title"></h3>
+        <p class="proj-modal-desc" id="pm-desc"></p>
+        <div class="proj-modal-ach-lbl">Key Achievements</div>
+        <ul class="proj-modal-ach" id="pm-ach"></ul>
+        <div class="proj-modal-tags" id="pm-tags"></div>
+        <div class="proj-modal-links" id="pm-links"></div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
