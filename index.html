@@ -675,33 +675,109 @@
 
       .about-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(320px, .85fr) 1fr;
         gap: 5rem;
-        align-items: center
+        align-items: center;
+        perspective: 1600px;
       }
 
-      @media(max-width:900px) {
-        .about-grid {
-          grid-template-columns: 1fr;
-          gap: 3rem
-        }
-      }
-
-      .portrait-wrap {
-        position: relative
-      }
-
-      .portrait-frame {
+      .about-flashcard {
         position: relative;
+        display: block;
+        width: 100%;
+        min-height: 0;
+        aspect-ratio: 842 / 740;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        text-align: left;
+        transform-style: preserve-3d;
+      }
+
+      .about-flashcard.open {
+        grid-column: 1 / -1;
+        min-height: 640px;
+        aspect-ratio: auto;
+      }
+
+      .about-flashcard.open+.about-teaser {
+        display: none;
+      }
+
+      .about-flashcard:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 10px;
+      }
+
+      .about-flashcard-inner {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+        transition: transform .8s cubic-bezier(.2, .8, .2, 1);
+      }
+
+      .about-flashcard.open .about-flashcard-inner {
+        transform: rotateY(180deg);
+      }
+
+      .about-card-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
         border: 1px solid var(--border2);
         border-radius: 4px;
         overflow: hidden;
         background: var(--card);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, .34);
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+      }
+
+      .about-card-front {
+        justify-content: flex-end;
+      }
+
+      .about-card-back {
+        transform: rotateY(180deg);
+        padding: clamp(1.5rem, 4vw, 3rem);
+        justify-content: center;
+        background:
+          linear-gradient(135deg, rgba(0, 212, 255, .06), transparent 45%, rgba(26, 127, 232, .08)),
+          var(--card);
+      }
+
+      .about-card-back::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(0, 212, 255, .08);
+        pointer-events: none;
+      }
+
+      .portrait-wrap {
+        position: relative;
+      }
+
+      .about-card-front .portrait-wrap {
+        position: absolute;
+        inset: 0;
+        display: block;
+      }
+
+      .portrait-frame {
+        position: absolute;
+        inset: 0;
       }
 
       .portrait-frame img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
         display: block;
         filter: saturate(.85) contrast(1.05)
       }
@@ -726,9 +802,11 @@
         border-radius: 3px;
         padding: .75rem 1rem;
         z-index: 2;
+        text-align: left;
       }
 
       .portrait-chip-tag {
+        display: block;
         font-family: var(--font-mono);
         font-size: .65rem;
         color: var(--cyan);
@@ -736,9 +814,39 @@
       }
 
       .portrait-chip-text {
+        display: block;
         font-size: .8rem;
         color: var(--txt2);
         margin-top: .25rem
+      }
+
+      .about-front-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        margin-top: .8rem;
+        font-family: var(--font-mono);
+        font-size: .68rem;
+        color: var(--cyan);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .about-front-hint::after {
+        content: '↗';
+        font-size: .8rem;
+      }
+
+      .about-teaser {
+        position: relative;
+      }
+
+      .about-teaser-text {
+        color: var(--muted);
+        max-width: 560px;
+        font-size: 1rem;
+        line-height: 1.75;
+        margin-top: 1.25rem;
       }
 
       .portrait-corner {
@@ -780,7 +888,23 @@
         line-height: 1.75
       }
 
+      .about-card-back .section-title {
+        display: block;
+      }
+
+      .about-text>span {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
       .about-text p:last-child {
+        margin-bottom: 0
+      }
+
+      .about-text>span:last-child {
         margin-bottom: 0
       }
 
@@ -798,6 +922,35 @@
         flex-wrap: wrap;
         gap: .5rem;
         margin-top: 2rem
+      }
+
+      @media(max-width:900px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .about-flashcard,
+        .about-flashcard.open {
+          min-height: 0;
+          aspect-ratio: 842 / 740;
+        }
+      }
+
+      @media(max-width:768px) {
+        .about-flashcard {
+          aspect-ratio: auto;
+          min-height: 520px;
+        }
+
+        .about-flashcard.open {
+          min-height: 760px;
+        }
+
+        .about-card-back {
+          justify-content: flex-start;
+          overflow-y: auto;
+        }
       }
 
       .about-tag {
@@ -1278,8 +1431,6 @@
         width: 16px;
         height: 16px
       }
-
-
 
       /* ── SKILLS ── */
       #skills {
@@ -1897,47 +2048,60 @@
   <section id="about">
     <div class="section-max">
       <div class="about-grid">
-        <div class="portrait-wrap reveal">
-          <div class="portrait-corner tl"></div>
-          <div class="portrait-corner tr"></div>
-          <div class="portrait-corner bl"></div>
-          <div class="portrait-corner br"></div>
-          <div class="portrait-frame">
-            <img src="src/Portrait.png" alt="Piyush Singh Bhati"
-              onerror="this.style.minHeight='400px';this.style.background='var(--card2)'" />
-            <div class="portrait-chip">
-              <div class="portrait-chip-tag">// AI Systems Engineering</div>
-              <div class="portrait-chip-text">Building Infrastructure for ML Workloads</div>
-            </div>
-          </div>
-        </div>
+        <button class="about-flashcard reveal" id="about-flashcard" type="button" aria-expanded="false">
+          <span class="about-flashcard-inner">
+            <span class="about-card-face about-card-front">
+              <span class="portrait-wrap">
+                <span class="portrait-corner tl"></span>
+                <span class="portrait-corner tr"></span>
+                <span class="portrait-corner bl"></span>
+                <span class="portrait-corner br"></span>
+                <span class="portrait-frame">
+                  <img src="src/Portrait.png" alt="Piyush Singh Bhati"
+                    onerror="this.style.minHeight='400px';this.style.background='var(--card2)'" />
+                  <span class="portrait-chip">
+                    <span class="portrait-chip-tag">// AI Systems Engineering</span>
+                    <span class="portrait-chip-text">A quick look at the systems-minded builder behind the portfolio.</span>
+                    <span class="about-front-hint">Click photo to read about me</span>
+                  </span>
+                </span>
+              </span>
+            </span>
 
-        <div class="reveal" style="transition-delay:.1s">
+            <span class="about-card-face about-card-back">
+              <span class="section-label">About Me</span>
+              <span class="section-title" style="margin-bottom:1.5rem">Engineering <span class="grad">AI Systems</span></span>
+              <span class="about-text">
+                <span>I am an undergraduate <span class="hl">Computer Science</span> student at <span class="accent">IIT
+                    Jodhpur</span> focused on <span class="hl">AI systems</span>, operating systems, and computer
+                  architecture.</span>
+                <span>My work explores how modern AI workloads interact with hardware and system software. I build
+                  infrastructure for machine learning — including <span class="hl">GPU-accelerated inference
+                    pipelines</span>, <span class="hl">lightweight operating systems for ML workloads</span>, and <span
+                    class="hl">distributed AI systems</span>.</span>
+                <span>My interests include <span class="accent">ML systems</span>, <span class="hl">GPU architecture</span>,
+                  <span class="hl">AI inference infrastructure</span>, and <span class="accent">operating system
+                    design</span> for high-performance and low-power computing environments.
+                </span>
+                <span>I also have a keen passion for design and aesthetics expressed through <span class="hl">CAD
+                    Modelling</span> in the domain of <span class="hl">Robotics</span>.</span>
+              </span>
+              <span class="about-tags">
+                <span class="about-tag">AI Systems</span>
+                <span class="about-tag">Operating Systems</span>
+                <span class="about-tag">GPU Architecture</span>
+                <span class="about-tag">Robotics</span>
+                <span class="about-tag">Computer Architecture</span>
+                <span class="about-tag">Embedded Systems</span>
+              </span>
+            </span>
+          </span>
+        </button>
+        <div class="about-teaser reveal" style="transition-delay:.1s">
           <div class="section-label">About Me</div>
           <h2 class="section-title" style="margin-bottom:1.5rem">Engineering <span class="grad">AI Systems</span></h2>
-          <div class="about-text">
-            <p>I am an undergraduate <span class="hl">Computer Science</span> student at <span class="accent">IIT
-                Jodhpur</span> focused on <span class="hl">AI systems</span>, operating systems, and computer
-              architecture.</p>
-            <p>My work explores how modern AI workloads interact with hardware and system software. I build
-              infrastructure for machine learning — including <span class="hl">GPU-accelerated inference
-                pipelines</span>, <span class="hl">lightweight operating systems for ML workloads</span>, and <span
-                class="hl">distributed AI systems</span>.</p>
-            <p>My interests include <span class="accent">ML systems</span>, <span class="hl">GPU architecture</span>,
-              <span class="hl">AI inference infrastructure</span>, and <span class="accent">operating system
-                design</span> for high-performance and low-power computing environments.
-            </p>
-            <p>I also have a keen passion for design and aesthetics expressed through <span class="hl">CAD
-                Modelling</span> in the domain of <span class="hl">Robotics</span>.</p>
-          </div>
-          <div class="about-tags">
-            <span class="about-tag">AI Systems</span>
-            <span class="about-tag">Operating Systems</span>
-            <span class="about-tag">GPU Architecture</span>
-            <span class="about-tag">Robotics</span>
-            <span class="about-tag">Computer Architecture</span>
-            <span class="about-tag">Embedded Systems</span>
-          </div>
+          <p class="about-teaser-text">A systems-focused CSE undergraduate at IIT Jodhpur building at the intersection
+            of AI infrastructure, operating systems, hardware-aware ML, and robotics design.</p>
         </div>
       </div>
     </div>
@@ -1986,7 +2150,7 @@
     <div class="section-max">
       <div class="section-head reveal">
         <div class="section-label">Featured Work</div>
-        <h2 class="section-title">Projects &amp; <span class="grad">Research</span></h2>
+        <h2 class="section-title">Projects</h2>
       </div>
       <div class="proj-grid">
         <div class="proj-card reveal" onclick="openModal(0)">
@@ -2006,7 +2170,7 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.05s" onclick="openModal(1)">
+        <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(2)">
           <div class="proj-card-img"><img src="src/os-scheduler.png" alt="OS Scheduler"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
@@ -2023,7 +2187,7 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(2)">
+        <div class="proj-card reveal" style="transition-delay:.15s" onclick="openModal(3)">
           <div class="proj-card-img"><img src="src/jarvis-interface.png" alt="JARVIS"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
@@ -2040,7 +2204,23 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.15s" onclick="openModal(3)">
+        <div class="proj-card reveal" style="transition-delay:.05s" onclick="openModal(1)">
+          <div class="proj-card-img"><img src="src/CounselAI.png" alt="Counsel.AI"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-meta">2026 · Deep Learning / LLMs / Backend</div>
+            <h3 class="proj-card-title">Counsel.ai — Student Advisory</h3>
+            <p class="proj-card-desc">AI-driven platform for college counselling using adaptive conversational guidance and NCDM trait estimation.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
+          </div>
+        </div>
+        <div class="proj-card reveal" style="transition-delay:.2s" onclick="openModal(4)">
           <div class="proj-card-img"><img src="src/llm-chart-generator.png" alt="LLM Charts"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
@@ -2057,7 +2237,7 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.2s" onclick="openModal(4)">
+        <div class="proj-card reveal" style="transition-delay:.25s" onclick="openModal(5)">
           <div class="proj-card-img"><img src="src/Farm_top_image.jpg" alt="Crop Detection"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
@@ -2074,7 +2254,7 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.25s" onclick="openModal(5)">
+        <div class="proj-card reveal" style="transition-delay:.3s" onclick="openModal(6)">
           <div class="proj-card-img"><img src="src/Wing_Side_view.jpeg" alt="Wing Design"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
@@ -2091,7 +2271,7 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.3s" onclick="openModal(6)">
+        <div class="proj-card reveal" style="transition-delay:.35s" onclick="openModal(7)">
           <div class="proj-card-img"><img src="src/quadcopter-isometric.png" alt="Quadcopter"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
@@ -2342,6 +2522,13 @@
       });
     });
 
+    // ── ABOUT FLASHCARD ──
+    const aboutFlashcard = document.getElementById('about-flashcard');
+    aboutFlashcard?.addEventListener('click', () => {
+      const isOpen = aboutFlashcard.classList.toggle('open');
+      aboutFlashcard.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
 
     // ── PROJECT MODALS ──
     const GH = '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>';
@@ -2352,6 +2539,19 @@
         desc: 'Architected a bare-metal ARM64 unikernel (<256KB) for deterministic ML inference, featuring a custom zero-dependency ONNX runtime and optimized SIMD kernels for microsecond-level execution.',
         ach: ['Implemented ARMv8-A boot (EL3\u2192EL1), MMU setup, GICv2, and timer with full interrupt handling', 'Designed a cooperative priority scheduler with custom 104B context switching and sub-8\u00b5s switch latency', 'Developed a zero-dependency ONNX runtime (40+ ops) with custom protobuf parser and 128MB pre-allocated tensor arena (no runtime malloc)', 'Optimized Conv2D/GEMM kernels (cache-aligned, NEON SIMD) with hardware-timer profiling for \u00b5s-level analysis', 'Achieved ~269\u00b5s inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines'],
         tags: ['C11', 'ARM64 Assembly', 'NEON SIMD', 'QEMU', 'GCC'], link: 'https://github.com/Piyush2005-code/MiniOS'
+      },
+      {
+        meta: '2026 \u00b7 Deep Learning / LLMs / Backend / Deployment', title: 'Counsel.ai - Student Advisory Platform for College Counselling',
+        imgs: ['src/CounselAI.png'],
+        desc: 'Counsel.AI is an AI-driven student advisory platform designed to help students make informed branch and college decisions through adaptive conversational guidance, personalized interest assessment, and data-driven recommendation systems.',
+        ach: [
+          'Engineered a Mistral-powered conversational engine with adaptive multi-turn counselling workflows',
+          'Implemented DistilRoBERTa-based anomaly/relevance detection for real-time student response validation',
+          'Developed an NCDM-based PyTorch model for dynamic 11D student trait estimation during conversations',
+          'Built semantic recommendation pipelines using SentenceTransformers, Pinecone, and PostgreSQL filtering',
+          'Integrated MCP-compatible retrieval and agentic reasoning workflows using FastMCP and vLLM infrastructure'
+        ],
+        tags: ['Deep Learning', 'vLLM', 'PostgreSQL', 'Model Context Protocol'], link: 'https://github.com/HerilMistry/Counsel.ai.git'
       },
       {
         meta: '2025 \u00b7 Systems Programming', title: 'OS Scheduling Algorithm Simulator',
@@ -2409,7 +2609,9 @@
       document.getElementById('pm-desc').textContent = p.desc;
       document.getElementById('pm-ach').innerHTML = p.ach.map(a => `<li>${a}</li>`).join('');
       document.getElementById('pm-tags').innerHTML = p.tags.map(t => `<span class="proj-modal-tag">${t}</span>`).join('');
+      
       document.getElementById('pm-links').innerHTML = p.link ? `<a class="proj-modal-link" href="${p.link}" target="_blank">${GH} Source Code</a>` : '';
+
       document.getElementById('proj-modal').classList.add('open');
       document.body.classList.add('modal-open');
       document.body.style.overflow = 'hidden';
