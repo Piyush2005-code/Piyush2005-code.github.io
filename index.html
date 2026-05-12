@@ -675,8 +675,8 @@
 
       .about-grid {
         display: grid;
-        grid-template-columns: minmax(320px, .85fr) 1fr;
-        gap: 5rem;
+        grid-template-columns: minmax(min(100%, 18rem), .85fr) 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
         align-items: center;
         perspective: 1600px;
       }
@@ -685,8 +685,8 @@
         position: relative;
         display: block;
         width: 100%;
-        min-height: 0;
-        aspect-ratio: 842 / 740;
+        height: clamp(22rem, 58vh, 34rem);
+        height: clamp(22rem, 58svh, 34rem);
         border: 0;
         padding: 0;
         background: transparent;
@@ -699,8 +699,8 @@
 
       .about-flashcard.open {
         grid-column: 1 / -1;
-        min-height: 640px;
-        aspect-ratio: auto;
+        height: clamp(34rem, 76vh, 46rem);
+        height: clamp(34rem, 76svh, 46rem);
       }
 
       .about-flashcard.open+.about-teaser {
@@ -745,6 +745,7 @@
         transform: rotateY(180deg);
         padding: clamp(1.5rem, 4vw, 3rem);
         justify-content: center;
+        overflow-y: auto;
         background:
           linear-gradient(135deg, rgba(0, 212, 255, .06), transparent 45%, rgba(26, 127, 232, .08)),
           var(--card);
@@ -930,21 +931,26 @@
           gap: 2rem;
         }
 
-        .about-flashcard,
+        .about-flashcard {
+          height: clamp(24rem, 62vh, 38rem);
+          height: clamp(24rem, 62svh, 38rem);
+        }
+
         .about-flashcard.open {
-          min-height: 0;
-          aspect-ratio: 842 / 740;
+          height: clamp(34rem, 78vh, 44rem);
+          height: clamp(34rem, 78svh, 44rem);
         }
       }
 
       @media(max-width:768px) {
         .about-flashcard {
-          aspect-ratio: auto;
-          min-height: 520px;
+          height: clamp(24rem, 64vh, 34rem);
+          height: clamp(24rem, 64svh, 34rem);
         }
 
         .about-flashcard.open {
-          min-height: 760px;
+          height: clamp(38rem, 84vh, 48rem);
+          height: clamp(38rem, 84svh, 48rem);
         }
 
         .about-card-back {
