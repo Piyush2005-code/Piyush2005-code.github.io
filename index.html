@@ -135,6 +135,49 @@
         opacity: .5
       }
 
+      .nav-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        background: rgba(0, 255, 179, 0.04);
+        border: 1px solid rgba(0, 255, 179, 0.15);
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--accent);
+        text-transform: lowercase;
+        letter-spacing: 0.04em;
+        margin-left: 1rem;
+        pointer-events: none;
+      }
+      @media (max-width: 768px) {
+        .nav-status-badge {
+          display: none;
+        }
+      }
+      .pulse-dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--accent);
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 8px var(--accent);
+        animation: pulse-active 1.8s infinite ease-in-out;
+      }
+      @keyframes pulse-active {
+        0%, 100% {
+          transform: scale(0.9);
+          opacity: 0.6;
+          box-shadow: 0 0 4px var(--accent);
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+          box-shadow: 0 0 10px var(--accent);
+        }
+      }
+
       .nav-links {
         display: flex;
         align-items: center;
@@ -573,6 +616,57 @@
         animation: fade-right .7s 1.2s forwards;
       }
 
+      /* ── HERO CODE BOX ── */
+      .hero-code-box {
+        margin: 1.6rem 0;
+        max-width: 440px;
+        width: 100%;
+        background: rgba(4, 8, 15, 0.45);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        overflow: hidden;
+        opacity: 0;
+        animation: fade-up .7s .9s forwards;
+      }
+      .code-box-header {
+        background: rgba(8, 16, 32, 0.75);
+        padding: 0.45rem 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border-bottom: 1px solid var(--border);
+      }
+      .code-box-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+      }
+      .dot-r { background: #ff5c5c; }
+      .dot-y { background: #ffbd2e; }
+      .dot-g { background: #27c93f; }
+      .code-box-title {
+        color: var(--muted);
+        font-size: 0.65rem;
+        margin-left: 0.5rem;
+        text-transform: lowercase;
+      }
+      .code-box-body {
+        padding: 0.8rem 1rem;
+        line-height: 1.5;
+        color: var(--txt);
+      }
+      .code-keyword {
+        color: var(--cyan);
+        font-weight: 600;
+      }
+      .code-str {
+        color: var(--accent);
+      }
+
       @keyframes fade-right {
         from {
           opacity: 0;
@@ -636,17 +730,21 @@
         color: var(--cyan);
         letter-spacing: .2em;
         text-transform: uppercase;
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: .75rem;
         margin-bottom: 1rem;
       }
 
       .section-label::before {
-        content: '';
-        width: 24px;
-        height: 1px;
-        background: var(--cyan)
+        content: '< ';
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .section-label::after {
+        content: ' />';
+        color: var(--accent);
+        font-weight: 700;
       }
 
       .section-title {
@@ -1198,6 +1296,36 @@
 
       .proj-card:hover .proj-card-hint svg {
         transform: translateX(4px)
+      }
+
+      .proj-card-cli-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--accent);
+        opacity: 0.65;
+        border: 1px dashed rgba(0, 255, 179, 0.25);
+        padding: 0.3rem 0.55rem;
+        border-radius: 4px;
+        background: rgba(4, 8, 15, 0.4);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 5;
+      }
+
+      .proj-card-cli-btn:hover {
+        opacity: 1;
+        color: var(--txt);
+        border-color: var(--accent);
+        background: rgba(0, 255, 179, 0.08);
+        box-shadow: 0 0 10px rgba(0, 255, 179, 0.2);
+      }
+
+      .proj-card-cli-symbol {
+        font-weight: 700;
+        color: var(--accent);
       }
 
       /* ── MODAL ── */
@@ -1915,6 +2043,427 @@
           opacity: 0
         }
       }
+
+      /* ── FLOATING TERMINAL LAUNCHER ── */
+      .floating-term-launcher {
+        position: fixed;
+        bottom: 2rem;
+        right: 6rem;
+        z-index: 200;
+        width: 46px;
+        height: 46px;
+        border: 1px solid var(--border2);
+        background: rgba(6, 13, 26, 0.85);
+        backdrop-filter: blur(14px);
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: border-color .25s, background .25s, box-shadow .25s, transform .25s;
+        color: var(--cyan);
+      }
+      .floating-term-launcher:hover {
+        border-color: var(--cyan);
+        background: rgba(0, 240, 255, 0.15);
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        transform: translateY(-2px);
+      }
+      .floating-term-launcher svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* ── TERMINAL WIDGET OVERLAY ── */
+      .term-widget-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding-bottom: 5.8rem;
+        padding-right: 2rem;
+        background: transparent;
+        backdrop-filter: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .term-widget-overlay.open {
+        opacity: 1;
+      }
+
+      /* ── TERMINAL WIDGET WINDOW ── */
+      .term-widget-window {
+        width: 440px;
+        max-width: 90vw;
+        height: 340px;
+        max-height: 70vh;
+        background: rgba(5, 10, 20, 0.88);
+        backdrop-filter: blur(25px);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(0, 240, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        transform: translateY(20px) scale(0.95);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s ease, height 0.3s ease;
+        pointer-events: auto;
+        font-family: var(--font-mono);
+      }
+      .term-widget-overlay.open .term-widget-window {
+        transform: translateY(0) scale(1);
+      }
+
+      /* CRT vintage glass curves */
+      .term-widget-window::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.35) 100%);
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* CRT Scanline effect overlay */
+      .term-widget-scanlines {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 4px, 6px 100%;
+        pointer-events: none;
+        z-index: 9;
+        opacity: 0.85;
+      }
+
+      /* Header Bar */
+      .term-widget-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.65rem 1rem;
+        background: rgba(8, 16, 32, 0.9);
+        border-bottom: 1px solid var(--border);
+        user-select: none;
+        position: relative;
+        z-index: 11;
+      }
+      .term-widget-dots {
+        display: flex;
+        gap: 6px;
+      }
+      .term-widget-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .term-widget-dot:hover {
+        opacity: 0.8;
+      }
+      .term-widget-close { background: #ff5c5c; }
+      .term-widget-min { background: #ffbd2e; }
+      .term-widget-max { background: #27c93f; }
+
+      .term-widget-title {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: lowercase;
+      }
+      .term-widget-theme-select {
+        background: rgba(3, 6, 12, 0.6);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+        font-family: var(--font-mono);
+      }
+      .term-widget-theme-select:hover {
+        border-color: var(--border2);
+        color: var(--txt);
+      }
+
+      /* Terminal Body */
+      .term-widget-body {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        position: relative;
+        z-index: 5;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border2) transparent;
+      }
+      .term-widget-body::-webkit-scrollbar {
+        width: 4px;
+      }
+      .term-widget-body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .term-widget-body::-webkit-scrollbar-thumb {
+        background: var(--border2);
+        border-radius: 2px;
+      }
+
+      /* Command Input Prompt */
+      .term-widget-prompt-line {
+        display: flex;
+        align-items: center;
+        position: relative;
+        gap: 6px;
+        margin-top: 2px;
+      }
+      .term-widget-prompt-lbl {
+        color: var(--cyan);
+        white-space: nowrap;
+        font-weight: 600;
+      }
+      .term-widget-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        caret-color: transparent; /* custom caret */
+        position: relative;
+        z-index: 3;
+      }
+      /* Custom caret cursor */
+      .term-widget-caret {
+        position: absolute;
+        width: 7px;
+        height: 14px;
+        background: currentColor;
+        z-index: 2;
+        animation: term-caret-blink 1s step-end infinite;
+        pointer-events: none;
+      }
+      @keyframes term-caret-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      
+      .term-widget-hint {
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--dim);
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 1;
+        white-space: pre;
+      }
+
+      /* Output Formatting */
+      .term-out-line {
+        line-height: 1.45;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .term-out-error {
+        color: var(--warn) !important;
+      }
+      .term-out-success {
+        color: var(--accent) !important;
+      }
+      .term-out-info {
+        color: var(--steel) !important;
+      }
+      .term-out-dim {
+        color: var(--dim) !important;
+      }
+
+      /* Matrix rain canvas inside terminal */
+      .term-matrix-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        display: none;
+        opacity: 0.18;
+      }
+
+      /* ── THEME ENHANCEMENTS ── */
+      /* default theme: cyan */
+      .term-theme-default {
+        color: var(--cyan);
+        text-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
+        --term-color: var(--cyan);
+        --term-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
+      }
+      .term-theme-default .term-widget-prompt-lbl { color: var(--accent); }
+      
+      /* matrix theme: green */
+      .term-theme-matrix {
+        color: #39ff14;
+        text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+        --term-color: #39ff14;
+        --term-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+      }
+      .term-theme-matrix .term-widget-prompt-lbl { color: #00ff66; }
+      .term-theme-matrix .term-widget-window { border-color: rgba(57, 255, 20, 0.3); }
+
+      /* amber theme: retro orange */
+      .term-theme-amber {
+        color: #ffb000;
+        text-shadow: 0 0 5px rgba(255, 176, 0, 0.6);
+        --term-color: #ffb000;
+        --term-shadow: 0 0 5px rgba(255, 176, 0, 0.6);
+      }
+      .term-theme-amber .term-widget-prompt-lbl { color: #ff8800; }
+      .term-theme-amber .term-widget-window { border-color: rgba(255, 176, 0, 0.35); }
+
+      /* steel theme: ice blue */
+      .term-theme-steel {
+        color: #8db6cd;
+        text-shadow: 0 0 3px rgba(141, 182, 205, 0.4);
+        --term-color: #8db6cd;
+        --term-shadow: 0 0 3px rgba(141, 182, 205, 0.4);
+      }
+      .term-theme-steel .term-widget-prompt-lbl { color: #a4d3ee; }
+      .term-theme-steel .term-widget-window { border-color: rgba(141, 182, 205, 0.25); }
+
+      /* hack theme: bright terminal green-yellow */
+      .term-theme-hack {
+        color: #00ff00;
+        text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+        --term-color: #00ff00;
+        --term-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+      }
+      .term-theme-hack .term-widget-prompt-lbl { color: #adff2f; }
+      .term-theme-hack .term-widget-window { border-color: rgba(0, 255, 0, 0.25); }
+
+      /* cyberpunk theme: hot pink / neon purple */
+      .term-theme-cyberpunk {
+        color: #ff007f;
+        text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+        --term-color: #ff007f;
+        --term-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+      }
+      .term-theme-cyberpunk .term-widget-prompt-lbl { color: var(--neon-purple); }
+      .term-theme-cyberpunk .term-widget-window { border-color: rgba(255, 0, 127, 0.35); }
+
+      /* Neofetch Custom Grid/Flex Layout styles */
+      .neofetch-container {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: flex-start;
+        font-size: 0.65rem;
+        line-height: 1.35;
+        margin: 0.5rem 0;
+        width: 100%;
+      }
+      .neofetch-art {
+        font-family: var(--font-mono);
+        white-space: pre;
+        color: var(--term-color, var(--accent));
+        text-shadow: var(--term-shadow, none);
+        flex-shrink: 0;
+        line-height: 1.15;
+      }
+      .neofetch-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.18rem;
+        font-family: var(--font-mono);
+        min-width: 0;
+        flex-grow: 1;
+      }
+      .neofetch-row {
+        display: flex;
+        white-space: nowrap;
+      }
+      .neofetch-key {
+        color: var(--term-color, var(--accent));
+        text-shadow: var(--term-shadow, none);
+        font-weight: bold;
+        display: inline-block;
+        width: 120px;
+        flex-shrink: 0;
+      }
+      .neofetch-val {
+        color: var(--txt);
+        word-break: break-all;
+      }
+
+      @media (max-width: 520px) {
+        .neofetch-container {
+          flex-direction: column;
+          gap: 1rem;
+          font-size: 0.58rem;
+        }
+        .neofetch-art {
+          align-self: center;
+        }
+      }
+
+      /* Keyboard hint bubble */
+      .term-kbd-hint {
+        position: fixed;
+        bottom: 5.5rem;
+        right: 6rem;
+        z-index: 200;
+        font-family: var(--font-mono);
+        font-size: .62rem;
+        color: var(--dim);
+        letter-spacing: .08em;
+        background: rgba(6, 13, 26, .9);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        padding: .35rem .7rem;
+        white-space: nowrap;
+        pointer-events: none;
+        animation: hint-fade 3s 2s forwards;
+        opacity: 0;
+        animation-fill-mode: both;
+      }
+      
+      /* Make sure the navbar "Shell" link behaves perfectly */
+      .nav-term-btn svg {
+        transition: transform 0.2s;
+      }
+      .nav-term-btn:hover svg {
+        transform: rotate(-15deg) scale(1.1);
+      }
+
+      /* Maximized state */
+      .term-widget-window.maximized {
+        width: 800px !important;
+        height: 520px !important;
+        max-width: 95vw !important;
+        max-height: 85vh !important;
+        border-radius: 8px !important;
+      }
+
+      /* Mobile responsiveness for floating companion window */
+      @media (max-width: 640px) {
+        .term-widget-overlay {
+          padding-bottom: 5.5rem;
+          padding-right: 1rem;
+          padding-left: 1rem;
+        }
+        .term-widget-window {
+          width: calc(100vw - 2rem);
+          height: 280px;
+        }
+      }
   </style>
 </head>
 
@@ -1942,11 +2491,16 @@
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-logo"><span class="brace">&lt;</span>PSB<span class="brace">/&gt;</span></a>
+      <div class="nav-status-badge">
+        <span class="pulse-dot"></span>
+        <span>piyush_os: active</span>
+      </div>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
+        <a href="#" class="nav-term-btn" onclick="event.preventDefault(); openTerminalWidget();" title="Launch Interactive Shell (or press `)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align: middle; margin-right: 4px; display: inline-block;"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>Shell</a>
         <a href="#contact" class="nav-cta">Get in Touch</a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -1962,6 +2516,7 @@
       <a href="#research" onclick="closeMobile()">Research</a>
       <a href="#projects" onclick="closeMobile()">Projects</a>
       <a href="#skills" onclick="closeMobile()">Skills</a>
+      <a href="#" onclick="event.preventDefault(); closeMobile(); openTerminalWidget();">Shell Console</a>
       <a href="#contact" onclick="closeMobile()">Contact</a>
     </div>
   </nav>
@@ -1996,6 +2551,25 @@
         <span>IIT Jodhpur</span>
         <span style="color:var(--border2)">·</span>
         <span>AI Systems · OS · Robotics</span>
+      </div>
+
+      <!-- Floating Hacker Code Declaration Panel -->
+      <div class="hero-code-box">
+        <div class="code-box-header">
+          <div class="code-box-dot dot-r"></div>
+          <div class="code-box-dot dot-y"></div>
+          <div class="code-box-dot dot-g"></div>
+          <div class="code-box-title">builder.js</div>
+        </div>
+        <div class="code-box-body">
+          <span class="code-keyword">const</span> builder = {
+            name: <span class="code-str">'Piyush Singh Bhati'</span>,
+            host: <span class="code-str">'IIT Jodhpur'</span>,
+            skills: [<span class="code-str">'AI Systems'</span>, <span class="code-str">'OS/Kernels'</span>, <span class="code-str">'CAD/Robotics'</span>],
+            shell: <span class="code-keyword">true</span>,
+            status: <span class="code-str">'active'</span>
+          };
+        </div>
       </div>
 
       <div class="hero-socials">
@@ -2093,12 +2667,12 @@
                     Modelling</span> in the domain of <span class="hl">Robotics</span>.</span>
               </span>
               <span class="about-tags">
-                <span class="about-tag">AI Systems</span>
-                <span class="about-tag">Operating Systems</span>
-                <span class="about-tag">GPU Architecture</span>
-                <span class="about-tag">Robotics</span>
-                <span class="about-tag">Computer Architecture</span>
-                <span class="about-tag">Embedded Systems</span>
+                <span class="about-tag">--ai-systems</span>
+                <span class="about-tag">--operating-systems</span>
+                <span class="about-tag">--gpu-architecture</span>
+                <span class="about-tag">--robotics</span>
+                <span class="about-tag">--comp-architecture</span>
+                <span class="about-tag">--embedded-systems</span>
               </span>
             </span>
           </span>
@@ -2641,6 +3215,950 @@
       else { audio.play().catch(() => { }); btn.classList.add('playing'); iconMuted.style.display = 'none'; iconPlaying.style.display = ''; }
       playing = !playing;
     });
+
+
+    // ── RETRO TERMINAL INTERACTIVE SHELL ──
+    (function() {
+      const COMMANDS = ['help', 'neofetch', 'ls', 'cd', 'cat', 'cowsay', 'matrix', 'theme', 'clear', 'scroll', 'open', 'social'];
+      
+      const VFS = {
+        '/about.txt': `Piyush Singh Bhati
+------------------
+Systems & AI/Robotics Engineer
+Undergraduate at Indian Institute of Technology (IIT) Jodhpur.
+
+Key Focus Areas:
+• Low-level systems software, bare-metal ARM64 unikernels, RTOS.
+• Deep learning pipelines, vLLM, custom model deployment, computer vision.
+• Autonomous systems, robotics simulation, aerodynamics (CAD/CFD).`,
+
+        '/contact.txt': `Contact Information
+-------------------
+Email:    piyush.bhati680@gmail.com
+GitHub:   github.com/Piyush2005-code
+LinkedIn: linkedin.com/in/piyush-singh-bhati-5a074929a
+Location: IIT Jodhpur, Rajasthan, India`,
+
+        '/publications.txt': `Academic Foundations & Coursework
+----------------------------------
+Relevant Coursework:
+• Data Structures & Algorithms (DSA)
+• Linear Algebra & Ordinary Differential Equations (O.D.E)
+• Probability & Stochastic Processes
+• Introduction to Computer Science
+• Software Engineering
+• Pattern Recognition and Machine Learning
+
+Achievements:
+• STOL aircraft wing design achieving Lift Coefficient of 8.1258 (Inter IIT Tech Meet 14.0)`,
+
+        '/skills.sh': `#!/bin/bash
+# Piyush Singh Bhati - Core Skills & Technologies
+
+LANGUAGES=(
+  "C/C++" "Python" "ARM64 Assembly" "JavaScript" "TypeScript" "Bash" "HTML/CSS"
+)
+SYSTEMS=(
+  "ARMv8-A Bare-metal" "Cooperative Schedulers" "Interrupt Controllers (GICv2)"
+  "Memory Management Unit (MMU)" "vLLM Stack" "Docker" "Kubernetes" "Linux"
+)
+AI_ML_CV=(
+  "PyTorch" "ONNX Runtime (custom)" "SentenceTransformers" "Pinecone"
+  "U-Net Segmentation" "DistilRoBERTa Anomaly Detection" "NCDM Models"
+)
+CAD_CFD=(
+  "ANSYS Fluent" "Fusion 360" "SolidWorks" "Aerodynamics Sim"
+)
+
+echo "Ready to build high-performance systems and intelligent agents."`,
+
+        '/projects/01_unikernel.md': `# ARM64 Unikernel for ML Inference
+----------------------------------
+Architected a bare-metal ARM64 unikernel (<256KB) for deterministic ML inference.
+• Developed a custom zero-dependency ONNX runtime and optimized cache-aligned NEON SIMD Conv2D/GEMM kernels.
+• Cooperative priority scheduler with custom 104B context switching (<8us switch latency).
+• Achieved ~269us inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines.
+• Technologies: C11, ARM64 Assembly, NEON SIMD, QEMU, GCC.`,
+
+        '/projects/02_counsel_ai.md': `# Counsel.ai - Student Advisory Platform
+---------------------------------------
+AI-driven student advisory platform designed to help students make informed branch and college decisions.
+• Mistral-powered conversational engine with adaptive multi-turn counselling workflows.
+• PyTorch-based Neural Cognitive Diagnosis Model (NCDM) for estimating 11D student traits.
+• SentenceTransformers + Pinecone + PostgreSQL semantic recommendation pipelines.
+• Technologies: Deep Learning, PyTorch, vLLM, FastMCP, Pinecone, PostgreSQL.`,
+
+        '/projects/03_os_simulator.md': `# OS Scheduling Algorithm Simulator
+----------------------------------
+Interactive desktop and web simulation of classical operating system scheduling algorithms.
+• Visually models scheduling algorithms: FCFS, Round Robin, and Priority Scheduling.
+• Generates real-time Gantt charts for profiling wait/turnaround times.
+• Technologies: React, TypeScript, Electron, Tailwind CSS.`,
+
+        '/projects/04_jarvis.md': `# JARVIS Voice Assistant
+--------------------------
+Voice assistant featuring GPU-accelerated inference pipelines and sub-second latency.
+• GPU inference on NVIDIA A5000 with custom CUDA optimization.
+• Real-time voice processing using AudioFlamingo3.
+• RAG-enabled context-aware knowledge fetching.
+• Technologies: CUDA, vLLM, PyTorch, RAG, Docker, Kubernetes.`,
+
+        '/projects/05_crop_stress.md': `# Crop Stress Detection (U-Net)
+-------------------------------
+Computer vision system for semantic segmentation of crop stress from aerial drone imagery.
+• Built a synthetic dataset pipeline with Gaussian blending and rotational augmentation (4x dataset expansion).
+• Designed U-Net model (~7.7M params) achieving pixel-level crop stress detection.
+• Real-time video inference pipeline using OpenCV and batch inference.
+• Technologies: PyTorch, U-Net, OpenCV, CUDA / MPS.`,
+
+        '/projects/06_wing_design.md': `# STOL Fixed-Wing Aircraft Wing Design
+--------------------------------------
+Aerodynamic wing design targeting high lift (CL > 5) for Short Take-Off and Landing (STOL) flight parameters.
+• Designed full 3D wing CAD assembly and verified performance in ANSYS Fluent.
+• Achieved record max lift coefficient of 8.1258 under simulated thrust conditions.
+• Technologies: CAD, Fusion 360, CFD, ANSYS Fluent.`,
+
+        '/projects/07_quadcopter.md': `# Quadcopter CAD Design & Development
+-------------------------------------
+Personal Project. Complete design and development of a custom quadcopter with detailed CAD modeling, structural analysis, and autonomous flight capabilities.
+• Designed full assembly CAD model with structural optimization for weight and rigidity.
+• Optimized frame geometry for payload capacity and flight stability.
+• Technologies: CAD, UAV Design, Fusion 360, Robotics, Autonomous Systems.`
+      };
+
+      const dirs = new Set(['/', '/projects']);
+      let currentDir = '/';
+      const cmdHistory = [];
+      let historyIdx = -1;
+      let currentInputTemp = "";
+      
+      let isMatrixRunning = false;
+      let matrixAnimFrameId = null;
+
+      // DOM Elements
+      let overlay, win, body, input, caret, measure, hint, select;
+
+      function initElements() {
+        overlay = document.getElementById('term-widget-overlay');
+        win = document.querySelector('.term-widget-window');
+        body = document.getElementById('term-widget-body');
+        input = document.getElementById('term-widget-input');
+        caret = document.getElementById('term-widget-caret');
+        measure = document.getElementById('term-widget-measure');
+        hint = document.getElementById('term-widget-hint');
+        select = document.getElementById('term-theme-select');
+        
+        if (!input) return;
+
+        // Event listeners
+        input.addEventListener('input', () => {
+          updateCaret();
+          updateSuggestionHint();
+        });
+        
+        input.addEventListener('keyup', () => {
+          updateCaret();
+        });
+
+        input.addEventListener('click', updateCaret);
+        input.addEventListener('select', updateCaret);
+        
+        body.addEventListener('click', (e) => {
+          if (window.getSelection().toString() !== '') return;
+          input.focus();
+        });
+
+        // Keydown handler inside terminal
+        input.addEventListener('keydown', (e) => {
+          if (isMatrixRunning) {
+            stopMatrixRain();
+            writeLine("matrix screensaver terminated.", "term-out-dim");
+            input.value = '';
+            updateCaret();
+            updateSuggestionHint();
+            e.preventDefault();
+            return;
+          }
+
+          if (e.key === 'Enter') {
+            const val = input.value;
+            const label = body.querySelector('.term-widget-prompt-line .term-widget-prompt-lbl').textContent;
+            writeLine(label + ' ' + val, "");
+            
+            if (val.trim()) {
+              if (cmdHistory.length === 0 || cmdHistory[cmdHistory.length - 1] !== val) {
+                cmdHistory.push(val);
+              }
+            }
+            
+            executeCommand(val);
+            input.value = '';
+            historyIdx = -1;
+            updateCaret();
+            updateSuggestionHint();
+          } 
+          else if (e.key === 'Tab') {
+            e.preventDefault();
+            handleAutocomplete();
+            updateSuggestionHint();
+          } 
+          else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            handleHistory('up');
+            updateSuggestionHint();
+          } 
+          else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            handleHistory('down');
+            updateSuggestionHint();
+          } 
+          else if (e.key === 'ArrowRight') {
+            if (hint && hint.textContent && input.selectionStart === input.value.length) {
+              input.value = hint.textContent;
+              updateCaret();
+              updateSuggestionHint();
+              e.preventDefault();
+            }
+          }
+        });
+
+        // Dynamic CLI Card Badge Injection
+        const cards = document.querySelectorAll('.proj-card');
+        const projectSlugs = [
+          'unikernel',
+          'counsel',
+          'scheduler',
+          'jarvis',
+          'chart',
+          'crop',
+          'wing',
+          'quadcopter'
+        ];
+        cards.forEach((card, idx) => {
+          const hintEl = card.querySelector('.proj-card-hint');
+          if (hintEl && !card.querySelector('.proj-card-cli-btn')) {
+            const btn = document.createElement('div');
+            btn.className = 'proj-card-cli-btn';
+            const slug = projectSlugs[idx] || idx.toString();
+            btn.setAttribute('onclick', `event.stopPropagation(); runCommandFromPage('open ${slug}')`);
+            btn.innerHTML = `<span class="proj-card-cli-symbol">&gt;_</span> open ${slug}`;
+            
+            const parent = hintEl.parentNode;
+            if (parent) {
+              parent.style.display = 'flex';
+              parent.style.alignItems = 'center';
+              parent.style.justifyContent = 'space-between';
+              parent.style.gap = '0.5rem';
+              parent.style.flexWrap = 'wrap';
+              parent.appendChild(btn);
+            }
+          }
+        });
+      }
+
+      window.openTerminalWidget = function() {
+        if (!overlay) initElements();
+        if (!overlay) return;
+        
+        overlay.style.display = 'flex';
+        overlay.offsetHeight; // force reflow
+        overlay.classList.add('open');
+        
+        const hintBubble = document.getElementById('term-kbd-hint');
+        if (hintBubble) {
+          hintBubble.style.display = 'none';
+        }
+        
+        setTimeout(() => {
+          if (input) {
+            input.focus();
+            updateCaret();
+          }
+        }, 50);
+      };
+
+      window.closeTerminalWidget = function() {
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        stopMatrixRain();
+        
+        setTimeout(() => {
+          if (!overlay.classList.contains('open')) {
+            overlay.style.display = 'none';
+          }
+        }, 300);
+      };
+
+      window.toggleTerminalWidget = function() {
+        if (!overlay) initElements();
+        if (!overlay) return;
+        
+        if (overlay.classList.contains('open')) {
+          closeTerminalWidget();
+        } else {
+          openTerminalWidget();
+        }
+      };
+
+      window.maximizeTerminalWidget = function() {
+        if (!win) return;
+        win.classList.toggle('maximized');
+        
+        if (isMatrixRunning) {
+          setTimeout(() => {
+            const canvas = document.getElementById('term-matrix-canvas');
+            if (canvas && body) {
+              canvas.width = body.clientWidth;
+              canvas.height = body.clientHeight;
+            }
+          }, 350);
+        }
+      };
+
+      window.changeTerminalTheme = function(themeName) {
+        if (!overlay) return;
+        overlay.classList.remove(
+          'term-theme-default',
+          'term-theme-matrix',
+          'term-theme-amber',
+          'term-theme-steel',
+          'term-theme-hack',
+          'term-theme-cyberpunk'
+        );
+        overlay.classList.add('term-theme-' + themeName);
+        if (select) select.value = themeName;
+      };
+
+      window.runCommandFromPage = function(cmdStr) {
+        if (!overlay) initElements();
+        if (!overlay) return;
+        
+        // Open the terminal overlay
+        openTerminalWidget();
+        
+        if (!input) return;
+        
+        // Temporarily lock user input
+        input.disabled = true;
+        input.value = '';
+        updateCaret();
+        updateSuggestionHint();
+        
+        let charIdx = 0;
+        const typeSpeed = 30; // 30ms typing velocity
+        
+        function typeNextChar() {
+          if (charIdx < cmdStr.length) {
+            input.value += cmdStr[charIdx];
+            updateCaret();
+            updateSuggestionHint();
+            charIdx++;
+            setTimeout(typeNextChar, typeSpeed);
+          } else {
+            // Finished typing, unlock and run
+            input.disabled = false;
+            setTimeout(() => {
+              const label = body.querySelector('.term-widget-prompt-line .term-widget-prompt-lbl').textContent;
+              writeLine(label + ' ' + cmdStr, "");
+              
+              if (cmdStr.trim()) {
+                if (cmdHistory.length === 0 || cmdHistory[cmdHistory.length - 1] !== cmdStr) {
+                  cmdHistory.push(cmdStr);
+                }
+              }
+              
+              executeCommand(cmdStr);
+              input.value = '';
+              historyIdx = -1;
+              updateCaret();
+              updateSuggestionHint();
+              input.focus();
+            }, 250);
+          }
+        }
+        
+        // Trigger typewriter after standard overlay open transitions complete
+        setTimeout(typeNextChar, 350);
+      };
+
+      function updateCaret() {
+        if (!input || !measure || !caret) return;
+        const textBeforeCursor = input.value.slice(0, input.selectionStart);
+        measure.textContent = textBeforeCursor;
+        caret.style.left = measure.offsetWidth + 'px';
+      }
+
+      function updateSuggestionHint() {
+        if (!input || !hint) return;
+        const val = input.value;
+        if (!val) {
+          hint.textContent = '';
+          return;
+        }
+        
+        const trimmed = val.trimStart();
+        const parts = trimmed.split(/\s+/);
+        let suggestion = '';
+        
+        if (parts.length === 1) {
+          const typedCmd = parts[0];
+          const match = COMMANDS.find(c => c.startsWith(typedCmd) && c !== typedCmd);
+          if (match) {
+            suggestion = match;
+          }
+        } else {
+          const cmd = parts[0];
+          if (cmd === 'cat' || cmd === 'cd') {
+            const pathPrefix = parts.slice(1).join(' ');
+            const contents = listContents(currentDir);
+            const cleanContents = contents.map(c => {
+              if (c.startsWith('<span')) {
+                const temp = document.createElement('div');
+                temp.innerHTML = c;
+                return temp.textContent || temp.innerText;
+              }
+              return c;
+            });
+            
+            const match = cleanContents.find(c => c.startsWith(pathPrefix) && c !== pathPrefix);
+            if (match) {
+              suggestion = cmd + ' ' + match;
+            }
+          }
+        }
+        
+        if (suggestion && suggestion.startsWith(val)) {
+          hint.textContent = suggestion;
+        } else {
+          hint.textContent = '';
+        }
+      }
+
+      function resolvePath(path) {
+        if (!path) return currentDir;
+        let target = path;
+        if (!target.startsWith('/')) {
+          if (currentDir === '/') target = '/' + target;
+          else target = currentDir + '/' + target;
+        }
+        const parts = target.split('/').filter(Boolean);
+        const stack = [];
+        for (const part of parts) {
+          if (part === '.') continue;
+          if (part === '..') stack.pop();
+          else stack.push(part);
+        }
+        return '/' + stack.join('/');
+      }
+
+      function isDirectory(path) {
+        let p = path;
+        if (p.endsWith('/') && p.length > 1) {
+          p = p.slice(0, -1);
+        }
+        return dirs.has(p);
+      }
+
+      function listContents(dir) {
+        let normDir = dir;
+        if (!normDir.endsWith('/')) normDir += '/';
+        const contents = [];
+        
+        if (normDir === '/') {
+          contents.push('<span class="term-out-success">projects/</span>');
+          for (const key in VFS) {
+            if (key.startsWith('/') && !key.slice(1).includes('/')) {
+              contents.push(key.slice(1));
+            }
+          }
+        } else if (normDir === '/projects/') {
+          for (const key in VFS) {
+            if (key.startsWith('/projects/')) {
+              contents.push(key.replace('/projects/', ''));
+            }
+          }
+        }
+        return contents;
+      }
+
+      function writeLine(text, className) {
+        if (!body) return;
+        const promptLine = body.querySelector('.term-widget-prompt-line');
+        const div = document.createElement('div');
+        div.className = 'term-out-line ' + (className || '');
+        
+        if (text.includes('<span') || text.includes('<br') || text.includes('\n')) {
+          div.innerHTML = text.replace(/\n/g, '<br>');
+        } else {
+          div.textContent = text;
+        }
+        
+        body.insertBefore(div, promptLine);
+        scrollToBottom();
+      }
+
+      function scrollToBottom() {
+        if (body) body.scrollTop = body.scrollHeight;
+      }
+
+      function handleHistory(dir) {
+        if (!input || cmdHistory.length === 0) return;
+        
+        if (historyIdx === -1) {
+          currentInputTemp = input.value;
+        }
+        
+        if (dir === 'up') {
+          if (historyIdx < cmdHistory.length - 1) {
+            historyIdx++;
+            input.value = cmdHistory[cmdHistory.length - 1 - historyIdx];
+          }
+        } else if (dir === 'down') {
+          if (historyIdx > 0) {
+            historyIdx--;
+            input.value = cmdHistory[cmdHistory.length - 1 - historyIdx];
+          } else if (historyIdx === 0) {
+            historyIdx = -1;
+            input.value = currentInputTemp;
+          }
+        }
+        
+        setTimeout(() => {
+          input.selectionStart = input.selectionEnd = input.value.length;
+          updateCaret();
+        }, 0);
+      }
+
+      function handleAutocomplete() {
+        if (!input) return;
+        const value = input.value.trimStart();
+        const parts = value.split(/\s+/);
+        
+        if (parts.length === 1) {
+          const cmdPrefix = parts[0];
+          const matches = COMMANDS.filter(c => c.startsWith(cmdPrefix));
+          if (matches.length === 1) {
+            input.value = matches[0] + ' ';
+            updateCaret();
+          } else if (matches.length > 1) {
+            printAutocompleteOptions(matches);
+          }
+        } else {
+          const cmd = parts[0];
+          if (cmd === 'cat' || cmd === 'cd') {
+            const pathPrefix = parts.slice(1).join(' ');
+            const contents = listContents(currentDir);
+            const cleanContents = contents.map(c => {
+              if (c.startsWith('<span')) {
+                const temp = document.createElement('div');
+                temp.innerHTML = c;
+                return temp.textContent || temp.innerText;
+              }
+              return c;
+            });
+            
+            const matches = cleanContents.filter(c => c.startsWith(pathPrefix));
+            if (matches.length === 1) {
+              const match = matches[0];
+              input.value = cmd + ' ' + match;
+              updateCaret();
+            } else if (matches.length > 1) {
+              printAutocompleteOptions(matches);
+            }
+          }
+        }
+      }
+
+      function printAutocompleteOptions(options) {
+        const label = body.querySelector('.term-widget-prompt-line .term-widget-prompt-lbl').textContent;
+        writeLine(label + ' ' + input.value, "");
+        writeLine(options.join('    '), "term-out-info");
+      }
+
+      function updatePromptLabel() {
+        const lbls = document.querySelectorAll('.term-widget-prompt-lbl');
+        const path = currentDir === '/' ? '~' : '~' + currentDir;
+        const labelText = `guest@piyush_os:${path}$`;
+        lbls.forEach(lbl => {
+          lbl.textContent = labelText;
+        });
+      }
+
+      function cowsay(text) {
+        const line = "_".repeat(text.length + 2);
+        const border = "-".repeat(text.length + 2);
+        return `  ${line}
+ < ${text} >
+  ${border}
+         \\   ^__^
+          \\  (oo)\\_______
+             (__)\\       )\\/\\
+                 ||----w |
+                 ||     ||`;
+      }
+
+      function startMatrixRain() {
+        const canvas = document.getElementById('term-matrix-canvas');
+        if (!canvas) return;
+        
+        canvas.style.display = 'block';
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = body.clientWidth;
+        canvas.height = body.clientHeight;
+        
+        const fontSize = 11;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#@%&*+-=";
+        
+        function draw() {
+          if (!isMatrixRunning) return;
+          
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          let textColor = '#39ff14';
+          if (overlay.classList.contains('term-theme-amber')) textColor = '#ffb000';
+          else if (overlay.classList.contains('term-theme-steel')) textColor = '#8db6cd';
+          else if (overlay.classList.contains('term-theme-default')) textColor = '#00f0ff';
+          else if (overlay.classList.contains('term-theme-hack')) textColor = '#00ff00';
+          else if (overlay.classList.contains('term-theme-cyberpunk')) textColor = '#ff007f';
+          
+          ctx.fillStyle = textColor;
+          ctx.font = fontSize + 'px monospace';
+          
+          for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            drops[i]++;
+          }
+          
+          matrixAnimFrameId = requestAnimationFrame(draw);
+        }
+        
+        isMatrixRunning = true;
+        matrixAnimFrameId = requestAnimationFrame(draw);
+      }
+
+      function stopMatrixRain() {
+        isMatrixRunning = false;
+        if (matrixAnimFrameId) {
+          cancelAnimationFrame(matrixAnimFrameId);
+          matrixAnimFrameId = null;
+        }
+        const canvas = document.getElementById('term-matrix-canvas');
+        if (canvas) {
+          canvas.style.display = 'none';
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      function executeCommand(cmdStr) {
+        const trimmed = cmdStr.trim();
+        if (trimmed === '') return;
+        
+        const parts = trimmed.split(/\s+/);
+        const cmd = parts[0].toLowerCase();
+        const args = parts.slice(1);
+        
+        if (cmd === 'clear') {
+          const promptLine = body.querySelector('.term-widget-prompt-line');
+          const canvas = document.getElementById('term-matrix-canvas');
+          body.innerHTML = '';
+          if (canvas) body.appendChild(canvas);
+          body.appendChild(promptLine);
+          return;
+        }
+        
+        if (cmd === 'help') {
+          const helpText = `Available Commands:
+  scroll <sec>   Scroll to page section (hero, about, research, projects, skills, contact)
+  open <proj>    Open graphical project details popup (e.g. open unikernel)
+  social <plt>   Open external profile in new tab (github, linkedin, email)
+  neofetch       Display system information & ASCII art
+  ls             List files and directories
+  cd <dir>       Change virtual directory (e.g. cd projects, cd ..)
+  cat <file>     Print file contents (e.g. cat about.txt, cat skills.sh)
+  matrix         Start matrix digital rain screensaver (press any key to stop)
+  cowsay <msg>   Make the retro ASCII cow say something
+  theme <name>   Switch retro theme (default, matrix, amber, steel, hack, cyberpunk)
+  clear          Clear the screen
+  help           Show this menu`;
+          writeLine(helpText, "term-out-info");
+          return;
+        }
+        
+        if (cmd === 'neofetch') {
+          const artLines = [
+            "                WB%%B8%%8%%%%%%W                ",
+            "            k%8%Z              pBB%0            ",
+            "          %%%                      @%@          ",
+            "       xB%_                          X%B        ",
+            "      %B>           Q#%%%%%Ba          cB@      ",
+            "    {%%          xB%q        W%L         %%     ",
+            "   J%v          %8             #8         o%Q   ",
+            "   Bd          B&               q%         #B   ",
+            "  B*          &@                 &          B%  ",
+            " %%           %         ka_#x   Q#           %d ",
+            " B*          %B               &%BBB%%W       hB ",
+            " B         8%%>                    |         >% ",
+            "@%       w%t 8                 u8%            %Y",
+            "%%       M%B%                p%%&             %U",
+            "Y%       %%%%%%B1           B%%B              8J",
+            " %      x%B%%%%%%%B$      XB%%%%M             B ",
+            " %>      BB Xp*    Q88    %%%%%%%*           p% ",
+            " o@       B%B         jB @%%%%%%%B&          8) ",
+            "  &      B%           B B%%%%%%%%%BB        *8  ",
+            "   B    WB            % k%%%%%%%%%%B%      )%   ",
+            "    W  {%J            % O%%%%%%%%%%%%M     &    ",
+            "       %B             8 O%%% 8@%%%%%%%   x      ",
+            "      M%              j O%%%%& x%%%%%%#         ",
+            "      %w                %%%8x %%8%%%%%%         ",
+            "      %                w%%%%%%%%    B%%         ",
+            "     #&               d%%%%%%%%%%%%%%%%1        ",
+            "     8|              %%%%%%%%%%%%%%%%%%?        ",
+            "     8             @%%%%%%%%%%%%%%%%%%%         ",
+            "     M       B%8%%B%dZWW$$Z@@%&%8%%%%%%         ",
+            "     I   %d                         d@          "
+          ];
+
+          const specs = [
+            { key: "OS:", val: "Arch of Chaos" },
+            { key: "Kernel:", val: "caffeinated-v6.9" },
+            { key: "Shell:", val: "zsh + questionable decisions" },
+            { key: "Editor:", val: "neovim btw" },
+            { key: "WM:", val: "window manager manager" },
+            { key: "Uptime:", val: "survived another compile" },
+            { key: "Battery:", val: "powered by curiosity" },
+            { key: "Neural Nets:", val: "training responsibly" },
+            { key: "Productivity:", val: "event-driven" },
+            { key: "Cache:", val: "mostly coherent" },
+            { key: "Simulation:", val: "faster than expected" },
+            { key: "Scheduler:", val: "prioritizing cool projects" },
+            { key: "Fork Count:", val: "increasing steadily" }
+          ];
+
+          const artHtml = artLines.join('\n');
+          let infoHtml = '';
+          specs.forEach(spec => {
+            infoHtml += `<div class="neofetch-row"><span class="neofetch-key">${spec.key}</span><span class="neofetch-val">${spec.val}</span></div>`;
+          });
+
+          const neofetchHtml = `<div class="neofetch-container">` +
+            `<div class="neofetch-art">${artHtml}</div>` +
+            `<div class="neofetch-info">${infoHtml}</div>` +
+            `</div>`;
+
+          writeLine(neofetchHtml, "");
+          return;
+        }
+        
+        if (cmd === 'ls') {
+          const contents = listContents(currentDir);
+          if (contents.length > 0) {
+            writeLine(contents.join('    '), "");
+          }
+          return;
+        }
+        
+        if (cmd === 'cd') {
+          const target = args.join(' ');
+          if (!target || target === '.' || target === '~') {
+            currentDir = '/';
+            updatePromptLabel();
+            return;
+          }
+          const resolved = resolvePath(target);
+          if (isDirectory(resolved)) {
+            currentDir = resolved;
+            updatePromptLabel();
+          } else {
+            writeLine(`cd: no such file or directory: ${target}`, "term-out-error");
+          }
+          return;
+        }
+        
+        if (cmd === 'cat') {
+          const target = args.join(' ');
+          if (!target) {
+            writeLine("cat: missing file operand", "term-out-error");
+            return;
+          }
+          const resolved = resolvePath(target);
+          if (VFS[resolved] !== undefined) {
+            writeLine(VFS[resolved], "");
+          } else if (isDirectory(resolved)) {
+            writeLine(`cat: ${target}: Is a directory`, "term-out-error");
+          } else {
+            writeLine(`cat: ${target}: No such file or directory`, "term-out-error");
+          }
+          return;
+        }
+        
+        if (cmd === 'cowsay') {
+          const msg = args.join(' ');
+          if (!msg) {
+            writeLine("cowsay: what do you want me to say?", "term-out-error");
+            return;
+          }
+          writeLine(cowsay(msg), "");
+          return;
+        }
+        
+        if (cmd === 'matrix') {
+          startMatrixRain();
+          return;
+        }
+        
+        if (cmd === 'theme') {
+          const themeName = args[0];
+          const validThemes = ['default', 'matrix', 'amber', 'steel', 'hack', 'cyberpunk'];
+          if (!themeName) {
+            writeLine(`Usage: theme <name>
+Available themes: ${validThemes.join(', ')}`, "term-out-info");
+            return;
+          }
+          if (validThemes.includes(themeName.toLowerCase())) {
+            changeTerminalTheme(themeName.toLowerCase());
+            writeLine(`Theme changed to '${themeName}'`, "term-out-success");
+          } else {
+            writeLine(`theme: unknown theme '${themeName}'`, "term-out-error");
+          }
+          return;
+        }
+
+        if (cmd === 'scroll' || cmd === 'goto') {
+          const target = args[0] ? args[0].toLowerCase() : '';
+          const validSections = ['hero', 'about', 'research', 'projects', 'skills', 'contact'];
+          
+          if (!target) {
+            writeLine(`Usage: scroll <section>
+Available sections: hero, about, research, projects, skills, contact`, "term-out-info");
+            return;
+          }
+          
+          if (validSections.includes(target)) {
+            writeLine(`Navigating to section '${target}'...`, "term-out-success");
+            const element = document.getElementById(target);
+            if (element) {
+              setTimeout(() => {
+                closeTerminalWidget();
+                element.scrollIntoView({ behavior: 'smooth' });
+              }, 400);
+            } else {
+              writeLine(`Error: Section element #${target} not found on page.`, "term-out-error");
+            }
+          } else {
+            writeLine(`scroll: unknown section '${target}'.
+Available: hero, about, research, projects, skills, contact`, "term-out-error");
+          }
+          return;
+        }
+        
+        if (cmd === 'open' || cmd === 'view') {
+          const target = args.join(' ').toLowerCase();
+          if (!target) {
+            writeLine(`Usage: open <project_index_or_name>
+Examples: open 0, open unikernel, open counsel`, "term-out-info");
+            return;
+          }
+          
+          const projectMap = {
+            '0': 0, 'unikernel': 0, 'arm64': 0, 'os': 0,
+            '1': 1, 'counsel': 1, 'counsel.ai': 1, 'student': 1,
+            '2': 2, 'scheduler': 2, 'os-scheduler': 2, 'simulator': 2,
+            '3': 3, 'jarvis': 3, 'voice': 3, 'assistant': 3,
+            '4': 4, 'chart': 4, 'generator': 4, 'charts': 4,
+            '5': 5, 'crop': 5, 'unet': 5, 'detection': 5,
+            '6': 6, 'wing': 6, 'aerospace': 6, 'fixed-wing': 6,
+            '7': 7, 'quadcopter': 7, 'drone': 7, 'robotics': 7
+          };
+          
+          let projectIdx = -1;
+          if (projectMap[target] !== undefined) {
+            projectIdx = projectMap[target];
+          } else {
+            PROJECTS.forEach((proj, idx) => {
+              if (proj.title.toLowerCase().includes(target)) {
+                projectIdx = idx;
+              }
+            });
+          }
+          
+          if (projectIdx >= 0 && projectIdx < PROJECTS.length) {
+            writeLine(`Opening project modal for '${PROJECTS[projectIdx].title}'...`, "term-out-success");
+            setTimeout(() => {
+              closeTerminalWidget();
+              openModal(projectIdx);
+            }, 400);
+          } else {
+            writeLine(`open: project '${target}' not found.
+Type 'ls projects' or look at the main page for project names.`, "term-out-error");
+          }
+          return;
+        }
+        
+        if (cmd === 'social') {
+          const target = args[0] ? args[0].toLowerCase() : '';
+          const socials = {
+            'github': 'https://github.com/Piyush2005-code',
+            'linkedin': 'https://linkedin.com/in/piyush-singh-bhati-5a074929a',
+            'email': 'mailto:piyush.bhati680@gmail.com'
+          };
+          if (!target) {
+            writeLine(`Usage: social <github|linkedin|email>`, "term-out-info");
+            return;
+          }
+          if (socials[target]) {
+            writeLine(`Opening Piyush's ${target} in a new tab...`, "term-out-success");
+            setTimeout(() => {
+              window.open(socials[target], '_blank');
+            }, 400);
+          } else {
+            writeLine(`social: unknown platform '${target}'. Available: github, linkedin, email`, "term-out-error");
+          }
+          return;
+        }
+        
+        writeLine(`zsh: command not found: ${cmd}`, "term-out-error");
+      }
+
+      // Keyboard Shortcut listener (global)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '`') {
+          const active = document.activeElement;
+          if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA') && !active.classList.contains('term-widget-input')) {
+            return;
+          }
+          e.preventDefault();
+          toggleTerminalWidget();
+        }
+      });
+
+      // Window resize listener
+      window.addEventListener('resize', () => {
+        if (isMatrixRunning) {
+          const canvas = document.getElementById('term-matrix-canvas');
+          if (canvas && body) {
+            canvas.width = body.clientWidth;
+            canvas.height = body.clientHeight;
+          }
+        }
+      });
+      
+      // Setup elements on load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initElements);
+      } else {
+        initElements();
+      }
+    })();
   </script>
 
   <!-- PROJECT MODAL (body-level to escape stacking contexts) -->
@@ -2665,6 +4183,61 @@
       </div>
     </div>
   </div>
+
+  <!-- TERMINAL WIDGET OVERLAY -->
+  <div class="term-widget-overlay term-theme-default" id="term-widget-overlay" style="display: none;" onclick="if(event.target===this)closeTerminalWidget()">
+    <div class="term-widget-window">
+      <div class="term-widget-scanlines"></div>
+      <div class="term-widget-header">
+        <div class="term-widget-dots">
+          <span class="term-widget-dot term-widget-close" onclick="closeTerminalWidget()" title="Close"></span>
+          <span class="term-widget-dot term-widget-min" onclick="closeTerminalWidget()" title="Minimize"></span>
+          <span class="term-widget-dot term-widget-max" onclick="maximizeTerminalWidget()" title="Maximize"></span>
+        </div>
+        <div class="term-widget-title">guest@piyush_os: ~</div>
+        <select class="term-widget-theme-select" id="term-theme-select" onchange="changeTerminalTheme(this.value)">
+          <option value="default">default</option>
+          <option value="matrix">matrix</option>
+          <option value="amber">amber</option>
+          <option value="steel">steel</option>
+          <option value="hack">hack</option>
+          <option value="cyberpunk">cyberpunk</option>
+        </select>
+      </div>
+      
+      <div class="term-widget-body" id="term-widget-body">
+        <canvas class="term-matrix-canvas" id="term-matrix-canvas"></canvas>
+        <div class="term-out-line term-out-dim">Welcome to Piyush's Interactive Linux Shell v1.1.0.
+Type '<span class="term-out-success">help</span>' to see commands, or drive the portfolio page directly using:
+  • <span class="term-out-success">scroll &lt;section&gt;</span>  (sections: about, research, projects, skills, contact)
+  • <span class="term-out-success">open &lt;project&gt;</span>    (projects: unikernel, counsel, scheduler, jarvis, crop, wing...)
+Toggle this console anytime with the backtick (<span class="term-out-success">`</span>) key.
+        </div>
+        
+        <!-- Current input prompt line -->
+        <div class="term-widget-prompt-line">
+          <span class="term-widget-prompt-lbl">guest@piyush_os:~$</span>
+          <div style="position: relative; flex: 1; display: flex; align-items: center; overflow: hidden;">
+            <span class="term-widget-hint" id="term-widget-hint" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-family: inherit; font-size: inherit; color: var(--dim); opacity: 0.45; pointer-events: none; white-space: pre; z-index: 1;"></span>
+            <input type="text" class="term-widget-input" id="term-widget-input" style="width: 100%; background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: inherit; caret-color: transparent; position: relative; z-index: 3;" autocomplete="off" spellcheck="false">
+            <span class="term-widget-caret" id="term-widget-caret" style="position: absolute; width: 7.5px; height: 14px; background: currentColor; z-index: 2; pointer-events: none; top: 50%; transform: translateY(-50%);"></span>
+            <span id="term-widget-measure" style="position: absolute; visibility: hidden; white-space: pre; font-family: inherit; font-size: inherit;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING LAUNCHER -->
+  <div class="floating-term-launcher" onclick="openTerminalWidget()" title="Launch Shell Console (`)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <polyline points="4 17 10 11 4 5"></polyline>
+      <line x1="12" y1="19" x2="20" y2="19"></line>
+    </svg>
+  </div>
+
+  <!-- KEYBOARD HINT BUBBLE -->
+  <div class="term-kbd-hint" id="term-kbd-hint">press &#96; to open shell</div>
 
 </body>
 
