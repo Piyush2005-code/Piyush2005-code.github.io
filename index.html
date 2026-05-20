@@ -2305,6 +2305,10 @@
         text-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
         --term-color: var(--cyan);
         --term-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
+        --ascii-color-1: #00f0ff;
+        --ascii-color-2: #8a2be2;
+        --ascii-color-3: #ff007f;
+        --ascii-color-4: #ffffff;
       }
       .term-theme-default .term-widget-prompt-lbl { color: var(--accent); }
       
@@ -2314,6 +2318,10 @@
         text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
         --term-color: #39ff14;
         --term-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+        --ascii-color-1: #00ff66;
+        --ascii-color-2: #008833;
+        --ascii-color-3: #adff2f;
+        --ascii-color-4: #ffffff;
       }
       .term-theme-matrix .term-widget-prompt-lbl { color: #00ff66; }
       .term-theme-matrix .term-widget-window { border-color: rgba(57, 255, 20, 0.3); }
@@ -2324,6 +2332,10 @@
         text-shadow: 0 0 5px rgba(255, 176, 0, 0.6);
         --term-color: #ffb000;
         --term-shadow: 0 0 5px rgba(255, 176, 0, 0.6);
+        --ascii-color-1: #ffb000;
+        --ascii-color-2: #ff5500;
+        --ascii-color-3: #ffdd00;
+        --ascii-color-4: #ffffff;
       }
       .term-theme-amber .term-widget-prompt-lbl { color: #ff8800; }
       .term-theme-amber .term-widget-window { border-color: rgba(255, 176, 0, 0.35); }
@@ -2334,6 +2346,10 @@
         text-shadow: 0 0 3px rgba(141, 182, 205, 0.4);
         --term-color: #8db6cd;
         --term-shadow: 0 0 3px rgba(141, 182, 205, 0.4);
+        --ascii-color-1: #8db6cd;
+        --ascii-color-2: #4682b4;
+        --ascii-color-3: #b0c4de;
+        --ascii-color-4: #ffffff;
       }
       .term-theme-steel .term-widget-prompt-lbl { color: #a4d3ee; }
       .term-theme-steel .term-widget-window { border-color: rgba(141, 182, 205, 0.25); }
@@ -2344,6 +2360,10 @@
         text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
         --term-color: #00ff00;
         --term-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+        --ascii-color-1: #00ff00;
+        --ascii-color-2: #005500;
+        --ascii-color-3: #adff2f;
+        --ascii-color-4: #ffffff;
       }
       .term-theme-hack .term-widget-prompt-lbl { color: #adff2f; }
       .term-theme-hack .term-widget-window { border-color: rgba(0, 255, 0, 0.25); }
@@ -2354,6 +2374,10 @@
         text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
         --term-color: #ff007f;
         --term-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+        --ascii-color-1: #ff007f;
+        --ascii-color-2: #9d00ff;
+        --ascii-color-3: #00f0ff;
+        --ascii-color-4: #ffff00;
       }
       .term-theme-cyberpunk .term-widget-prompt-lbl { color: var(--neon-purple); }
       .term-theme-cyberpunk .term-widget-window { border-color: rgba(255, 0, 127, 0.35); }
@@ -2452,6 +2476,61 @@
         border-radius: 8px !important;
       }
 
+      /* Tiled state */
+      .term-widget-window.tiled {
+        width: 820px !important;
+        height: 460px !important;
+        max-width: 95vw !important;
+        max-height: 85vh !important;
+      }
+
+      /* Tiled and maximized state combined */
+      .term-widget-window.tiled.maximized {
+        width: 1020px !important;
+        height: 580px !important;
+      }
+
+      /* Layout Button */
+      .term-widget-layout-btn {
+        background: rgba(3, 6, 12, 0.6);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+        font-family: var(--font-mono);
+        transition: all 0.2s ease;
+      }
+      .term-widget-layout-btn:hover {
+        border-color: var(--border2);
+        color: var(--txt);
+        background: rgba(0, 240, 255, 0.08);
+      }
+      .term-widget-layout-btn.active {
+        color: var(--accent);
+        border-color: var(--accent);
+        background: rgba(0, 255, 179, 0.08);
+        text-shadow: var(--term-shadow);
+      }
+
+      /* Ranger Hover Highlights by theme */
+      .ranger-item {
+        border-radius: 2px;
+        padding: 2px 4px;
+        margin-bottom: 2px;
+      }
+      .ranger-item:hover {
+        background: rgba(0, 240, 255, 0.08);
+        color: var(--txt);
+      }
+      .term-theme-matrix .ranger-item:hover { background: rgba(57, 255, 20, 0.12); }
+      .term-theme-amber .ranger-item:hover { background: rgba(255, 176, 0, 0.12); }
+      .term-theme-steel .ranger-item:hover { background: rgba(141, 182, 205, 0.1); }
+      .term-theme-hack .ranger-item:hover { background: rgba(0, 255, 0, 0.12); }
+      .term-theme-cyberpunk .ranger-item:hover { background: rgba(255, 0, 127, 0.12); }
+
       /* Mobile responsiveness for floating companion window */
       @media (max-width: 640px) {
         .term-widget-overlay {
@@ -2463,11 +2542,258 @@
           width: calc(100vw - 2rem);
           height: 280px;
         }
+        .term-pane-column {
+          display: none !important;
+        }
+        .term-widget-window.tiled {
+          width: calc(100vw - 2rem) !important;
+          height: 280px !important;
+        }
+        .term-widget-layout-btn {
+          display: none !important;
+        }
+      }
+
+      /* ── SYSTEMS HACKER FRONTEND DECORATIONS ── */
+      
+      /* Global Modern Web scrollbars styling */
+      html {
+        scrollbar-color: rgba(0, 212, 255, 0.35) var(--bg);
+        scrollbar-width: thin;
+      }
+      
+      @supports not (scrollbar-color: auto) {
+        ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+          background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+          background: var(--border2);
+          border-radius: 3px;
+          transition: background 0.3s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: var(--cyan);
+        }
+      }
+
+
+
+      /* Animated CRT scanline background overlay in Hero */
+      #hero {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero-scanlines {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.18) 50%);
+        background-size: 100% 4px;
+        z-index: 2;
+        opacity: 0.35;
+        mix-blend-mode: overlay;
+        animation: crt-flicker-anim 0.25s infinite;
+      }
+      
+      @keyframes crt-flicker-anim {
+        0%, 100% { opacity: 0.33; }
+        50% { opacity: 0.37; }
+      }
+
+      /* Card Corner ticks & Unix metadata styling */
+      .research-card, .proj-card, .skill-card {
+        position: relative;
+      }
+      
+      .research-card::after, .proj-card::after, .skill-card::after {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 6px;
+        height: 6px;
+        border-bottom: 1.5px solid transparent;
+        border-right: 1.5px solid transparent;
+        pointer-events: none;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      
+      .research-card:hover::after, .proj-card:hover::after, .skill-card:hover::after {
+        border-color: var(--accent);
+        transform: scale(1.1);
+      }
+      
+      .card-hacker-perm {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: var(--dim);
+        user-select: none;
+        pointer-events: none;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+        opacity: 0.65;
+        letter-spacing: 0.05em;
+      }
+      
+      .research-card:hover .card-hacker-perm, 
+      .proj-card:hover .card-hacker-perm, 
+      .skill-card:hover .card-hacker-perm {
+        color: var(--cyan);
+        text-shadow: 0 0 5px rgba(0, 212, 255, 0.4);
+        opacity: 1;
+      }
+
+      /* Section header comments */
+      .section-comment-header {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--dim);
+        margin-bottom: 0.4rem;
+        letter-spacing: 0.08em;
+        display: block;
+        transition: color 0.3s ease;
+      }
+      
+      .section-head:hover .section-comment-header,
+      .about-teaser:hover .section-comment-header,
+      .about-card-back:hover .section-comment-header {
+        color: var(--cyan);
+      }
+
+
+
+      /* ASCII Character classes */
+      .ascii-c1 {
+        color: var(--ascii-color-1, var(--cyan));
+        text-shadow: 0 0 3px var(--ascii-color-1, var(--cyan));
+      }
+      .ascii-c2 {
+        color: var(--ascii-color-2, var(--muted));
+      }
+      .ascii-c3 {
+        color: var(--ascii-color-3, var(--accent));
+      }
+      .ascii-c4 {
+        color: var(--ascii-color-4, var(--txt));
+        font-weight: bold;
+      }
+
+      /* Hero IDE Enhancements */
+      .code-box-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between !important;
+        width: 100%;
+      }
+      .code-box-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .ide-run-btn {
+        background: rgba(0, 255, 179, 0.08);
+        border: 1px solid rgba(0, 255, 179, 0.25);
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.2s ease;
+        user-select: none;
+      }
+      .ide-run-btn:hover {
+        background: rgba(0, 255, 179, 0.2);
+        border-color: var(--accent);
+        box-shadow: 0 0 8px rgba(0, 255, 179, 0.4);
+      }
+      .ide-console-output {
+        margin-top: 0.8rem;
+        border-top: 1px dashed var(--border);
+        padding-top: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: #00ff7f;
+        line-height: 1.4;
+        white-space: pre-wrap;
+        display: none;
+        text-align: left;
+        opacity: 0.95;
+      }
+
+      /* Telemetry Diagnostic Console in Modals */
+      .proj-modal-telemetry {
+        margin-top: 1.5rem;
+        border: 1px solid var(--border);
+        background: rgba(4, 8, 15, 0.95);
+        border-radius: 6px;
+        overflow: hidden;
+        font-family: var(--font-mono);
+        text-align: left;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+      }
+      .telemetry-header {
+        background: rgba(10, 20, 40, 0.8);
+        border-bottom: 1px solid var(--border);
+        padding: 0.4rem 0.8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: var(--cyan);
+        user-select: none;
+      }
+      .telemetry-status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #00ff7f;
+        box-shadow: 0 0 6px #00ff7f;
+        animation: pulse-telemetry 1.5s infinite alternate;
+      }
+      @keyframes pulse-telemetry {
+        0% { opacity: 0.4; }
+        100% { opacity: 1; }
+      }
+      .telemetry-console {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.6rem;
+        line-height: 1.5;
+        color: var(--txt2);
+        max-height: 130px;
+        overflow-y: auto;
+        min-height: 85px;
+        white-space: pre-wrap;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+      }
+      .telemetry-console::-webkit-scrollbar {
+        width: 4px;
+      }
+      .telemetry-console::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 2px;
+      }
+      .telemetry-log-line {
+        margin-bottom: 2px;
       }
   </style>
 </head>
 
 <body>
+
+
 
 
 
@@ -2523,6 +2849,7 @@
 
   <!-- HERO -->
   <section id="hero">
+    <div class="hero-scanlines"></div>
     <div class="hero-video-wrap">
       <video autoplay loop muted playsinline>
         <source src="videos/quadcopter-demo.mp4" type="video/mp4" />
@@ -2539,7 +2866,7 @@
       </h1>
 
       <p class="hero-subtitle">
-        Building the future at the intersection of<br />
+         Building the future at the intersection of<br />
         <strong>Artificial Intelligence</strong> &nbsp;×&nbsp; <strong>Computing Hardware</strong> &nbsp;×&nbsp;
         <strong>Autonomous Systems</strong>
       </p>
@@ -2553,24 +2880,7 @@
         <span>AI Systems · OS · Robotics</span>
       </div>
 
-      <!-- Floating Hacker Code Declaration Panel -->
-      <div class="hero-code-box">
-        <div class="code-box-header">
-          <div class="code-box-dot dot-r"></div>
-          <div class="code-box-dot dot-y"></div>
-          <div class="code-box-dot dot-g"></div>
-          <div class="code-box-title">builder.js</div>
-        </div>
-        <div class="code-box-body">
-          <span class="code-keyword">const</span> builder = {
-            name: <span class="code-str">'Piyush Singh Bhati'</span>,
-            host: <span class="code-str">'IIT Jodhpur'</span>,
-            skills: [<span class="code-str">'AI Systems'</span>, <span class="code-str">'OS/Kernels'</span>, <span class="code-str">'CAD/Robotics'</span>],
-            shell: <span class="code-keyword">true</span>,
-            status: <span class="code-str">'active'</span>
-          };
-        </div>
-      </div>
+
 
       <div class="hero-socials">
         <a href="https://github.com/Piyush2005-code" target="_blank" rel="noopener" title="GitHub">
@@ -2649,6 +2959,7 @@
             </span>
 
             <span class="about-card-face about-card-back">
+              <span class="section-comment-header">// source: about.sh · status: verified</span>
               <span class="section-label">About Me</span>
               <span class="section-title" style="margin-bottom:1.5rem">Engineering <span class="grad">AI Systems</span></span>
               <span class="about-text">
@@ -2678,6 +2989,7 @@
           </span>
         </button>
         <div class="about-teaser reveal" style="transition-delay:.1s">
+          <span class="section-comment-header">// source: about.sh · status: verified</span>
           <div class="section-label">About Me</div>
           <h2 class="section-title" style="margin-bottom:1.5rem">Engineering <span class="grad">AI Systems</span></h2>
           <p class="about-teaser-text">A systems-focused CSE undergraduate at IIT Jodhpur building at the intersection
@@ -2691,11 +3003,13 @@
   <section id="research">
     <div class="section-max">
       <div class="section-head reveal">
+        <span class="section-comment-header">// module: research.c (kernel_space)</span>
         <div class="section-label">Academic Work</div>
         <h2 class="section-title">Research <span class="grad">Experience</span></h2>
       </div>
       <div class="research-grid">
         <div class="research-card reveal">
+          <div class="card-hacker-perm">drwxr-xr-x</div>
           <div class="rc-inst">IIT Jodhpur</div>
           <div class="rc-title">AI Systems Research</div>
           <div class="rc-advisor">Advisor: Prof. Sidharth Sharma</div>
@@ -2709,6 +3023,7 @@
           </div>
         </div>
         <div class="research-card reveal" style="transition-delay:.12s">
+          <div class="card-hacker-perm">drwxr-xr-x</div>
           <div class="rc-inst">IIT Jodhpur</div>
           <div class="rc-title">Scientific Machine Learning Research</div>
           <div class="rc-advisor">Advisor: Prof. Harshal D. Akolekar</div>
@@ -2729,6 +3044,7 @@
   <section id="projects">
     <div class="section-max">
       <div class="section-head reveal">
+        <span class="section-comment-header">/* 03. execution_flow */</span>
         <div class="section-label">Featured Work</div>
         <h2 class="section-title">Projects</h2>
       </div>
@@ -2739,7 +3055,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">2025–Ongoing · Embedded Systems / OS</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">2025–Ongoing · Embedded Systems / OS · [git:main]</div>
             <h3 class="proj-card-title">ARM64 Unikernel for ML Inference</h3>
             <p class="proj-card-desc">Bare-metal ARM64 unikernel (&lt;256KB) for deterministic ML inference with custom
               ONNX runtime and NEON SIMD kernels achieving ~269µs latency.</p>
@@ -2756,7 +3073,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">2025 · Systems Programming</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">2025 · Systems Programming · [git:stable]</div>
             <h3 class="proj-card-title">OS Scheduling Algorithm Simulator</h3>
             <p class="proj-card-desc">Classical OS scheduling algorithms with interactive UI, real-time Gantt charts,
               and cross-platform Electron desktop app.</p>
@@ -2773,7 +3091,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">2025 · AI/ML Project</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">2025 · AI/ML Project · [git:main]</div>
             <h3 class="proj-card-title">JARVIS Voice Assistant</h3>
             <p class="proj-card-desc">Real-time voice assistant with sub-second GPU-accelerated inference on NVIDIA
               A5000, RAG-based context, and 500+ concurrent user support.</p>
@@ -2790,7 +3109,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">2026 · Deep Learning / LLMs / Backend</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">2026 · DL / LLMs / Backend · [git:prod]</div>
             <h3 class="proj-card-title">Counsel.ai — Student Advisory</h3>
             <p class="proj-card-desc">AI-driven platform for college counselling using adaptive conversational guidance and NCDM trait estimation.</p>
             <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2806,7 +3126,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">2025 · Deep Learning</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">2025 · Deep Learning · [git:main]</div>
             <h3 class="proj-card-title">LLM-Based Chart Generation</h3>
             <p class="proj-card-desc">Automated chart generation from uploaded PDFs using LLMs and semantic NLP
               extraction with real-time visualization rendering.</p>
@@ -2823,7 +3144,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">2025 · Computer Vision</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">2025 · Computer Vision · [git:dev]</div>
             <h3 class="proj-card-title">Crop Stress Detection — U-Net</h3>
             <p class="proj-card-desc">Pixel-wise semantic segmentation of stressed crops from aerial imagery using a
               7.7M-param U-Net with real-time video inference.</p>
@@ -2840,7 +3162,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">Inter IIT Tech Meet 14.0 · Aeronautics</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">Inter IIT Tech Meet 14.0 · Aeronautics · [release:v1.0]</div>
             <h3 class="proj-card-title">Fixed-Wing STOL Wing Design</h3>
             <p class="proj-card-desc">High-lift wing configuration achieving CL = 8.1258 with full CAD assembly and CFD
               validation using ANSYS Fluent.</p>
@@ -2857,7 +3180,8 @@
             <div class="proj-card-img-ov"></div>
           </div>
           <div class="proj-card-body">
-            <div class="proj-card-meta">Personal Project · Robotics</div>
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">Personal Project · Robotics · [git:cad]</div>
             <h3 class="proj-card-title">Quadcopter CAD Design</h3>
             <p class="proj-card-desc">Custom quadcopter with full CAD modeling, structural analysis, and modular
               component design optimized for autonomous flight.</p>
@@ -2875,12 +3199,14 @@
   <section id="skills">
     <div class="section-max">
       <div class="section-head reveal">
+        <span class="section-comment-header">// thread_id: 0x7FFF0042 (active)</span>
         <div class="section-label">Technical Expertise</div>
         <h2 class="section-title">Skills & <span class="grad">Technologies</span></h2>
       </div>
 
       <div class="skills-grid">
         <div class="skill-card reveal">
+          <div class="card-hacker-perm">-rw-r--r--</div>
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <polyline points="16 18 22 12 16 6" />
@@ -2895,6 +3221,7 @@
           </div>
         </div>
         <div class="skill-card reveal" style="transition-delay:.06s">
+          <div class="card-hacker-perm">-rw-r--r--</div>
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <rect x="2" y="2" width="20" height="20" rx="2" />
@@ -2909,6 +3236,7 @@
           </div>
         </div>
         <div class="skill-card reveal" style="transition-delay:.12s">
+          <div class="card-hacker-perm">-rw-r--r--</div>
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path
@@ -2922,6 +3250,7 @@
           </div>
         </div>
         <div class="skill-card reveal" style="transition-delay:.18s">
+          <div class="card-hacker-perm">-rw-r--r--</div>
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <circle cx="12" cy="12" r="3" />
@@ -2936,6 +3265,7 @@
           </div>
         </div>
         <div class="skill-card reveal" style="transition-delay:.24s">
+          <div class="card-hacker-perm">-rw-r--r--</div>
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <polyline points="4 17 10 11 4 5" />
@@ -2949,6 +3279,7 @@
           </div>
         </div>
         <div class="skill-card reveal" style="transition-delay:.3s">
+          <div class="card-hacker-perm">-rw-r--r--</div>
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -3072,7 +3403,194 @@
   </footer>
 
   <script>
+    // ── SYSTEMS-HACKER PORTFOLIO ADDITIONS ──
+    const pageStartTime = Date.now();
+    let telemetryIntervalId = null;
 
+    function getDynamicUptime() {
+      const diffSecs = Math.floor((Date.now() - pageStartTime) / 1000);
+      const secs = diffSecs % 60;
+      const mins = Math.floor(diffSecs / 60) % 60;
+      const hours = Math.floor(diffSecs / 3600);
+      
+      let str = '';
+      if (hours > 0) str += `${hours}h `;
+      if (mins > 0 || hours > 0) str += `${mins}m `;
+      str += `${secs}s`;
+      return str;
+    }
+
+
+
+    function colorizeAsciiArt(artText) {
+      let colored = '';
+      for (let i = 0; i < artText.length; i++) {
+        const char = artText[i];
+        if (char === ' ') {
+          colored += ' ';
+        } else if (char === '\n') {
+          colored += '\n';
+        } else if (['%', '8', 'B', '@'].includes(char)) {
+          colored += `<span class="ascii-c1">${char}</span>`;
+        } else if (['W', 'Z', 'Q', 'M', 'O', '#', 'a', 'd', '&'].includes(char)) {
+          colored += `<span class="ascii-c2">${char}</span>`;
+        } else if (['x', 'p', 'q', 'L', 'J', 'v', 'o', 'w', 't', 'u', 'Y', '1', '$', 'X', '?'].includes(char)) {
+          colored += `<span class="ascii-c3">${char}</span>`;
+        } else {
+          colored += `<span class="ascii-c4">${char}</span>`;
+        }
+      }
+      return colored;
+    }
+
+    // Global tracking of profile window references
+    window.profileTabs = window.profileTabs || {
+      github: null,
+      linkedin: null
+    };
+
+    const TELEMETRY_LOGS = [
+      // 0: ARM64 Unikernel
+      [
+        "[boot] Initializing ARMv8-A EL3 to EL1 boot sequence...",
+        "[mmu] Set up page tables (L0, L1, L2). Translation enabled.",
+        "[irq] Configuring Generic Interrupt Controller (GICv2)...",
+        "[mmu] Identity map memory regions, pre-allocated 128MB arena.",
+        "[sched] Context size: 104B. Cooperative scheduler started.",
+        "[onnx] Parsing ONNX protobuf file structure...",
+        "[onnx] Model loaded successfully: 42 operations verified.",
+        "[simd] Cache alignment checked. NEON registers initialized.",
+        "[prof] Starting Conv2D / GEMM matrix multiply bench...",
+        "[prof] Inference complete: 269.45 microseconds.",
+        "[sys] Unikernel status: deterministic execution loop [OK]."
+      ],
+      // 1: Counsel.ai
+      [
+        "[model] Deferring vLLM loading to local server: port 8000",
+        "[distilroberta] Model loaded into CUDA:0 successfully.",
+        "[ncdm] PyTorch trait estimation model initialized (11 dimensions).",
+        "[semantic] SentenceTransformers connecting to Pinecone vector DB...",
+        "[semantic] Query vector generated. Shape: [1, 384].",
+        "[semantic] Retrieval query matched 5 colleges in 18ms.",
+        "[postgres] Filtering by cutoff and fees constraints... 3 matches.",
+        "[agentic] Mistral multi-turn counselling logic: state synchronized.",
+        "[mcp] FastMCP server active: exposed 4 database diagnostic tools."
+      ],
+      // 2: OS Scheduling Simulator
+      [
+        "[simulator] React component tree mounted.",
+        "[sim] Spawning 5 processes with random burst and priority values.",
+        "[algo] Running First-Come First-Served scheduling pass...",
+        "[algo] Running Round Robin pass (Time Quantum = 4ms)...",
+        "[algo] Running Non-Preemptive Priority pass...",
+        "[prof] Average Turnaround Time (RR): 14.8ms",
+        "[prof] Average Waiting Time (RR): 6.2ms",
+        "[gantt] Drawing SVG chart lines for FCFS sequence...",
+        "[ipc] Sending scheduling arrays to Electron main process."
+      ],
+      // 3: JARVIS Voice Assistant
+      [
+        "[audio] AudioFlamingo3 speech processing pipeline live.",
+        "[cuda] CUDA context created on GPU:0 (NVIDIA A5000).",
+        "[cuda] CUDA kernels optimized. Cache warming completed.",
+        "[whisper] Real-time audio stream decoder hooked.",
+        "[rag] Initializing query search on local vector database...",
+        "[vllm] Pipeline execution triggered with sub-second constraint.",
+        "[whisper] Decoding completed in 42ms.",
+        "[vllm] LLM generation response received: 84 tokens.",
+        "[sys] Response stream sent to TTS module. Latency: 0.85s."
+      ],
+      // 4: LLM Chart Gen
+      [
+        "[server] Node.js backend listening on port 5000",
+        "[pdf] Uploaded document received. File size: 2.4MB",
+        "[pdf] PDF parsing engine extracting text buffers...",
+        "[trans] Deployed semantic text segmenter...",
+        "[llm] Formatting JSON payload for local LLM completion...",
+        "[llm] Prompt tokens: 4096, Output tokens: 1024",
+        "[classifier] ML-based data type classification: NUMERIC",
+        "[chart] Matching layout schema: Bar chart selected.",
+        "[chart] Rendering SVG output: Success [OK]."
+      ],
+      // 5: Crop Stress
+      [
+        "[torch] PyTorch runtime loaded. CUDA/MPS acceleration active.",
+        "[unet] Initializing U-Net semantic segmentation network (7.7M params).",
+        "[synthetic] Loading augmentations: Gaussian blend + Rotations.",
+        "[train] Epoch 100/100 completed. BCE Loss: 0.042, Dice: 0.945",
+        "[cv] OpenCV capture opened for aerial_footage_08.mp4.",
+        "[infer] Batch size: 8, FPS: 45.3",
+        "[cv] Writing video stream mask overlay overlay_output.mp4."
+      ],
+      // 6: Wing Design
+      [
+        "[cad] Parsing wing profile SolidWorks XML coordinates...",
+        "[mesh] Generating multi-block structured mesh inside domain...",
+        "[mesh] Mesh verification: 1.2M nodes, max skewness: 0.22",
+        "[solver] Loading ANSYS Fluent solver routines...",
+        "[solver] Target parameters: AoA = 8°, Re = 1.5e5",
+        "[solver] Iteration 500/500 converged. Residuals < 1e-6",
+        "[prof] Max Lift Coefficient (CL) calculated: 8.1258",
+        "[prof] Lift/Drag ratio (L/D): 18.42"
+      ],
+      // 7: Quadcopter CAD
+      [
+        "[cad] Loading quadcopter model database from Fusion 360 API...",
+        "[fea] Setting material density: Carbon Fiber (1.6g/cm³)",
+        "[fea] Stress analysis: loading loads on motor arms (4.5G crash)",
+        "[fea] Max deflection: 0.12mm (Safety factor: 3.4)",
+        "[geom] Center of Gravity (CoG) coordinate: [0.0, 0.0, 1.45]",
+        "[autopilot] Mapping hardware sensor mounts (IMU, Baro, GPS)",
+        "[sys] Rigidity validation complete: Weight target 420g met."
+      ]
+    ];
+
+    function startTelemetryStream(idx) {
+      if (telemetryIntervalId) {
+        clearInterval(telemetryIntervalId);
+      }
+      
+      const consoleEl = document.getElementById('pm-telemetry-console');
+      if (!consoleEl) return;
+      consoleEl.textContent = '';
+      
+      const logs = TELEMETRY_LOGS[idx] || ["[sys] No telemetry log available for this project index."];
+      let logIdx = 0;
+      
+      function getLogClass(prefix) {
+        if (prefix === '[sys]' || prefix === '[boot]') return 'telemetry-log-green';
+        if (prefix === '[err]' || prefix === '[warn]') return 'telemetry-log-yellow';
+        if (['[mmu]', '[irq]', '[sched]', '[cuda]', '[mesh]', '[fea]'].includes(prefix)) return 'telemetry-log-blue';
+        return '';
+      }
+      
+      function appendLog() {
+        if (logIdx < logs.length) {
+          const line = logs[logIdx];
+          const div = document.createElement('div');
+          div.className = 'telemetry-log-line';
+          
+          const match = line.match(/^(\[[a-z0-9]+\])\s*(.*)/i);
+          if (match) {
+            const prefix = match[1];
+            const rest = match[2];
+            const cls = getLogClass(prefix);
+            div.innerHTML = `<span class="${cls}">${prefix}</span> ${rest}`;
+          } else {
+            div.textContent = line;
+          }
+          
+          consoleEl.appendChild(div);
+          consoleEl.scrollTop = consoleEl.scrollHeight;
+          logIdx++;
+        } else {
+          clearInterval(telemetryIntervalId);
+          telemetryIntervalId = null;
+        }
+      }
+      
+      telemetryIntervalId = setInterval(appendLog, 200);
+    }
 
     // ── NAV SCROLL ──
     const navbar = document.getElementById('navbar');
@@ -3195,8 +3713,15 @@
       document.getElementById('proj-modal').classList.add('open');
       document.body.classList.add('modal-open');
       document.body.style.overflow = 'hidden';
+      
+      // Start real-time project telemetry console stream
+      startTelemetryStream(idx);
     }
     function closeModal() {
+      if (telemetryIntervalId) {
+        clearInterval(telemetryIntervalId);
+        telemetryIntervalId = null;
+      }
       document.getElementById('proj-modal').classList.remove('open');
       document.body.classList.remove('modal-open');
       document.body.style.overflow = '';
@@ -3215,6 +3740,9 @@
       else { audio.play().catch(() => { }); btn.classList.add('playing'); iconMuted.style.display = 'none'; iconPlaying.style.display = ''; }
       playing = !playing;
     });
+
+    window.isMusicPlaying = () => playing;
+    window.toggleMusic = () => { btn.click(); };
 
 
     // ── RETRO TERMINAL INTERACTIVE SHELL ──
@@ -3335,18 +3863,214 @@ Personal Project. Complete design and development of a custom quadcopter with de
       let isMatrixRunning = false;
       let matrixAnimFrameId = null;
 
+      // tmux tiling state variables
+      let isTiled = false;
+      let htopIntervalId = null;
+
+      function getHtopProcesses() {
+        const isMusicRunning = window.isMusicPlaying ? window.isMusicPlaying() : false;
+        
+        return [
+          { pid: 101, user: 'guest', pr: 20, ni: 0, virt: '14.2M', res: '3.1M', cpu: isMusicRunning ? (Math.random() * 0.8 + 0.6).toFixed(1) : '0.0', mem: '0.2', state: isMusicRunning ? 'R' : 'S', cmd: 'ambient-music', control: isMusicRunning ? 'KILL' : 'RUN' },
+          { pid: 102, user: 'guest', pr: 20, ni: 0, virt: '8.5M', res: '2.4M', cpu: isMatrixRunning ? (Math.random() * 4.5 + 8.5).toFixed(1) : '0.0', mem: '0.1', state: isMatrixRunning ? 'R' : 'S', cmd: 'matrix-canvas', control: isMatrixRunning ? 'KILL' : 'RUN' },
+          { pid: 103, user: 'guest', pr: 20, ni: 0, virt: '12.8M', res: '4.0M', cpu: (telemetryIntervalId ? (Math.random() * 1.5 + 0.5) : 0).toFixed(1), mem: '0.3', state: telemetryIntervalId ? 'R' : 'S', cmd: 'hud-telemetry', control: 'SYS' },
+          { pid: 104, user: 'guest', pr: 20, ni: 0, virt: '32.0M', res: '8.2M', cpu: (Math.random() * 0.8 + 1.2).toFixed(1), mem: '0.6', state: 'R', cmd: 'window-manager', control: 'SYS' }
+        ];
+      }
+
+      window.toggleHtopProcess = function(pid) {
+        if (pid === 101) {
+          if (window.toggleMusic) {
+            window.toggleMusic();
+            renderHtop();
+          }
+        } else if (pid === 102) {
+          if (isMatrixRunning) {
+            stopMatrixRain();
+            writeLine("matrix screensaver terminated.", "term-out-dim");
+          } else {
+            startMatrixRain();
+          }
+          renderHtop();
+        }
+      };
+
+      function renderHtop() {
+        const container = document.getElementById('term-pane-htop');
+        if (!container) return;
+        
+        const isMusicRunning = window.isMusicPlaying ? window.isMusicPlaying() : false;
+        
+        let cpuTotal = 1.2 + (Math.random() * 0.8);
+        if (isMusicRunning) cpuTotal += 1.2;
+        if (isMatrixRunning) cpuTotal += 12.5;
+        if (telemetryIntervalId) cpuTotal += 1.8;
+        if (cpuTotal > 100) cpuTotal = 99.8;
+        
+        let memTotal = 29.4 + (Math.random() * 0.4);
+        if (isMusicRunning) memTotal += 0.5;
+        if (isMatrixRunning) memTotal += 0.8;
+        
+        const cpuBarCount = Math.min(Math.floor(cpuTotal / 5), 20);
+        const cpuBar = '|'.repeat(cpuBarCount) + ' '.repeat(20 - cpuBarCount);
+        
+        const memBarCount = Math.min(Math.floor(memTotal / 5), 20);
+        const memBar = '|'.repeat(memBarCount) + ' '.repeat(20 - memBarCount);
+        
+        let html = '';
+        html += `<div style="color: var(--accent); font-weight: bold; margin-bottom: 0.3rem;">SYSTEM MONITOR (htop)</div>`;
+        html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0.4rem; font-size: 0.53rem;">`;
+        html += `  <div>CPU [${cpuBar}] <span style="color: var(--accent); font-weight: bold;">${cpuTotal.toFixed(1)}%</span></div>`;
+        html += `  <div>MEM [${memBar}] <span style="color: var(--cyan); font-weight: bold;">${memTotal.toFixed(1)}%</span></div>`;
+        html += `</div>`;
+        
+        html += `<div style="border-top: 1px dashed var(--border); margin-bottom: 0.4rem;"></div>`;
+        
+        html += `<div style="display: grid; grid-template-columns: 24px 38px 14px 22px 24px 24px 75px 1fr; font-weight: bold; color: var(--accent); margin-bottom: 0.2rem;">`;
+        html += `  <span>PID</span><span>USER</span><span>PR</span><span>NI</span><span>CPU%</span><span>MEM%</span><span>COMMAND</span><span>ACTION</span>`;
+        html += `</div>`;
+        
+        const procs = getHtopProcesses();
+        procs.forEach(p => {
+          const actionText = p.control === 'SYS' ? `<span style="color: var(--dim); font-size: 0.5rem;">[system]</span>` :
+            `<span onclick="toggleHtopProcess(${p.pid})" style="cursor: pointer; text-decoration: underline; color: ${p.control === 'KILL' ? '#ff5c5c' : '#00ff7f'}; font-weight: bold;">[${p.control.toLowerCase()}]</span>`;
+          
+          const rowStyle = p.state === 'R' ? `color: var(--txt); font-weight: 500;` : `color: var(--dim);`;
+          
+          html += `<div style="display: grid; grid-template-columns: 24px 38px 14px 22px 24px 24px 75px 1fr; margin-bottom: 0.15rem; ${rowStyle}">`;
+          html += `  <span>${p.pid}</span>`;
+          html += `  <span>${p.user}</span>`;
+          html += `  <span>${p.pr}</span>`;
+          html += `  <span>${p.ni}</span>`;
+          html += `  <span style="color: ${parseFloat(p.cpu) > 40 ? '#ff5c5c' : 'inherit'}">${p.cpu}</span>`;
+          html += `  <span>${p.mem}</span>`;
+          html += `  <span>${p.cmd}</span>`;
+          html += `  <span>${actionText}</span>`;
+          html += `</div>`;
+        });
+        
+        container.innerHTML = html;
+      }
+
+      function startHtopLoop() {
+        if (htopIntervalId) return;
+        renderHtop();
+        htopIntervalId = setInterval(renderHtop, 1000);
+      }
+      
+      function stopHtopLoop() {
+        if (htopIntervalId) {
+          clearInterval(htopIntervalId);
+          htopIntervalId = null;
+        }
+      }
+
+      function renderRanger() {
+        const container = document.getElementById('term-pane-ranger');
+        if (!container) return;
+        
+        let html = `<div style="color: var(--accent); font-weight: bold; margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between;">`;
+        html += `<span>RANGER v1.0.0 [dir: ${currentDir}]</span>`;
+        html += `<span style="font-size: 0.5rem; color: var(--dim);">click file to cat / folder to cd</span>`;
+        html += `</div>`;
+        html += `<div style="border-top: 1px dashed var(--border); margin-bottom: 0.4rem;"></div>`;
+        
+        if (currentDir === '/projects') {
+          html += `<div class="ranger-item" onclick="rangerCd('..')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span style="color: var(--cyan);">📁</span> <span style="color: var(--txt);">..</span></div>`;
+        }
+        
+        if (currentDir === '/') {
+          html += `<div class="ranger-item" onclick="rangerCd('projects')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span style="color: var(--cyan);">📁</span> <span style="color: var(--txt);">projects/</span></div>`;
+          
+          const files = ['about.txt', 'contact.txt', 'publications.txt', 'skills.sh'];
+          files.forEach(f => {
+            const isScript = f.endsWith('.sh');
+            const icon = isScript ? '⚙️' : '📄';
+            const color = isScript ? 'var(--accent)' : 'var(--txt2)';
+            html += `<div class="ranger-item" onclick="rangerCat('${f}')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span>${icon}</span> <span style="color: ${color};">${f}</span></div>`;
+          });
+        } else if (currentDir === '/projects') {
+          const files = [
+            '01_unikernel.md',
+            '02_counsel_ai.md',
+            '03_os_simulator.md',
+            '04_jarvis.md',
+            '05_crop_stress.md',
+            '06_wing_design.md',
+            '07_quadcopter.md'
+          ];
+          files.forEach(f => {
+            html += `<div class="ranger-item" onclick="rangerCat('${f}')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span>📄</span> <span style="color: var(--txt2);">${f}</span></div>`;
+          });
+        }
+        
+        container.innerHTML = html;
+      }
+
+      window.rangerCd = function(target) {
+        if (target === '..') {
+          runCommandFromPage('cd ..');
+        } else {
+          runCommandFromPage('cd ' + target);
+        }
+      };
+
+      window.rangerCat = function(filename) {
+        runCommandFromPage('cat ' + filename);
+      };
+
+      window.toggleTerminalTiling = function() {
+        if (!win) return;
+        isTiled = !isTiled;
+        
+        const column = document.getElementById('term-pane-column');
+        const layoutBtn = document.getElementById('term-layout-btn');
+        
+        if (isTiled) {
+          win.classList.add('tiled');
+          if (column) column.style.display = 'flex';
+          if (layoutBtn) {
+            layoutBtn.textContent = 'tmux: on';
+            layoutBtn.classList.add('active');
+          }
+          startHtopLoop();
+          renderRanger();
+          writeLine("tiled workspace layout enabled (tmux split)", "term-out-dim");
+        } else {
+          win.classList.remove('tiled');
+          if (column) column.style.display = 'none';
+          if (layoutBtn) {
+            layoutBtn.textContent = 'tmux: off';
+            layoutBtn.classList.remove('active');
+          }
+          stopHtopLoop();
+          writeLine("tiled workspace layout disabled", "term-out-dim");
+        }
+        
+        if (isMatrixRunning) {
+          setTimeout(() => {
+            const canvas = document.getElementById('term-matrix-canvas');
+            if (canvas && body) {
+              canvas.width = body.clientWidth;
+              canvas.height = body.clientHeight;
+            }
+          }, 350);
+        }
+      };
+
       // DOM Elements
-      let overlay, win, body, input, caret, measure, hint, select;
+      let overlay, win, body, input, caret, measure, hint, select, layoutBtn;
 
       function initElements() {
         overlay = document.getElementById('term-widget-overlay');
-        win = document.querySelector('.term-widget-window');
+        win = document.getElementById('term-widget-window');
         body = document.getElementById('term-widget-body');
         input = document.getElementById('term-widget-input');
         caret = document.getElementById('term-widget-caret');
         measure = document.getElementById('term-widget-measure');
         hint = document.getElementById('term-widget-hint');
         select = document.getElementById('term-theme-select');
+        layoutBtn = document.getElementById('term-layout-btn');
         
         if (!input) return;
 
@@ -3469,6 +4193,11 @@ Personal Project. Complete design and development of a custom quadcopter with de
           hintBubble.style.display = 'none';
         }
         
+        if (isTiled) {
+          startHtopLoop();
+          renderRanger();
+        }
+        
         setTimeout(() => {
           if (input) {
             input.focus();
@@ -3481,6 +4210,7 @@ Personal Project. Complete design and development of a custom quadcopter with de
         if (!overlay) return;
         overlay.classList.remove('open');
         stopMatrixRain();
+        stopHtopLoop();
         
         setTimeout(() => {
           if (!overlay.classList.contains('open')) {
@@ -3878,9 +4608,12 @@ Personal Project. Complete design and development of a custom quadcopter with de
         
         if (cmd === 'help') {
           const helpText = `Available Commands:
-  scroll <sec>   Scroll to page section (hero, about, research, projects, skills, contact)
+  scroll <sec>   Scroll to page section (about, research, projects, skills, contact)
   open <proj>    Open graphical project details popup (e.g. open unikernel)
   social <plt>   Open external profile in new tab (github, linkedin, email)
+  tmux           Toggle tiling window workspace layout (split panes)
+  htop           Open system monitor in side pane (shows CPU/processes)
+  ranger         Open file explorer in side pane (browse project source)
   neofetch       Display system information & ASCII art
   ls             List files and directories
   cd <dir>       Change virtual directory (e.g. cd projects, cd ..)
@@ -3891,6 +4624,27 @@ Personal Project. Complete design and development of a custom quadcopter with de
   clear          Clear the screen
   help           Show this menu`;
           writeLine(helpText, "term-out-info");
+          return;
+        }
+        
+        if (cmd === 'tmux' || cmd === 'split') {
+          toggleTerminalTiling();
+          return;
+        }
+        
+        if (cmd === 'htop') {
+          if (!isTiled) {
+            toggleTerminalTiling();
+          }
+          writeLine("htop: system monitor active in sidebar pane", "term-out-success");
+          return;
+        }
+        
+        if (cmd === 'ranger') {
+          if (!isTiled) {
+            toggleTerminalTiling();
+          }
+          writeLine("ranger: file explorer active in sidebar pane", "term-out-success");
           return;
         }
         
@@ -3932,9 +4686,8 @@ Personal Project. Complete design and development of a custom quadcopter with de
             { key: "OS:", val: "Arch of Chaos" },
             { key: "Kernel:", val: "caffeinated-v6.9" },
             { key: "Shell:", val: "zsh + questionable decisions" },
-            { key: "Editor:", val: "neovim btw" },
-            { key: "WM:", val: "window manager manager" },
-            { key: "Uptime:", val: "survived another compile" },
+            { key: "Terminal:", val: "hyperfocus-terminal" },
+            { key: "Uptime:", val: `survived another compile (${getDynamicUptime()})` },
             { key: "Battery:", val: "powered by curiosity" },
             { key: "Neural Nets:", val: "training responsibly" },
             { key: "Productivity:", val: "event-driven" },
@@ -3951,7 +4704,7 @@ Personal Project. Complete design and development of a custom quadcopter with de
           });
 
           const neofetchHtml = `<div class="neofetch-container">` +
-            `<div class="neofetch-art">${artHtml}</div>` +
+            `<div class="neofetch-art">${colorizeAsciiArt(artHtml)}</div>` +
             `<div class="neofetch-info">${infoHtml}</div>` +
             `</div>`;
 
@@ -3972,12 +4725,14 @@ Personal Project. Complete design and development of a custom quadcopter with de
           if (!target || target === '.' || target === '~') {
             currentDir = '/';
             updatePromptLabel();
+            if (isTiled) renderRanger();
             return;
           }
           const resolved = resolvePath(target);
           if (isDirectory(resolved)) {
             currentDir = resolved;
             updatePromptLabel();
+            if (isTiled) renderRanger();
           } else {
             writeLine(`cd: no such file or directory: ${target}`, "term-out-error");
           }
@@ -4118,7 +4873,13 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
           if (socials[target]) {
             writeLine(`Opening Piyush's ${target} in a new tab...`, "term-out-success");
             setTimeout(() => {
-              window.open(socials[target], '_blank');
+              if (target === 'github') {
+                window.profileTabs.github = window.open(socials[target], '_blank');
+              } else if (target === 'linkedin') {
+                window.profileTabs.linkedin = window.open(socials[target], '_blank');
+              } else {
+                window.open(socials[target], '_blank');
+              }
             }, 400);
           } else {
             writeLine(`social: unknown platform '${target}'. Available: github, linkedin, email`, "term-out-error");
@@ -4138,6 +4899,14 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
           }
           e.preventDefault();
           toggleTerminalWidget();
+        }
+        
+        // Ctrl+Alt+T toggles tiling mode when terminal is open
+        if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 't') {
+          if (overlay && overlay.classList.contains('open')) {
+            e.preventDefault();
+            toggleTerminalTiling();
+          }
         }
       });
 
@@ -4180,13 +4949,22 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
         <ul class="proj-modal-ach" id="pm-ach"></ul>
         <div class="proj-modal-tags" id="pm-tags"></div>
         <div class="proj-modal-links" id="pm-links"></div>
+        
+        <!-- Live System Telemetry Console -->
+        <div class="proj-modal-telemetry">
+          <div class="telemetry-header">
+            <span id="telemetry-lbl">[SYS] Telemetry Diagnostic Console</span>
+            <span class="telemetry-status-dot"></span>
+          </div>
+          <div class="telemetry-console" id="pm-telemetry-console"></div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- TERMINAL WIDGET OVERLAY -->
   <div class="term-widget-overlay term-theme-default" id="term-widget-overlay" style="display: none;" onclick="if(event.target===this)closeTerminalWidget()">
-    <div class="term-widget-window">
+    <div class="term-widget-window" id="term-widget-window">
       <div class="term-widget-scanlines"></div>
       <div class="term-widget-header">
         <div class="term-widget-dots">
@@ -4195,33 +4973,55 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
           <span class="term-widget-dot term-widget-max" onclick="maximizeTerminalWidget()" title="Maximize"></span>
         </div>
         <div class="term-widget-title">guest@piyush_os: ~</div>
-        <select class="term-widget-theme-select" id="term-theme-select" onchange="changeTerminalTheme(this.value)">
-          <option value="default">default</option>
-          <option value="matrix">matrix</option>
-          <option value="amber">amber</option>
-          <option value="steel">steel</option>
-          <option value="hack">hack</option>
-          <option value="cyberpunk">cyberpunk</option>
-        </select>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="term-widget-layout-btn" onclick="toggleTerminalTiling()" id="term-layout-btn" title="Toggle Tmux Tiling Mode (Ctrl+Alt+T)">
+            tmux: off
+          </button>
+          <select class="term-widget-theme-select" id="term-theme-select" onchange="changeTerminalTheme(this.value)">
+            <option value="default">default</option>
+            <option value="matrix">matrix</option>
+            <option value="amber">amber</option>
+            <option value="steel">steel</option>
+            <option value="hack">hack</option>
+            <option value="cyberpunk">cyberpunk</option>
+          </select>
+        </div>
       </div>
       
-      <div class="term-widget-body" id="term-widget-body">
-        <canvas class="term-matrix-canvas" id="term-matrix-canvas"></canvas>
-        <div class="term-out-line term-out-dim">Welcome to Piyush's Interactive Linux Shell v1.1.0.
+      <div class="term-widget-wrapper" id="term-widget-wrapper" style="display: flex; flex: 1; overflow: hidden; position: relative;">
+        <!-- Left Pane: Shell Console -->
+        <div class="term-pane-shell" id="term-pane-shell" style="flex: 1.5; display: flex; flex-direction: column; overflow: hidden; position: relative; width: 100%;">
+          <div class="term-widget-body" id="term-widget-body" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; position: relative;">
+            <canvas class="term-matrix-canvas" id="term-matrix-canvas"></canvas>
+            <div class="term-out-line term-out-dim">Welcome to Piyush's Interactive Linux Shell v1.1.0.
 Type '<span class="term-out-success">help</span>' to see commands, or drive the portfolio page directly using:
   • <span class="term-out-success">scroll &lt;section&gt;</span>  (sections: about, research, projects, skills, contact)
   • <span class="term-out-success">open &lt;project&gt;</span>    (projects: unikernel, counsel, scheduler, jarvis, crop, wing...)
 Toggle this console anytime with the backtick (<span class="term-out-success">`</span>) key.
+            </div>
+            
+            <!-- Current input prompt line -->
+            <div class="term-widget-prompt-line">
+              <span class="term-widget-prompt-lbl">guest@piyush_os:~$</span>
+              <div style="position: relative; flex: 1; display: flex; align-items: center; overflow: hidden;">
+                <span class="term-widget-hint" id="term-widget-hint" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-family: inherit; font-size: inherit; color: var(--dim); opacity: 0.45; pointer-events: none; white-space: pre; z-index: 1;"></span>
+                <input type="text" class="term-widget-input" id="term-widget-input" style="width: 100%; background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: inherit; caret-color: transparent; position: relative; z-index: 3;" autocomplete="off" spellcheck="false">
+                <span class="term-widget-caret" id="term-widget-caret" style="position: absolute; width: 7.5px; height: 14px; background: currentColor; z-index: 2; pointer-events: none; top: 50%; transform: translateY(-50%);"></span>
+                <span id="term-widget-measure" style="position: absolute; visibility: hidden; white-space: pre; font-family: inherit; font-size: inherit;"></span>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <!-- Current input prompt line -->
-        <div class="term-widget-prompt-line">
-          <span class="term-widget-prompt-lbl">guest@piyush_os:~$</span>
-          <div style="position: relative; flex: 1; display: flex; align-items: center; overflow: hidden;">
-            <span class="term-widget-hint" id="term-widget-hint" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-family: inherit; font-size: inherit; color: var(--dim); opacity: 0.45; pointer-events: none; white-space: pre; z-index: 1;"></span>
-            <input type="text" class="term-widget-input" id="term-widget-input" style="width: 100%; background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: inherit; caret-color: transparent; position: relative; z-index: 3;" autocomplete="off" spellcheck="false">
-            <span class="term-widget-caret" id="term-widget-caret" style="position: absolute; width: 7.5px; height: 14px; background: currentColor; z-index: 2; pointer-events: none; top: 50%; transform: translateY(-50%);"></span>
-            <span id="term-widget-measure" style="position: absolute; visibility: hidden; white-space: pre; font-family: inherit; font-size: inherit;"></span>
+
+        <!-- Right Column: htop + ranger -->
+        <div class="term-pane-column" id="term-pane-column" style="display: none; flex: 1; flex-direction: column; border-left: 1px solid var(--border); background: rgba(3, 6, 12, 0.45); overflow: hidden;">
+          <!-- Top: htop -->
+          <div class="term-pane-htop" id="term-pane-htop" style="flex: 1.25; border-bottom: 1px solid var(--border); padding: 0.75rem 0.9rem; overflow-y: auto; font-family: var(--font-mono); font-size: 0.56rem; line-height: 1.35; color: var(--txt); scrollbar-width: none;">
+            <!-- Rendered in JS -->
+          </div>
+          <!-- Bottom: ranger -->
+          <div class="term-pane-ranger" id="term-pane-ranger" style="flex: 1; padding: 0.75rem 0.9rem; overflow-y: auto; font-family: var(--font-mono); font-size: 0.58rem; line-height: 1.35; color: var(--muted); scrollbar-width: none;">
+            <!-- Rendered in JS -->
           </div>
         </div>
       </div>
