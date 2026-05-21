@@ -3831,7 +3831,16 @@ Voice assistant featuring GPU-accelerated inference pipelines and sub-second lat
 • RAG-enabled context-aware knowledge fetching.
 • Technologies: CUDA, vLLM, PyTorch, RAG, Docker, Kubernetes.`,
 
-        '/projects/05_crop_stress.md': `# Crop Stress Detection (U-Net)
+        '/projects/05_chart_generator.md': `# LLM-Based Chart Generation Web App
+---------------------------------------
+Automated chart generation pipeline using LLMs to analyze uploaded PDF documents.
+• Implemented LLM-based document parsing using transformer architectures for semantic understanding.
+• Built NLP pipeline for extracting structured data from unstructured PDF content.
+• Designed automated chart selection algorithm using ML-based data type classification.
+• Created responsive frontend-backend workflow with real-time data visualization rendering.
+• Technologies: LLMs, NLP, PDF Parsing, React, Node.js, Data Visualization.`,
+
+        '/projects/06_crop_stress.md': `# Crop Stress Detection (U-Net)
 -------------------------------
 Computer vision system for semantic segmentation of crop stress from aerial drone imagery.
 • Built a synthetic dataset pipeline with Gaussian blending and rotational augmentation (4x dataset expansion).
@@ -3839,14 +3848,14 @@ Computer vision system for semantic segmentation of crop stress from aerial dron
 • Real-time video inference pipeline using OpenCV and batch inference.
 • Technologies: PyTorch, U-Net, OpenCV, CUDA / MPS.`,
 
-        '/projects/06_wing_design.md': `# STOL Fixed-Wing Aircraft Wing Design
+        '/projects/07_wing_design.md': `# STOL Fixed-Wing Aircraft Wing Design
 --------------------------------------
 Aerodynamic wing design targeting high lift (CL > 5) for Short Take-Off and Landing (STOL) flight parameters.
 • Designed full 3D wing CAD assembly and verified performance in ANSYS Fluent.
 • Achieved record max lift coefficient of 8.1258 under simulated thrust conditions.
 • Technologies: CAD, Fusion 360, CFD, ANSYS Fluent.`,
 
-        '/projects/07_quadcopter.md': `# Quadcopter CAD Design & Development
+        '/projects/08_quadcopter.md': `# Quadcopter CAD Design & Development
 -------------------------------------
 Personal Project. Complete design and development of a custom quadcopter with detailed CAD modeling, structural analysis, and autonomous flight capabilities.
 • Designed full assembly CAD model with structural optimization for weight and rigidity.
@@ -3976,16 +3985,16 @@ Personal Project. Complete design and development of a custom quadcopter with de
         html += `<div style="border-top: 1px dashed var(--border); margin-bottom: 0.4rem;"></div>`;
         
         if (currentDir === '/projects') {
-          html += `<div class="ranger-item" onclick="rangerCd('..')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span style="color: var(--cyan);">📁</span> <span style="color: var(--txt);">..</span></div>`;
+          html += `<div class="ranger-item" onclick="rangerCd('..')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span style="color: var(--cyan);">[d]</span> <span style="color: var(--txt);">..</span></div>`;
         }
         
         if (currentDir === '/') {
-          html += `<div class="ranger-item" onclick="rangerCd('projects')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span style="color: var(--cyan);">📁</span> <span style="color: var(--txt);">projects/</span></div>`;
+          html += `<div class="ranger-item" onclick="rangerCd('projects')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span style="color: var(--cyan);">[d]</span> <span style="color: var(--txt);">projects/</span></div>`;
           
           const files = ['about.txt', 'contact.txt', 'publications.txt', 'skills.sh'];
           files.forEach(f => {
             const isScript = f.endsWith('.sh');
-            const icon = isScript ? '⚙️' : '📄';
+            const icon = isScript ? '[*]' : '[-]';
             const color = isScript ? 'var(--accent)' : 'var(--txt2)';
             html += `<div class="ranger-item" onclick="rangerCat('${f}')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span>${icon}</span> <span style="color: ${color};">${f}</span></div>`;
           });
@@ -3995,12 +4004,13 @@ Personal Project. Complete design and development of a custom quadcopter with de
             '02_counsel_ai.md',
             '03_os_simulator.md',
             '04_jarvis.md',
-            '05_crop_stress.md',
-            '06_wing_design.md',
-            '07_quadcopter.md'
+            '05_chart_generator.md',
+            '06_crop_stress.md',
+            '07_wing_design.md',
+            '08_quadcopter.md'
           ];
           files.forEach(f => {
-            html += `<div class="ranger-item" onclick="rangerCat('${f}')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span>📄</span> <span style="color: var(--txt2);">${f}</span></div>`;
+            html += `<div class="ranger-item" onclick="rangerCat('${f}')" style="cursor: pointer; display: flex; gap: 6px; align-items: center;"><span>[-]</span> <span style="color: var(--txt2);">${f}</span></div>`;
           });
         }
         
@@ -4159,11 +4169,14 @@ Personal Project. Complete design and development of a custom quadcopter with de
           'quadcopter'
         ];
         cards.forEach((card, idx) => {
+          const onClickAttr = card.getAttribute('onclick') || '';
+          const match = onClickAttr.match(/openModal\((\d+)\)/);
+          const projectIdx = match ? parseInt(match[1], 10) : idx;
           const hintEl = card.querySelector('.proj-card-hint');
           if (hintEl && !card.querySelector('.proj-card-cli-btn')) {
             const btn = document.createElement('div');
             btn.className = 'proj-card-cli-btn';
-            const slug = projectSlugs[idx] || idx.toString();
+            const slug = projectSlugs[projectIdx] || projectIdx.toString();
             btn.setAttribute('onclick', `event.stopPropagation(); runCommandFromPage('open ${slug}')`);
             btn.innerHTML = `<span class="proj-card-cli-symbol">&gt;_</span> open ${slug}`;
             
