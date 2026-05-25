@@ -1705,6 +1705,7 @@
         color: var(--cyan)
       }
 
+
       /* ── CONTACT ── */
       #contact {
         background: var(--bg)
@@ -2812,6 +2813,14 @@
       <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
     </svg>
   </button>
+  
+  <button class="floating-term-launcher" aria-label="Open Command Line Interface" onclick="openTerminalWidget()" title="Open Terminal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <polyline points="4 17 10 11 4 5"></polyline>
+      <line x1="12" y1="19" x2="20" y2="19"></line>
+    </svg>
+  </button>
+
 
   <!-- NAV -->
   <nav id="navbar">
@@ -3039,6 +3048,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -3305,6 +3316,7 @@
           <span class="coursework-pill">Pattern Recognition and Machine Learning</span>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -4941,6 +4953,9 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
         initElements();
       }
     })();
+
+
+
   </script>
 
   <!-- PROJECT MODAL (body-level to escape stacking contexts) -->
