@@ -61,29 +61,17 @@
 
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 4px
     }
 
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
+      ::-webkit-scrollbar-track {
+        background: var(--bg)
+      }
 
-    ::-webkit-scrollbar-thumb {
-      background: var(--border2);
-      border-radius: 4px;
-      border: 2px solid var(--bg);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--cyan);
-    }
-
-    /* ── SELECTION ── */
-    ::selection {
-      background: rgba(0, 255, 179, 0.2);
-      color: var(--accent);
-      text-shadow: 0 0 5px var(--accent);
-    }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border2);
+        border-radius: 2px
+      }
 
       /* ── GRID NOISE BG ── */
       body::before {
@@ -413,7 +401,6 @@
         color: var(--txt);
         opacity: 0;
         animation: fade-up .7s .5s forwards;
-        text-shadow: 0 0 15px rgba(232, 244, 255, 0.15);
       }
 
       .hero-name .highlight {
@@ -532,9 +519,9 @@
       }
 
       .btn-primary:hover {
-        opacity: 1;
-        box-shadow: 0 6px 32px rgba(0, 212, 255, .5);
-        transform: translateY(-2px) scale(1.02);
+        opacity: .9;
+        box-shadow: 0 6px 32px rgba(0, 212, 255, .3);
+        transform: translateY(-1px)
       }
 
       .btn-secondary {
@@ -554,9 +541,7 @@
       .btn-secondary:hover {
         border-color: var(--cyan);
         color: var(--cyan);
-        background: rgba(0, 212, 255, .08);
-        box-shadow: 0 0 15px rgba(0, 212, 255, .2);
-        transform: translateY(-2px) scale(1.02);
+        background: rgba(0, 212, 255, .04)
       }
 
       .hero-scroll {
@@ -727,6 +712,144 @@
         }
       }
 
+      /* ── SKILL CONSTELLATION CANVAS ── */
+      .skill-constellation-wrap {
+        margin: 1.6rem 0 0;
+        width: 100%;
+        max-width: 480px;
+        height: 195px;
+        position: relative;
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        overflow: hidden;
+        background: rgba(4,8,15,0.5);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+        cursor: crosshair;
+      }
+      .skill-constellation-wrap canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .scl-overlay {
+        position: absolute;
+        top: 0.45rem;
+        left: 0.8rem;
+        right: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: var(--dim);
+        pointer-events: none;
+        z-index: 2;
+        letter-spacing: 0.06em;
+      }
+      .scl-live { color: var(--accent); margin-left: auto; }
+      .scl-legend {
+        position: absolute;
+        bottom: 0.5rem;
+        left: 0.7rem;
+        display: flex;
+        gap: 0.7rem;
+        font-family: var(--font-mono);
+        font-size: 0.5rem;
+        color: var(--dim);
+        pointer-events: none;
+        z-index: 2;
+        letter-spacing: 0.05em;
+      }
+      .scl-key { display: flex; align-items: center; gap: 0.25rem; }
+      .scl-key-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+      /* ── INTERACTIVE FILE SYSTEM TREE ── */
+      .fs-tree-container {
+        margin-top: 2rem;
+        background: rgba(8,12,20,0.7);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: var(--font-mono);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      }
+      .fs-tree-header {
+        background: rgba(12,18,28,0.9);
+        padding: 0.6rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .fs-tree-title { color: var(--dim); font-size: 0.65rem; letter-spacing: 0.05em; }
+      .fs-tree-actions { display: flex; gap: 0.4rem; }
+      .fs-tree-actions .dot { width: 10px; height: 10px; border-radius: 50%; }
+      .fs-tree-actions .dot.r { background: #ff5f56; }
+      .fs-tree-actions .dot.y { background: #ffbd2e; }
+      .fs-tree-actions .dot.g { background: #27c93f; }
+      
+      .fs-tree-body {
+        display: flex;
+        flex-direction: column;
+      }
+      @media (min-width: 768px) {
+        .fs-tree-body { flex-direction: row; height: 320px; }
+      }
+      
+      .fs-sidebar {
+        flex: 0 0 220px;
+        background: rgba(4,8,15,0.6);
+        border-right: 1px solid var(--border);
+        padding: 1rem 0.5rem;
+        overflow-y: auto;
+      }
+      .fs-list { list-style: none; margin: 0; padding: 0; }
+      .fs-list .fs-list { padding-left: 1rem; display: none; }
+      .fs-dir.open > .fs-list { display: block; }
+      .fs-label, .fs-file {
+        display: block;
+        padding: 0.35rem 0.5rem;
+        font-size: 0.65rem;
+        color: var(--muted);
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.2s, color 0.2s;
+        user-select: none;
+      }
+      .fs-label:hover, .fs-file:hover { background: rgba(255,255,255,0.05); color: var(--fg); }
+      .fs-file::before { content: '📄 '; opacity: 0.5; }
+      .fs-dir > .fs-label::before { content: '📁 '; opacity: 0.7; }
+      .fs-dir.open > .fs-label::before { content: '📂 '; opacity: 0.9; }
+      .fs-file.active { background: rgba(0, 255, 204, 0.1); color: var(--cyan); }
+      
+      .fs-content {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: auto;
+        background: transparent;
+      }
+      .fs-content pre { margin: 0; }
+      .fs-content code {
+        font-size: 0.7rem;
+        line-height: 1.5;
+        color: var(--fg);
+        white-space: pre;
+      }
+      /* Simple syntax highlighting colors */
+      .syn-keyword { color: #ff7b72; }
+      .syn-function { color: #d2a8ff; }
+      .syn-string { color: #a5d6ff; }
+      .syn-comment { color: #8b949e; font-style: italic; }
+      .syn-type { color: #79c0ff; }
+
+
+
+
       /* ── SECTION SHARED ── */
       section {
         position: relative;
@@ -768,7 +891,6 @@
         font-weight: 700;
         line-height: 1.05;
         color: var(--txt);
-        text-shadow: 0 0 10px rgba(232, 244, 255, 0.15);
       }
 
       .section-title .grad {
@@ -1126,8 +1248,7 @@
 
       .research-card:hover {
         border-color: var(--border2);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(26, 127, 232, 0.15);
+        transform: translateY(-3px)
       }
 
       .research-card:hover::before {
@@ -1218,8 +1339,8 @@
 
       .proj-card:hover {
         transform: translateY(-7px);
-        border-color: rgba(0, 212, 255, .6);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, .5), 0 0 15px rgba(0, 212, 255, .25);
+        border-color: rgba(0, 212, 255, .4);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 212, 255, .1);
       }
 
       .proj-card-img {
@@ -1721,7 +1842,6 @@
         border-color: rgba(0, 212, 255, .3);
         color: var(--cyan)
       }
-
 
       /* ── CONTACT ── */
       #contact {
@@ -2810,10 +2930,7 @@
 </head>
 
 <body>
-
-
-
-
+  
 
   <!-- BACKGROUND MUSIC -->
   <audio id="bg-audio" src="audio/background-music.mp3" loop preload="auto"></audio>
@@ -2830,14 +2947,6 @@
       <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
     </svg>
   </button>
-  
-  <button class="floating-term-launcher" aria-label="Open Command Line Interface" onclick="openTerminalWidget()" title="Open Terminal">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-      <polyline points="4 17 10 11 4 5"></polyline>
-      <line x1="12" y1="19" x2="20" y2="19"></line>
-    </svg>
-  </button>
-
 
   <!-- NAV -->
   <nav id="navbar">
@@ -2852,7 +2961,6 @@
         <a href="#research">Research</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
-        <a href="https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
         <a href="#" class="nav-term-btn" onclick="event.preventDefault(); openTerminalWidget();" title="Launch Interactive Shell (or press `)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align: middle; margin-right: 4px; display: inline-block;"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>Shell</a>
         <a href="#contact" class="nav-cta">Get in Touch</a>
       </div>
@@ -2869,7 +2977,6 @@
       <a href="#research" onclick="closeMobile()">Research</a>
       <a href="#projects" onclick="closeMobile()">Projects</a>
       <a href="#skills" onclick="closeMobile()">Skills</a>
-      <a href="https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing" target="_blank" rel="noopener" onclick="closeMobile()">Resume</a>
       <a href="#" onclick="event.preventDefault(); closeMobile(); openTerminalWidget();">Shell Console</a>
       <a href="#contact" onclick="closeMobile()">Contact</a>
     </div>
@@ -2933,8 +3040,23 @@
 
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing" target="_blank" rel="noopener" class="btn-secondary">Resume</a>
         <a href="#contact" class="btn-secondary">Contact Me</a>
+      </div>
+
+      <!-- INTERACTIVE SKILL CONSTELLATION -->
+      <div class="skill-constellation-wrap" id="skill-constellation-wrap">
+        <div class="scl-overlay">
+          <span style="color:var(--cyan)">&#9632;</span>
+          <span>skill-graph &mdash; hover to explore</span>
+          <span class="scl-live">&#9679; live</span>
+        </div>
+        <canvas id="skill-constellation" aria-label="Interactive skill graph"></canvas>
+        <div class="scl-legend">
+          <div class="scl-key"><span class="scl-key-dot" style="background:#00d4ff"></span>Systems</div>
+          <div class="scl-key"><span class="scl-key-dot" style="background:#a78bfa"></span>AI/ML</div>
+          <div class="scl-key"><span class="scl-key-dot" style="background:#00ffb3"></span>Robotics</div>
+          <div class="scl-key"><span class="scl-key-dot" style="background:#f59e0b"></span>Lang</div>
+        </div>
       </div>
     </div>
 
@@ -3023,6 +3145,58 @@
           <h2 class="section-title" style="margin-bottom:1.5rem">Engineering <span class="grad">AI Systems</span></h2>
           <p class="about-teaser-text">A systems-focused CSE undergraduate at IIT Jodhpur building at the intersection
             of AI infrastructure, operating systems, hardware-aware ML, and robotics design.</p>
+             <!-- 3D CHIP WIREFRAME (restored) -->
+            <style>
+              .chip-wireframe-wrapper {
+                margin-top: 2rem;
+                position: relative;
+                width: 100%;
+                height: 250px;
+                background: radial-gradient(circle at center, rgba(0, 255, 204, 0.05) 0%, transparent 70%);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                overflow: hidden;
+              }
+              .chip-canvas {
+                width: 100%;
+                height: 100%;
+                display: block;
+                cursor: grab;
+              }
+              .chip-canvas:active { cursor: grabbing; }
+              .chip-overlay-text {
+                position: absolute;
+                bottom: 1rem;
+                left: 1rem;
+                color: var(--cyan);
+                font-family: var(--font-mono);
+                font-size: 0.55rem;
+                letter-spacing: 0.1em;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                pointer-events: none;
+              }
+              .chip-status-blip {
+                width: 6px; height: 6px;
+                background: #00ffcc;
+                border-radius: 50%;
+                box-shadow: 0 0 8px #00ffcc;
+                animation: chip-pulse 1.5s infinite;
+              }
+              @keyframes chip-pulse {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.3; transform: scale(0.8); }
+              }
+            </style>
+            <div class="chip-wireframe-wrapper">
+              <canvas id="chip-canvas" class="chip-canvas" width="400" height="250"></canvas>
+              <div class="chip-overlay-text">
+                <span>architecture: RISC-V / Hopper</span>
+                <span class="chip-status-blip"></span>
+              </div>
+            </div> 
+         
         </div>
       </div>
     </div>
@@ -3068,8 +3242,6 @@
       </div>
     </div>
   </section>
-
-
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -3335,8 +3507,38 @@
           <span class="coursework-pill">Software Engineering</span>
           <span class="coursework-pill">Pattern Recognition and Machine Learning</span>
         </div>
-      </div>
 
+        <!-- INTERACTIVE FILE SYSTEM TREE -->
+        <div class="fs-tree-container" id="fs-tree">
+          <div class="fs-tree-header">
+                        <span class="fs-tree-actions"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+          </div>
+          <div class="fs-tree-body">
+            <div class="fs-sidebar">
+              <ul class="fs-list">
+                <li class="fs-dir open">
+                  <span class="fs-label" onclick="this.parentElement.classList.toggle('open')">src</span>
+                  <ul class="fs-list">
+                    <li class="fs-file active" data-file="pinns">physics_informed.py</li>
+                    <li class="fs-file" data-file="kernel">unikernel_sched.c</li>
+                    <li class="fs-file" data-file="drone">quad_nav.cpp</li>
+                  </ul>
+                </li>
+                <li class="fs-dir open">
+                  <span class="fs-label" onclick="this.parentElement.classList.toggle('open')">models</span>
+                  <ul class="fs-list">
+                    <li class="fs-file" data-file="vllm">vllm_engine.rs</li>
+                    <li class="fs-file" data-file="tensorrt">tensorrt_opt.cu</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="fs-content">
+              <pre><code id="fs-code-view"></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -3418,6 +3620,8 @@
           </div>
         </div>
       </div>
+      
+      <!-- Removed hex-dump-wrapper (Memory Dump / Hex decoder) -->
     </div>
   </section>
 
@@ -4653,9 +4857,8 @@ Personal Project. Complete design and development of a custom quadcopter with de
         
         if (cmd === 'help') {
           const helpText = `Available Commands:
-  resume         Open my resume in a new tab
   scroll <sec>   Scroll to page section (about, research, projects, skills, contact)
-  open <item>    Open project details or resume (e.g. open unikernel, open resume)
+  open <proj>    Open graphical project details popup (e.g. open unikernel)
   social <plt>   Open external profile in new tab (github, linkedin, email)
   tmux           Toggle tiling window workspace layout (split panes)
   htop           Open system monitor in side pane (shows CPU/processes)
@@ -4862,23 +5065,11 @@ Available: hero, about, research, projects, skills, contact`, "term-out-error");
           return;
         }
         
-        if (cmd === 'resume') {
-          writeLine("Opening resume in a new tab...", "term-out-success");
-          window.open("https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing", "_blank");
-          return;
-        }
-
         if (cmd === 'open' || cmd === 'view') {
           const target = args.join(' ').toLowerCase();
           if (!target) {
-            writeLine(`Usage: open <project_index_or_name> or open resume
-Examples: open 0, open unikernel, open resume`, "term-out-info");
-            return;
-          }
-          
-          if (target === 'resume') {
-            writeLine("Opening resume in a new tab...", "term-out-success");
-            window.open("https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing", "_blank");
+            writeLine(`Usage: open <project_index_or_name>
+Examples: open 0, open unikernel, open counsel`, "term-out-info");
             return;
           }
           
@@ -4987,9 +5178,333 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
       }
     })();
 
+    /* ═══════════════════════════════════════════════════
+       INTERACTIVE SKILL CONSTELLATION
+    ═══════════════════════════════════════════════════ */
+    (function () {
+      const canvas = document.getElementById('skill-constellation');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const wrap = document.getElementById('skill-constellation-wrap');
+
+      const SKILLS = [
+        { label: 'Python',    cat: 'ai'       },
+        { label: 'C++',       cat: 'lang'     },
+        { label: 'CUDA',      cat: 'systems'  },
+        { label: 'PyTorch',   cat: 'ai'       },
+        { label: 'ROS2',      cat: 'robotics' },
+        { label: 'Linux',     cat: 'systems'  },
+        { label: 'RISC-V',    cat: 'systems'  },
+        { label: 'ONNX',      cat: 'ai'       },
+        { label: 'vLLM',      cat: 'ai'       },
+        { label: 'OpenCV',    cat: 'robotics' },
+        { label: 'TensorRT',  cat: 'ai'       },
+        { label: 'CMake',     cat: 'lang'     },
+        { label: 'Assembly',  cat: 'systems'  },
+        { label: 'NumPy',     cat: 'ai'       },
+        { label: 'LangChain', cat: 'ai'       },
+        { label: 'Git',       cat: 'lang'     },
+        { label: 'Rust',      cat: 'lang'     },
+        { label: 'Docker',    cat: 'systems'  },
+      ];
+
+      const CAT_COLORS = {
+        lang:    '#f59e0b',
+        systems: '#00d4ff',
+        ai:      '#a78bfa',
+        robotics:'#00ffb3',
+      };
+
+      let nodes = [];
+      let W = 0, H = 0;
+      let mouse = { x: -9999, y: -9999 };
+      let hoveredIdx = null;
+      let raf = null;
+
+      function initNodes() {
+        nodes = SKILLS.map(s => ({
+          label: s.label,
+          cat: s.cat,
+          x: 30 + Math.random() * (W - 60),
+          y: 30 + Math.random() * (H - 60),
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+        }));
+      }
+
+      function resize() {
+        W = canvas.width  = wrap.clientWidth;
+        H = canvas.height = wrap.clientHeight;
+        if (nodes.length === 0) initNodes();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const LINK_DIST = Math.min(W, H) * 0.44;
+
+        // Edges
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < LINK_DIST) {
+              const alpha = (1 - d / LINK_DIST) * 0.28;
+              const isHov = hoveredIdx === i || hoveredIdx === j;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = isHov
+                ? `rgba(0,212,255,${Math.min(alpha * 3.5, 0.85)})`
+                : `rgba(100,160,220,${alpha})`;
+              ctx.lineWidth = isHov ? 1.1 : 0.45;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Nodes
+        nodes.forEach((n, i) => {
+          const color = CAT_COLORS[n.cat];
+          const isHov = hoveredIdx === i;
+          const r = isHov ? 5.5 : 3.5;
+
+          // Glow halo
+          const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5);
+          grd.addColorStop(0, color + (isHov ? '55' : '30'));
+          grd.addColorStop(1, color + '00');
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r * 5, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+
+          // Core
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = isHov ? '#ffffff' : color;
+          ctx.fill();
+
+          // Label
+          ctx.save();
+          ctx.font = `${isHov ? 600 : 400} ${isHov ? '0.6rem' : '0.54rem'} 'JetBrains Mono', monospace`;
+          ctx.fillStyle = isHov ? '#ffffff' : (color + 'bb');
+          ctx.textAlign = 'center';
+          ctx.shadowColor = isHov ? color : 'transparent';
+          ctx.shadowBlur = isHov ? 6 : 0;
+          ctx.fillText(n.label, n.x, n.y - r - 5);
+          ctx.restore();
+        });
+      }
+
+      function tick() {
+        nodes.forEach((n, i) => {
+          // Mouse attraction
+          const mdx = mouse.x - n.x, mdy = mouse.y - n.y;
+          const md = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (md < 120 && md > 1) {
+            const force = 0.038 * (1 - md / 120);
+            n.vx += (mdx / md) * force;
+            n.vy += (mdy / md) * force;
+          }
+
+          // Repulsion between nodes
+          for (let j = 0; j < nodes.length; j++) {
+            if (i === j) continue;
+            const b = nodes[j];
+            const dx = n.x - b.x, dy = n.y - b.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 42 && d > 0) {
+              const rep = 0.055 * (1 - d / 42);
+              n.vx += (dx / d) * rep;
+              n.vy += (dy / d) * rep;
+            }
+          }
+
+          // Damping
+          n.vx *= 0.95;
+          n.vy *= 0.95;
+          const spd = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+          if (spd > 1.4) { n.vx = n.vx / spd * 1.4; n.vy = n.vy / spd * 1.4; }
+
+          n.x += n.vx;
+          n.y += n.vy;
+
+          // Boundary bounce
+          const px = 22, py = 30;
+          if (n.x < px)   { n.x = px;   n.vx =  Math.abs(n.vx); }
+          if (n.x > W-px) { n.x = W-px; n.vx = -Math.abs(n.vx); }
+          if (n.y < py)   { n.y = py;   n.vy =  Math.abs(n.vy); }
+          if (n.y > H-py) { n.y = H-py; n.vy = -Math.abs(n.vy); }
+        });
+        draw();
+        raf = requestAnimationFrame(tick);
+      }
+
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        hoveredIdx = null;
+        nodes.forEach((n, i) => {
+          const dx = n.x - mouse.x, dy = n.y - mouse.y;
+          if (Math.sqrt(dx * dx + dy * dy) < 16) hoveredIdx = i;
+        });
+        canvas.style.cursor = hoveredIdx !== null ? 'pointer' : 'crosshair';
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        mouse = { x: -9999, y: -9999 };
+        hoveredIdx = null;
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
+        else if (!raf) raf = requestAnimationFrame(tick);
+      });
+
+      resize();
+      window.addEventListener('resize', resize);
+      raf = requestAnimationFrame(tick);
+    })();
+
+    /* ═══════════════════════════════════════════════════
+       INTERACTIVE FILE SYSTEM TREE
+    ═══════════════════════════════════════════════════ */
+    (function () {
+      const files = {
+        'pinns': `<span class="syn-comment"># physics_informed.py</span>
+<span class="syn-keyword">import</span> torch
+<span class="syn-keyword">import</span> torch.nn <span class="syn-keyword">as</span> nn
+
+<span class="syn-keyword">class</span> <span class="syn-type">FluidDynamicsPINN</span>(nn.Module):
+    <span class="syn-keyword">def</span> <span class="syn-function">__init__</span>(self):
+        <span class="syn-function">super</span>().__init__()
+        <span class="syn-comment"># Simulating Navier-Stokes with boundary conditions</span>
+        self.net = nn.Sequential(
+            nn.Linear(<span class="syn-string">3</span>, <span class="syn-string">128</span>),
+            nn.Tanh(),
+            nn.Linear(<span class="syn-string">128</span>, <span class="syn-string">128</span>),
+            nn.Tanh(),
+            nn.Linear(<span class="syn-string">128</span>, <span class="syn-string">2</span>) <span class="syn-comment"># [u, v] velocity fields</span>
+        )
+
+    <span class="syn-keyword">def</span> <span class="syn-function">forward</span>(self, x, y, t):
+        <span class="syn-keyword">return</span> self.net(torch.cat([x, y, t], dim=<span class="syn-string">1</span>))`,
+        
+        'kernel': `<span class="syn-comment">// unikernel_sched.c</span>
+<span class="syn-keyword">#include</span> <span class="syn-string">&lt;stdint.h&gt;</span>
+<span class="syn-keyword">#include</span> <span class="syn-string">"scheduler.h"</span>
+
+<span class="syn-keyword">void</span> <span class="syn-function">context_switch</span>(<span class="syn-type">thread_t</span>* prev, <span class="syn-type">thread_t</span>* next) {
+    <span class="syn-comment">// Hardware-specific context save/restore</span>
+    <span class="syn-keyword">if</span> (prev != next) {
+        <span class="syn-function">save_fpu_state</span>(&amp;prev-&gt;fpu);
+        <span class="syn-function">__asm__</span> <span class="syn-keyword">volatile</span> (
+            <span class="syn-string">"push %rbp \n"</span>
+            <span class="syn-string">"mov %rsp, %0 \n"</span>
+            <span class="syn-string">"mov %1, %rsp \n"</span>
+            <span class="syn-string">"pop %rbp \n"</span>
+            : <span class="syn-string">"=m"</span>(prev-&gt;sp) 
+            : <span class="syn-string">"m"</span>(next-&gt;sp)
+            : <span class="syn-string">"memory"</span>
+        );
+        <span class="syn-function">restore_fpu_state</span>(&amp;next-&gt;fpu);
+    }
+}`,
+
+        'drone': `<span class="syn-comment">// quad_nav.cpp</span>
+<span class="syn-keyword">#include</span> <span class="syn-string">&lt;Eigen/Dense&gt;</span>
+<span class="syn-keyword">#include</span> <span class="syn-string">"kalman_filter.h"</span>
+
+<span class="syn-type">Eigen::Vector3d</span> <span class="syn-function">compute_thrust_vector</span>(<span class="syn-type">State</span>&amp; current, <span class="syn-type">Target</span>&amp; target) {
+    <span class="syn-comment">// Extended Kalman Filter updates</span>
+    <span class="syn-type">MatrixXd</span> K = P * H.transpose() * (H * P * H.transpose() + R).inverse();
+    current.pos = current.pos + K * (target.pos - H * current.pos);
+    
+    <span class="syn-comment">// PID control loops for roll/pitch/yaw</span>
+    <span class="syn-keyword">double</span> roll_err = target.roll - current.roll;
+    <span class="syn-keyword">double</span> pitch_err = target.pitch - current.pitch;
+    
+    <span class="syn-keyword">return</span> <span class="syn-type">Eigen::Vector3d</span>(
+        pid_roll.<span class="syn-function">compute</span>(roll_err),
+        pid_pitch.<span class="syn-function">compute</span>(pitch_err),
+        BASE_THRUST
+    );
+}`,
+
+        'vllm': `<span class="syn-comment">// vllm_engine.rs</span>
+<span class="syn-keyword">use</span> std::sync::Arc;
+<span class="syn-keyword">use</span> tokio::sync::Mutex;
+
+<span class="syn-keyword">pub struct</span> <span class="syn-type">PagedAttentionEngine</span> {
+    <span class="syn-keyword">pub</span> block_table: Arc&lt;Mutex&lt;Vec&lt;<span class="syn-type">BlockInfo</span>&gt;&gt;&gt;,
+    <span class="syn-keyword">pub</span> cache_stream: cudaStream_t,
+}
+
+<span class="syn-keyword">impl</span> <span class="syn-type">PagedAttentionEngine</span> {
+    <span class="syn-keyword">pub fn</span> <span class="syn-function">allocate_kv_cache</span>(&amp;<span class="syn-keyword">mut</span> self, seq_len: <span class="syn-type">usize</span>) -&gt; <span class="syn-type">Result</span>&lt;Vec&lt;<span class="syn-type">u32</span>&gt;, <span class="syn-type">Error</span>&gt; {
+        <span class="syn-keyword">let</span> num_blocks = (seq_len + BLOCK_SIZE - <span class="syn-string">1</span>) / BLOCK_SIZE;
+        <span class="syn-keyword">let</span> <span class="syn-keyword">mut</span> table = self.block_table.lock().await;
+        
+        <span class="syn-comment">// High-performance custom allocator mapping</span>
+        <span class="syn-keyword">let</span> allocated = table.iter_mut()
+            .filter(|b| b.state == BlockState::Free)
+            .take(num_blocks)
+            .map(|b| { b.state = BlockState::Active; b.id })
+            .collect();
+            
+        Ok(allocated)
+    }
+}`,
+
+        'tensorrt': `<span class="syn-comment">// tensorrt_opt.cu</span>
+<span class="syn-keyword">#include</span> <span class="syn-string">&lt;NvInfer.h&gt;</span>
+
+<span class="syn-keyword">__global__</span>
+<span class="syn-keyword">void</span> <span class="syn-function">fused_attention_kernel</span>(<span class="syn-keyword">const</span> <span class="syn-keyword">float</span>* Q, <span class="syn-keyword">const</span> <span class="syn-keyword">float</span>* K, <span class="syn-keyword">const</span> <span class="syn-keyword">float</span>* V, <span class="syn-keyword">float</span>* out, <span class="syn-keyword">int</span> seq_len) {
+    <span class="syn-comment">// Hardware-optimized warp-level primitives</span>
+    <span class="syn-keyword">int</span> tid = threadIdx.x;
+    <span class="syn-keyword">int</span> lane_id = tid % warpSize;
+    
+    <span class="syn-comment">// Shared memory caching for queries</span>
+    <span class="syn-keyword">__shared__</span> <span class="syn-keyword">float</span> smem_q[HEAD_DIM];
+    <span class="syn-keyword">if</span> (tid &lt; HEAD_DIM) {
+        smem_q[tid] = Q[blockIdx.x * HEAD_DIM + tid];
+    }
+    <span class="syn-function">__syncthreads</span>();
+    
+    <span class="syn-comment">// Tensor Core MMA operations would follow here</span>
+    <span class="syn-comment">// ...</span>
+}`
+      };
+
+      const codeView = document.getElementById('fs-code-view');
+      const fileNodes = document.querySelectorAll('.fs-file');
+      
+      if (!codeView || fileNodes.length === 0) return;
+      
+      function setFile(id) {
+        fileNodes.forEach(n => n.classList.remove('active'));
+        const activeNode = Array.from(fileNodes).find(n => n.dataset.file === id);
+        if (activeNode) activeNode.classList.add('active');
+        codeView.innerHTML = files[id] || '// File empty or unreadable';
+      }
+      
+      fileNodes.forEach(node => {
+        node.addEventListener('click', () => {
+          setFile(node.dataset.file);
+        });
+      });
+      
+      // Init default
+      setFile('pinns');
+    })();
+
 
 
   </script>
+
+  
 
   <!-- PROJECT MODAL (body-level to escape stacking contexts) -->
   <div class="proj-modal-ov" id="proj-modal" onclick="if(event.target===this)closeModal()">
@@ -5022,7 +5537,138 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
       </div>
     </div>
   </div>
+<script>
+  (function() {
+    const canvas = document.getElementById('chip-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    let width = 400, height = 250;
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width;
+      canvas.height = height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
+    let rotX = 0.5, rotY = 0.5;
+    let targetRotX = 0.5, targetRotY = 0.5;
+    let isDragging = false;
+    let lastMouse = { x: 0, y: 0 };
+    
+    canvas.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      lastMouse.x = e.clientX;
+      lastMouse.y = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) {
+        targetRotY = (e.clientX / window.innerWidth) * Math.PI - (Math.PI/2);
+        targetRotX = (e.clientY / window.innerHeight) * Math.PI/2 - (Math.PI/4);
+        return;
+      }
+      const dx = e.clientX - lastMouse.x;
+      const dy = e.clientY - lastMouse.y;
+      targetRotY += dx * 0.01;
+      targetRotX -= dy * 0.01;
+      lastMouse.x = e.clientX;
+      lastMouse.y = e.clientY;
+    });
+
+    const size = 60, thickness = 10, pins = 8;
+    const vertices = [
+      { x: -size, y: -thickness, z: -size }, { x: size, y: -thickness, z: -size },
+      { x: size, y: -thickness, z: size }, { x: -size, y: -thickness, z: size },
+      { x: -size, y: thickness, z: -size }, { x: size, y: thickness, z: -size },
+      { x: size, y: thickness, z: size }, { x: -size, y: thickness, z: size }
+    ];
+    const edges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+
+    function project(x, y, z) {
+      let cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      let y1 = y * cosX - z * sinX;
+      let z1 = y * sinX + z * cosX;
+      let cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      let x2 = x * cosY + z1 * sinY;
+      let z2 = -x * sinY + z1 * cosY;
+      let fov = 250;
+      let scale = fov / (fov + z2 + 100);
+      return { x: x2 * scale + width / 2, y: y1 * scale + height / 2, s: scale };
+    }
+
+    let animId;
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      rotX += (targetRotX - rotX) * 0.1;
+      rotY += (targetRotY - rotY) * 0.1;
+      if (!isDragging) targetRotY += 0.005;
+
+      ctx.strokeStyle = 'rgba(0, 255, 204, 0.4)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      edges.forEach(e => {
+        let p1 = project(vertices[e[0]].x, vertices[e[0]].y, vertices[e[0]].z);
+        let p2 = project(vertices[e[1]].x, vertices[e[1]].y, vertices[e[1]].z);
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+      });
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0, 255, 204, 0.15)';
+      for(let i=1; i<4; i++) {
+        let y = -thickness;
+        let p1 = project(-size + (size*2)*(i/4), y, -size);
+        let p2 = project(-size + (size*2)*(i/4), y, size);
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+        p1 = project(-size, y, -size + (size*2)*(i/4));
+        p2 = project(size, y, -size + (size*2)*(i/4));
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+      }
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.lineWidth = 1;
+      for(let i=1; i<pins; i++) {
+        let offset = -size + (size*2)*(i/pins);
+        let p1 = project(offset, thickness, -size);
+        let p2 = project(offset, thickness+10, -size-10);
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+        p1 = project(offset, thickness, size);
+        p2 = project(offset, thickness+10, size+10);
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+        p1 = project(-size, thickness, offset);
+        p2 = project(-size-10, thickness+10, offset);
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+        p1 = project(size, thickness, offset);
+        p2 = project(size+10, thickness+10, offset);
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+      }
+      ctx.stroke();
+
+      animId = requestAnimationFrame(draw);
+    }
+    
+    let isVisible = false;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !isVisible) {
+          isVisible = true;
+          draw();
+        } else if (!e.isIntersecting && isVisible) {
+          isVisible = false;
+          cancelAnimationFrame(animId);
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+  })();
+</script>
   <!-- TERMINAL WIDGET OVERLAY -->
   <div class="term-widget-overlay term-theme-default" id="term-widget-overlay" style="display: none;" onclick="if(event.target===this)closeTerminalWidget()">
     <div class="term-widget-window" id="term-widget-window">

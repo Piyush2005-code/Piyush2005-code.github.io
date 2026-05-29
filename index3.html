@@ -2806,6 +2806,596 @@
       .telemetry-log-line {
         margin-bottom: 2px;
       }
+
+      /* ══════════════════════════════════════════════════════
+         GROUNDBREAKING IMPROVEMENTS — INJECTED LAYER
+      ══════════════════════════════════════════════════════ */
+
+      /* ── HERO PARTICLE CANVAS ── */
+      #hero-particle-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      /* ── TYPEWRITER SUBTITLE ── */
+      .hero-typewriter-role {
+        color: var(--cyan);
+        font-weight: 600;
+        border-right: 2px solid var(--cyan);
+        animation: tw-cursor 0.8s step-end infinite;
+        white-space: nowrap;
+      }
+      @keyframes tw-cursor {
+        0%, 100% { border-color: var(--cyan); }
+        50% { border-color: transparent; }
+      }
+
+      /* ── COMMAND PALETTE ── */
+      #cmd-palette-ov {
+        position: fixed;
+        inset: 0;
+        z-index: 999998;
+        background: rgba(4,8,15,0.72);
+        backdrop-filter: blur(12px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 12vh;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+      }
+      #cmd-palette-ov.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      #cmd-palette {
+        width: min(640px, 92vw);
+        background: var(--card);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 30px rgba(0,212,255,0.1);
+        transform: scale(0.95) translateY(-12px);
+        transition: transform 0.2s cubic-bezier(.22,1,.36,1);
+      }
+      #cmd-palette-ov.open #cmd-palette {
+        transform: scale(1) translateY(0);
+      }
+      #cmd-palette-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8,16,32,0.8);
+      }
+      #cmd-palette-header svg {
+        color: var(--cyan);
+        flex-shrink: 0;
+        width: 16px; height: 16px;
+      }
+      #cmd-palette-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: var(--txt);
+        letter-spacing: 0.02em;
+      }
+      #cmd-palette-input::placeholder { color: var(--dim); }
+      #cmd-palette-hint {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--dim);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 2px 6px;
+      }
+      #cmd-palette-results {
+        max-height: 340px;
+        overflow-y: auto;
+        padding: 0.5rem;
+      }
+      .cmd-result-group-label {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--dim);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.5rem 0.75rem 0.25rem;
+      }
+      .cmd-result-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.65rem 0.75rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.15s;
+        border: 1px solid transparent;
+      }
+      .cmd-result-item:hover, .cmd-result-item.selected {
+        background: rgba(0,212,255,0.07);
+        border-color: rgba(0,212,255,0.15);
+      }
+      .cmd-result-icon {
+        width: 32px; height: 32px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        color: var(--cyan);
+        background: rgba(0,212,255,0.05);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+      }
+      .cmd-result-title {
+        font-size: 0.85rem;
+        color: var(--txt);
+        font-weight: 500;
+      }
+      .cmd-result-sub {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--dim);
+        margin-top: 1px;
+      }
+      .cmd-result-kbd {
+        margin-left: auto;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: var(--dim);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 1px 5px;
+      }
+      #cmd-palette-footer {
+        padding: 0.6rem 1rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        background: rgba(4,8,15,0.6);
+      }
+      .cmd-footer-hint {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: var(--dim);
+      }
+      .cmd-footer-hint kbd {
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        padding: 1px 4px;
+        color: var(--muted);
+      }
+
+      /* ── NAV ACTIVE INDICATOR ── */
+      .nav-links a.nav-active {
+        color: var(--cyan) !important;
+      }
+      .nav-links a.nav-active::after {
+        transform: scaleX(1) !important;
+      }
+
+      /* ── CMD PALETTE TRIGGER BUTTON IN NAV ── */
+      .nav-cmd-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.3rem 0.65rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: rgba(10,22,40,0.5);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--dim);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none !important;
+        margin-left: 0.25rem;
+      }
+      .nav-cmd-btn:hover {
+        border-color: var(--border2);
+        color: var(--muted);
+        background: rgba(0,212,255,0.05);
+      }
+      .nav-cmd-btn::after { display: none !important; }
+      .nav-cmd-btn kbd {
+        font-size: 0.55rem;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        padding: 0 3px;
+        color: var(--dim);
+      }
+
+      /* ── 3D TILT PROJECT CARDS ── */
+      .proj-card {
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition: transform 0.08s ease, border-color .3s, box-shadow .3s;
+      }
+      .proj-card-tilt-glow {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,212,255,0.12) 0%, transparent 65%);
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .proj-card:hover .proj-card-tilt-glow {
+        opacity: 1;
+      }
+
+      /* ── AI CHAT WIDGET ── */
+      #ai-chat-btn {
+        position: fixed;
+        bottom: 5.5rem;
+        right: 1.5rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--cyan2), var(--blue));
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bg);
+        box-shadow: 0 4px 20px rgba(0,212,255,0.35);
+        z-index: 500;
+        transition: transform 0.2s, box-shadow 0.2s;
+        animation: ai-pulse 3s ease-in-out infinite;
+      }
+      @keyframes ai-pulse {
+        0%, 100% { box-shadow: 0 4px 20px rgba(0,212,255,0.35); }
+        50% { box-shadow: 0 4px 30px rgba(0,212,255,0.6), 0 0 0 8px rgba(0,212,255,0.06); }
+      }
+      #ai-chat-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 28px rgba(0,212,255,0.5);
+        animation: none;
+      }
+      #ai-chat-btn svg { width: 22px; height: 22px; }
+      #ai-chat-btn .ai-chat-badge {
+        position: absolute;
+        top: -3px; right: -3px;
+        width: 14px; height: 14px;
+        background: var(--accent);
+        border-radius: 50%;
+        border: 2px solid var(--bg);
+        animation: pulse-active 2s infinite;
+      }
+
+      #ai-chat-window {
+        position: fixed;
+        bottom: 10.5rem;
+        right: 1.5rem;
+        width: min(380px, calc(100vw - 2rem));
+        height: 480px;
+        background: var(--card);
+        border: 1px solid var(--border2);
+        border-radius: 12px;
+        z-index: 501;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 20px rgba(0,212,255,0.08);
+        transform: scale(0.9) translateY(20px);
+        transform-origin: bottom right;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s cubic-bezier(.22,1,.36,1), opacity 0.2s;
+        overflow: hidden;
+      }
+      #ai-chat-window.open {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+      #ai-chat-header {
+        padding: 0.9rem 1.1rem;
+        background: rgba(8,16,32,0.9);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        flex-shrink: 0;
+      }
+      .ai-chat-avatar {
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--cyan2), var(--blue));
+        display: flex; align-items: center; justify-content: center;
+        color: var(--bg);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .ai-chat-header-info { flex: 1; }
+      .ai-chat-header-name {
+        font-family: var(--font-head);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--txt);
+      }
+      .ai-chat-header-status {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: var(--accent);
+        display: flex; align-items: center; gap: 0.3rem;
+      }
+      #ai-chat-close {
+        width: 26px; height: 26px;
+        border: 1px solid var(--border);
+        background: transparent;
+        border-radius: 3px;
+        color: var(--muted);
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      #ai-chat-close:hover { border-color: var(--cyan); color: var(--cyan); }
+      #ai-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+      }
+      .ai-msg {
+        max-width: 85%;
+        padding: 0.65rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        animation: msg-appear 0.25s ease;
+      }
+      @keyframes msg-appear {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .ai-msg.bot {
+        background: rgba(0,212,255,0.07);
+        border: 1px solid rgba(0,212,255,0.12);
+        color: var(--txt2);
+        align-self: flex-start;
+        border-bottom-left-radius: 2px;
+      }
+      .ai-msg.user {
+        background: rgba(26,127,232,0.15);
+        border: 1px solid rgba(26,127,232,0.2);
+        color: var(--txt);
+        align-self: flex-end;
+        border-bottom-right-radius: 2px;
+      }
+      .ai-msg.typing {
+        display: flex; align-items: center; gap: 4px;
+        padding: 0.75rem 1rem;
+      }
+      .typing-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--cyan);
+        animation: typing-bounce 1.2s ease-in-out infinite;
+      }
+      .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+      .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes typing-bounce {
+        0%, 100% { transform: translateY(0); opacity: 0.4; }
+        50% { transform: translateY(-5px); opacity: 1; }
+      }
+      #ai-chat-suggestions {
+        padding: 0 1rem 0.5rem;
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+      }
+      .ai-suggestion {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--cyan);
+        border: 1px solid rgba(0,212,255,0.2);
+        background: rgba(0,212,255,0.04);
+        border-radius: 20px;
+        padding: 0.25rem 0.65rem;
+        cursor: pointer;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .ai-suggestion:hover {
+        background: rgba(0,212,255,0.1);
+        border-color: var(--cyan);
+      }
+      #ai-chat-form {
+        padding: 0.75rem 1rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 0.5rem;
+        flex-shrink: 0;
+        background: rgba(4,8,15,0.5);
+      }
+      #ai-chat-inp {
+        flex: 1;
+        background: rgba(10,22,40,0.8);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.55rem 0.8rem;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--txt);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #ai-chat-inp:focus { border-color: rgba(0,212,255,0.4); }
+      #ai-chat-inp::placeholder { color: var(--dim); }
+      #ai-chat-send {
+        width: 36px; height: 36px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, var(--cyan2), var(--blue));
+        border: none;
+        color: var(--bg);
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: opacity 0.2s, transform 0.15s;
+        flex-shrink: 0;
+      }
+      #ai-chat-send:hover { opacity: 0.85; transform: scale(1.05); }
+      #ai-chat-send svg { width: 15px; height: 15px; }
+
+      /* ── SKILL RADAR ── */
+      #skill-radar-section {
+        margin-top: 4rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      @media (max-width: 768px) {
+        #skill-radar-section { grid-template-columns: 1fr; gap: 2rem; }
+      }
+      #skill-radar-svg { width: 100%; max-width: 340px; display: block; margin: 0 auto; }
+      .skill-radar-label {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        fill: var(--muted);
+        text-anchor: middle;
+      }
+      .radar-axis-line { stroke: var(--border); stroke-width: 1; }
+      .radar-ring { stroke: var(--border); stroke-width: 0.5; fill: none; }
+      .radar-area {
+        fill: rgba(0,212,255,0.1);
+        stroke: var(--cyan);
+        stroke-width: 1.5;
+        stroke-linejoin: round;
+      }
+      .radar-dot {
+        fill: var(--cyan);
+        stroke: var(--bg);
+        stroke-width: 2;
+      }
+      .skill-bars-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .skill-bar-item {}
+      .skill-bar-top {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        margin-bottom: 0.35rem;
+      }
+      .skill-bar-name { color: var(--txt2); }
+      .skill-bar-pct { color: var(--cyan); }
+      .skill-bar-track {
+        height: 4px;
+        background: var(--border);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .skill-bar-fill {
+        height: 100%;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--cyan2), var(--blue));
+        width: 0;
+        transition: width 1.2s cubic-bezier(.22,1,.36,1);
+      }
+
+      /* ── READING PROGRESS ── */
+      #reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--cyan), var(--blue), var(--accent));
+        z-index: 9999;
+        width: 0%;
+        transition: width 0.1s;
+        box-shadow: 0 0 8px rgba(0,212,255,0.5);
+      }
+
+      /* ── MOBILE BOTTOM NAV ── */
+      #mobile-bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 300;
+        background: rgba(4,8,15,0.95);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+      }
+      @media (max-width: 768px) { #mobile-bottom-nav { display: flex; } }
+      .mobile-nav-items {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+      }
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+        text-decoration: none;
+        color: var(--dim);
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.5rem;
+        border-radius: 4px;
+        transition: color 0.2s;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+      .mobile-nav-item.active { color: var(--cyan); }
+      .mobile-nav-item svg { width: 18px; height: 18px; }
+
+      /* ── SCROLL-REVEAL ENHANCED ── */
+      .reveal-scale {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.6s, transform 0.6s cubic-bezier(.22,1,.36,1);
+      }
+      .reveal-scale.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* ── NAV ACTIVE LINE ── */
+      .nav-section-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+      nav.scrolled .nav-section-progress {
+        transform: scaleX(1);
+      }
   </style>
 </head>
 
@@ -2831,6 +3421,87 @@
     </svg>
   </button>
   
+  <!-- READING PROGRESS BAR -->
+  <div id="reading-progress"></div>
+
+  <!-- COMMAND PALETTE -->
+  <div id="cmd-palette-ov" onclick="if(event.target===this)closeCmdPalette()">
+    <div id="cmd-palette">
+      <div id="cmd-palette-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--cyan);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="cmd-palette-input" type="text" placeholder="Search projects, sections, commands..." autocomplete="off" spellcheck="false" oninput="filterCmdPalette(this.value)">
+        <span id="cmd-palette-hint">ESC</span>
+      </div>
+      <div id="cmd-palette-results"></div>
+      <div id="cmd-palette-footer">
+        <div class="cmd-footer-hint"><kbd>&#8593;&#8595;</kbd> Navigate</div>
+        <div class="cmd-footer-hint"><kbd>&#8629;</kbd> Select</div>
+        <div class="cmd-footer-hint"><kbd>ESC</kbd> Close</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI CHAT BUTTON -->
+  <button id="ai-chat-btn" onclick="toggleAiChat()" title="Ask AI about Piyush" aria-label="Chat with AI">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <div class="ai-chat-badge"></div>
+  </button>
+
+  <!-- AI CHAT WINDOW -->
+  <div id="ai-chat-window">
+    <div id="ai-chat-header">
+      <div class="ai-chat-avatar">AI</div>
+      <div class="ai-chat-header-info">
+        <div class="ai-chat-header-name">Ask about Piyush</div>
+        <div class="ai-chat-header-status"><span class="pulse-dot" style="width:5px;height:5px"></span>Claude-powered &middot; Live</div>
+      </div>
+      <button id="ai-chat-close" onclick="toggleAiChat()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="ai-chat-messages">
+      <div class="ai-msg bot">&#128075; Hi! I'm an AI assistant that knows all about Piyush. Ask me about his projects, research, skills, or anything else!</div>
+    </div>
+    <div id="ai-chat-suggestions">
+      <div class="ai-suggestion" onclick="askAi('What are his best projects?')">Best projects?</div>
+      <div class="ai-suggestion" onclick="askAi('What research is he doing?')">Research?</div>
+      <div class="ai-suggestion" onclick="askAi('What are his core skills?')">Skills?</div>
+      <div class="ai-suggestion" onclick="askAi('How to contact Piyush?')">Contact?</div>
+    </div>
+    <div id="ai-chat-form">
+      <input id="ai-chat-inp" type="text" placeholder="Ask anything about Piyush..." onkeydown="if(event.key==='Enter')sendAiMsg()">
+      <button id="ai-chat-send" onclick="sendAiMsg()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav id="mobile-bottom-nav">
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="#hero">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a class="mobile-nav-item" href="#about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        About
+      </a>
+      <a class="mobile-nav-item" href="#projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+        Projects
+      </a>
+      <a class="mobile-nav-item" href="#skills">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Skills
+      </a>
+      <button class="mobile-nav-item" onclick="toggleAiChat()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Chat
+      </button>
+    </div>
+  </nav>
+
   <button class="floating-term-launcher" aria-label="Open Command Line Interface" onclick="openTerminalWidget()" title="Open Terminal">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
       <polyline points="4 17 10 11 4 5"></polyline>
@@ -2854,6 +3525,10 @@
         <a href="#skills">Skills</a>
         <a href="https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
         <a href="#" class="nav-term-btn" onclick="event.preventDefault(); openTerminalWidget();" title="Launch Interactive Shell (or press `)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align: middle; margin-right: 4px; display: inline-block;"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>Shell</a>
+        <a href="#" class="nav-cmd-btn" onclick="event.preventDefault();openCmdPalette()" title="Command Palette (Ctrl+K)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Search <kbd>⌘K</kbd>
+        </a>
         <a href="#contact" class="nav-cta">Get in Touch</a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -2877,6 +3552,8 @@
 
   <!-- HERO -->
   <section id="hero">
+    <!-- INTERACTIVE PARTICLE FIELD -->
+    <canvas id="hero-particle-canvas"></canvas>
     <div class="hero-scanlines"></div>
     <div class="hero-video-wrap">
       <video autoplay loop muted playsinline>
@@ -2896,7 +3573,7 @@
       <p class="hero-subtitle">
          Building the future at the intersection of<br />
         <strong>Artificial Intelligence</strong> &nbsp;×&nbsp; <strong>Computing Hardware</strong> &nbsp;×&nbsp;
-        <strong>Autonomous Systems</strong>
+        <span class="hero-typewriter-role" id="hero-typewriter">Autonomous Systems</span>
       </p>
 
       <div class="hero-meta">
@@ -3323,6 +4000,19 @@
               class="skill-pill">Agentic AI</span>
           </div>
         </div>
+      </div>
+
+
+      <!-- SKILL RADAR CHART -->
+      <div id="skill-radar-section" class="reveal-scale">
+        <div>
+          <div class="section-comment-header" style="margin-bottom:0.5rem">// proficiency_map.json</div>
+          <div class="coursework-title" style="text-align:left;margin-bottom:1.5rem">Skill Proficiency Radar</div>
+          <div class="skill-bars-list" id="skill-bars-list"></div>
+        </div>
+        <svg id="skill-radar-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Rendered by JS -->
+        </svg>
       </div>
 
       <div class="coursework reveal">
@@ -5096,6 +5786,513 @@ Toggle this console anytime with the backtick (<span class="term-out-success">`<
       <line x1="12" y1="19" x2="20" y2="19"></line>
     </svg>
   </div>
+
+
+  <script>
+  // ══════════════════════════════════════════════════════════
+  //  GROUNDBREAKING IMPROVEMENTS — INJECTED SCRIPT LAYER
+  // ══════════════════════════════════════════════════════════
+
+  // ── READING PROGRESS BAR ──────────────────────────────────
+  (function() {
+    const bar = document.getElementById('reading-progress');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / total) * 100;
+      if (bar) bar.style.width = pct + '%';
+    }, { passive: true });
+  })();
+
+  // ── HERO PARTICLE CANVAS ─────────────────────────────────
+  (function() {
+    const canvas = document.getElementById('hero-particle-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], mouse = { x: -999, y: -999 };
+    const N = 90;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < N; i++) {
+      particles.push({
+        x: Math.random() * 1920,
+        y: Math.random() * 1080,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.4 + 0.1,
+      });
+    }
+
+    const hero = document.getElementById('hero');
+    if (hero) {
+      hero.addEventListener('mousemove', e => {
+        const rect = hero.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      hero.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // Draw connections
+      for (let i = 0; i < N; i++) {
+        const p = particles[i];
+        // mouse repel
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) {
+          p.vx += (dx/dist) * 0.06;
+          p.vy += (dy/dist) * 0.06;
+        }
+        // speed limit
+        const spd = Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+        if (spd > 1.2) { p.vx *= 1.2/spd; p.vy *= 1.2/spd; }
+        // friction
+        p.vx *= 0.995; p.vy *= 0.995;
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+        for (let j = i+1; j < N; j++) {
+          const q = particles[j];
+          const ex = p.x - q.x, ey = p.y - q.y;
+          const d = Math.sqrt(ex*ex + ey*ey);
+          if (d < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(0,212,255,${0.07 * (1 - d/110)})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+        // Draw dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(0,212,255,${p.alpha})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // ── TYPEWRITER HERO ROLE ─────────────────────────────────
+  (function() {
+    const el = document.getElementById('hero-typewriter');
+    if (!el) return;
+    const roles = ['Autonomous Systems', 'Operating Systems', 'GPU Architecture', 'ML Infrastructure', 'Embedded Systems', 'Robotics & CAD'];
+    let ri = 0, ci = 0, deleting = false;
+    function tick() {
+      const role = roles[ri];
+      if (!deleting) {
+        ci++;
+        el.textContent = role.slice(0, ci);
+        if (ci >= role.length) { deleting = true; setTimeout(tick, 2200); return; }
+        setTimeout(tick, 65);
+      } else {
+        ci--;
+        el.textContent = role.slice(0, ci);
+        if (ci === 0) { deleting = false; ri = (ri+1)%roles.length; setTimeout(tick, 350); return; }
+        setTimeout(tick, 35);
+      }
+    }
+    setTimeout(tick, 1500);
+  })();
+
+  // ── 3D TILT PROJECT CARDS ────────────────────────────────
+  (function() {
+    function initTilt() {
+      document.querySelectorAll('.proj-card').forEach(card => {
+        // Add glow layer
+        if (!card.querySelector('.proj-card-tilt-glow')) {
+          const glow = document.createElement('div');
+          glow.className = 'proj-card-tilt-glow';
+          card.appendChild(glow);
+        }
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const cx = rect.width / 2, cy = rect.height / 2;
+          const rotX = (y - cy) / cy * -6;
+          const rotY = (x - cx) / cx * 8;
+          card.style.transform = `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-7px) scale(1.01)`;
+          const glow = card.querySelector('.proj-card-tilt-glow');
+          if (glow) { glow.style.setProperty('--mx', ((x/rect.width)*100)+'%'); glow.style.setProperty('--my', ((y/rect.height)*100)+'%'); }
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.transition = 'transform 0.35s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .3s';
+          setTimeout(() => { card.style.transition = ''; }, 400);
+        });
+      });
+    }
+    // Wait for DOM
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initTilt);
+    else initTilt();
+    setTimeout(initTilt, 500); // after dynamic cards too
+  })();
+
+  // ── SKILL RADAR ──────────────────────────────────────────
+  (function() {
+    const skillData = [
+      { label: 'Systems/OS', pct: 90 },
+      { label: 'ML/AI', pct: 85 },
+      { label: 'C/C++', pct: 88 },
+      { label: 'Python', pct: 92 },
+      { label: 'GPU/CUDA', pct: 75 },
+      { label: 'Robotics', pct: 78 },
+    ];
+
+    function renderRadar() {
+      const svg = document.getElementById('skill-radar-svg');
+      const bars = document.getElementById('skill-bars-list');
+      if (!svg || !bars) return;
+
+      const cx = 150, cy = 150, maxR = 110, n = skillData.length;
+
+      let svgContent = '';
+      // Rings
+      [0.25, 0.5, 0.75, 1].forEach(f => {
+        svgContent += `<polygon class="radar-ring" points="${getPolygonPoints(cx, cy, maxR*f, n)}" fill="none" stroke="rgba(26,48,80,0.8)" stroke-width="1"/>`;
+      });
+      // Axis lines
+      for (let i = 0; i < n; i++) {
+        const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+        const x = cx + maxR * Math.cos(angle);
+        const y = cy + maxR * Math.sin(angle);
+        svgContent += `<line class="radar-axis-line" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(26,48,80,0.8)" stroke-width="1"/>`;
+      }
+      // Data polygon (animated via JS)
+      const pts = skillData.map((d, i) => {
+        const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+        const r = maxR * d.pct / 100;
+        return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
+      });
+      const ptsStr = pts.map(p => p.join(',')).join(' ');
+      svgContent += `<polygon class="radar-area" id="radar-polygon" points="${cx},${cy} ".repeat(n) style="opacity:0;transition:all 1.5s cubic-bezier(.22,1,.36,1)"/>`;
+      // Dots
+      pts.forEach(([x, y], i) => {
+        svgContent += `<circle class="radar-dot" cx="${cx}" cy="${cy}" r="5" id="radar-dot-${i}" style="opacity:0;transition:all 1.5s ${i*0.1}s cubic-bezier(.22,1,.36,1)"/>`;
+      });
+      // Labels
+      for (let i = 0; i < n; i++) {
+        const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+        const r = maxR + 22;
+        const x = cx + r * Math.cos(angle);
+        const y = cy + r * Math.sin(angle);
+        svgContent += `<text class="skill-radar-label" x="${x}" y="${y}" dominant-baseline="middle">${skillData[i].label}</text>`;
+      }
+      svg.innerHTML = svgContent;
+
+      // Skill bars
+      bars.innerHTML = skillData.map((d,i) => `
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span class="skill-bar-name">${d.label}</span><span class="skill-bar-pct">${d.pct}%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" id="sbar-${i}" data-pct="${d.pct}"></div></div>
+        </div>
+      `).join('');
+
+      // Animate on scroll
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              // Animate radar
+              const poly = document.getElementById('radar-polygon');
+              if (poly) { poly.setAttribute('points', ptsStr); poly.style.opacity = '1'; }
+              pts.forEach(([x,y], i) => {
+                const dot = document.getElementById('radar-dot-'+i);
+                if (dot) { dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.style.opacity = '1'; }
+              });
+              // Animate bars
+              skillData.forEach((d, i) => {
+                const bar = document.getElementById('sbar-'+i);
+                if (bar) { setTimeout(() => { bar.style.width = d.pct + '%'; }, i * 80); }
+              });
+            }, 100);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const section = document.getElementById('skill-radar-section');
+      if (section) observer.observe(section);
+    }
+
+    function getPolygonPoints(cx, cy, r, n) {
+      return Array.from({length: n}, (_, i) => {
+        const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+        return `${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`;
+      }).join(' ');
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderRadar);
+    else renderRadar();
+  })();
+
+  // ── COMMAND PALETTE ─────────────────────────────────────
+  (function() {
+    const CMD_ITEMS = [
+      { group: 'Navigate', icon: '⌂', title: 'Home / Hero', sub: 'Scroll to top', action: () => window.scrollTo({top:0,behavior:'smooth'}) },
+      { group: 'Navigate', icon: '◎', title: 'About', sub: 'Learn about Piyush', action: () => document.getElementById('about')?.scrollIntoView({behavior:'smooth'}) },
+      { group: 'Navigate', icon: '◎', title: 'Research', sub: 'Academic work', action: () => document.getElementById('research')?.scrollIntoView({behavior:'smooth'}) },
+      { group: 'Navigate', icon: '◎', title: 'Projects', sub: 'Featured work', action: () => document.getElementById('projects')?.scrollIntoView({behavior:'smooth'}) },
+      { group: 'Navigate', icon: '◎', title: 'Skills', sub: 'Tech expertise', action: () => document.getElementById('skills')?.scrollIntoView({behavior:'smooth'}) },
+      { group: 'Navigate', icon: '◎', title: 'Contact', sub: 'Get in touch', action: () => document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}) },
+      { group: 'Projects', icon: '⬡', title: 'ARM64 Unikernel', sub: 'Bare-metal ML inference OS', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(0); } },
+      { group: 'Projects', icon: '⬡', title: 'Counsel.ai', sub: 'Student advisory platform', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(1); } },
+      { group: 'Projects', icon: '⬡', title: 'OS Scheduler', sub: 'Scheduling algorithm simulator', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(2); } },
+      { group: 'Projects', icon: '⬡', title: 'JARVIS Voice Assistant', sub: 'GPU-accelerated voice AI', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(3); } },
+      { group: 'Projects', icon: '⬡', title: 'LLM Chart Generator', sub: 'PDF to chart via LLM', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(4); } },
+      { group: 'Projects', icon: '⬡', title: 'Crop Stress Detection', sub: 'U-Net aerial imagery', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(5); } },
+      { group: 'Projects', icon: '⬡', title: 'Fixed-Wing STOL Wing', sub: 'CFD + CAD aeronautics', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(6); } },
+      { group: 'Projects', icon: '⬡', title: 'Quadcopter CAD', sub: 'Robotics design', action: () => { closeCmdPalette(); if(typeof openModal==='function') openModal(7); } },
+      { group: 'Actions', icon: '>', title: 'Open Terminal Shell', sub: 'Interactive CLI (or press `)', action: () => { closeCmdPalette(); if(typeof openTerminalWidget==='function') openTerminalWidget(); } },
+      { group: 'Actions', icon: '✉', title: 'Send Email', sub: 'piyush.bhati680@gmail.com', action: () => window.open('mailto:piyush.bhati680@gmail.com','_blank') },
+      { group: 'Actions', icon: '◈', title: 'View GitHub', sub: 'github.com/Piyush2005-code', action: () => window.open('https://github.com/Piyush2005-code','_blank') },
+      { group: 'Actions', icon: '⊕', title: 'Open LinkedIn', sub: 'piyush-singh-bhati', action: () => window.open('https://linkedin.com/in/piyush-singh-bhati-5a074929a','_blank') },
+      { group: 'Actions', icon: '☆', title: 'Chat with AI', sub: 'Ask AI about Piyush', action: () => { closeCmdPalette(); toggleAiChat(); } },
+    ];
+    window._CMD_ITEMS = CMD_ITEMS;
+    let selectedIdx = 0;
+    let filteredItems = [];
+
+    window.openCmdPalette = function() {
+      const ov = document.getElementById('cmd-palette-ov');
+      const inp = document.getElementById('cmd-palette-input');
+      if (!ov) return;
+      ov.classList.add('open');
+      if (inp) { inp.value = ''; inp.focus(); }
+      renderCmdResults(CMD_ITEMS);
+      document.body.style.overflow = 'hidden';
+    };
+    window.closeCmdPalette = function() {
+      const ov = document.getElementById('cmd-palette-ov');
+      if (ov) ov.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    window.filterCmdPalette = function(q) {
+      const lower = q.toLowerCase().trim();
+      if (!lower) { renderCmdResults(CMD_ITEMS); return; }
+      const filtered = CMD_ITEMS.filter(it =>
+        it.title.toLowerCase().includes(lower) ||
+        it.sub.toLowerCase().includes(lower) ||
+        it.group.toLowerCase().includes(lower)
+      );
+      renderCmdResults(filtered);
+    };
+
+    function renderCmdResults(items) {
+      filteredItems = items;
+      selectedIdx = 0;
+      const el = document.getElementById('cmd-palette-results');
+      if (!el) return;
+      if (!items.length) { el.innerHTML = '<div style="padding:1.5rem;text-align:center;font-family:var(--font-mono);font-size:0.75rem;color:var(--dim)">No results</div>'; return; }
+      const groups = {};
+      items.forEach(it => { if (!groups[it.group]) groups[it.group] = []; groups[it.group].push(it); });
+      let html = '', globalIdx = 0;
+      Object.entries(groups).forEach(([group, gItems]) => {
+        html += `<div class="cmd-result-group-label">${group}</div>`;
+        gItems.forEach(item => {
+          const idx = globalIdx++;
+          html += `<div class="cmd-result-item${idx===0?' selected':''}" data-idx="${idx}" onclick="executeCmdItem(${CMD_ITEMS.indexOf(item)})">
+            <div class="cmd-result-icon">${item.icon}</div>
+            <div><div class="cmd-result-title">${item.title}</div><div class="cmd-result-sub">${item.sub}</div></div>
+          </div>`;
+        });
+      });
+      el.innerHTML = html;
+    }
+
+    window.executeCmdItem = function(idx) {
+      const item = CMD_ITEMS[idx];
+      if (item) { closeCmdPalette(); setTimeout(() => item.action(), 80); }
+    };
+
+    // Keyboard nav in palette
+    document.getElementById('cmd-palette-input')?.addEventListener('keydown', e => {
+      const items = document.querySelectorAll('.cmd-result-item');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIdx = Math.min(selectedIdx+1, items.length-1);
+        items.forEach((it,i) => it.classList.toggle('selected', i===selectedIdx));
+        items[selectedIdx]?.scrollIntoView({block:'nearest'});
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIdx = Math.max(selectedIdx-1, 0);
+        items.forEach((it,i) => it.classList.toggle('selected', i===selectedIdx));
+        items[selectedIdx]?.scrollIntoView({block:'nearest'});
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        items[selectedIdx]?.click();
+      } else if (e.key === 'Escape') {
+        closeCmdPalette();
+      }
+    });
+
+    // Global shortcut Ctrl/Cmd+K
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const ov = document.getElementById('cmd-palette-ov');
+        if (ov && ov.classList.contains('open')) closeCmdPalette();
+        else openCmdPalette();
+      }
+      if (e.key === 'Escape') closeCmdPalette();
+    });
+  })();
+
+  // ── AI CHAT WIDGET ──────────────────────────────────────
+  (function() {
+    let chatOpen = false;
+    let chatHistory = [];
+
+    const PIYUSH_CONTEXT = `You are an AI assistant for Piyush Singh Bhati's portfolio website. Answer questions about him based on this information:
+
+PERSONAL: Piyush Singh Bhati is a B.Tech CSE student at IIT Jodhpur, focused on AI systems, operating systems, and computer architecture. Email: piyush.bhati680@gmail.com, GitHub: Piyush2005-code, LinkedIn: piyush-singh-bhati-5a074929a.
+
+RESEARCH: 
+1. AI Systems Research at IIT Jodhpur (Advisor: Prof. Sidharth Sharma) - GPU architecture, NVIDIA Hopper, ML optimization.
+2. Scientific ML Research (Advisor: Prof. Harshal D. Akolekar) - Physics-Informed Neural Networks, CFD surrogate modeling.
+
+PROJECTS:
+1. ARM64 Unikernel for ML Inference - Bare-metal ARM64 OS (<256KB) with custom ONNX runtime, NEON SIMD, ~269µs latency
+2. Counsel.ai - AI college counseling platform with vLLM, DistilRoBERTa, Pinecone vector DB, FastMCP
+3. OS Scheduling Simulator - React + Electron app with Gantt charts for FCFS, RR, Priority algorithms
+4. JARVIS Voice Assistant - Sub-second GPU inference on NVIDIA A5000, Whisper, RAG, supports 500+ users
+5. LLM Chart Generator - PDF to chart via LLM, semantic NLP, Node.js backend
+6. Crop Stress Detection - 7.7M param U-Net segmentation of aerial imagery, 45 FPS video inference
+7. Fixed-Wing STOL Wing - CL=8.1258, CFD with ANSYS Fluent, Inter IIT Tech Meet 14.0
+8. Quadcopter CAD - Full CAD, structural FEA, 420g weight target
+
+SKILLS: C, C++, Python, TypeScript, React; PyTorch, vLLM, LangChain, RAG, GPU inference; Docker, Kubernetes, Git; CAD Modeling, ANSYS Fluent, CFD; Operating Systems, Real-Time Systems.
+
+Be concise (2-4 sentences), helpful, and enthusiastic. If asked about contact, provide the email. Always stay in character as Piyush's portfolio assistant.`;
+
+    window.toggleAiChat = function() {
+      chatOpen = !chatOpen;
+      const win = document.getElementById('ai-chat-window');
+      const btn = document.getElementById('ai-chat-btn');
+      if (win) win.classList.toggle('open', chatOpen);
+      if (btn) {
+        const badge = btn.querySelector('.ai-chat-badge');
+        if (badge && chatOpen) badge.style.display = 'none';
+      }
+      if (chatOpen) {
+        setTimeout(() => document.getElementById('ai-chat-inp')?.focus(), 300);
+      }
+    };
+
+    window.askAi = function(text) {
+      document.getElementById('ai-chat-inp').value = text;
+      sendAiMsg();
+    };
+
+    window.sendAiMsg = async function() {
+      const inp = document.getElementById('ai-chat-inp');
+      const msgs = document.getElementById('ai-chat-messages');
+      const sugg = document.getElementById('ai-chat-suggestions');
+      if (!inp || !msgs) return;
+      const text = inp.value.trim();
+      if (!text) return;
+      inp.value = '';
+      if (sugg) sugg.style.display = 'none';
+
+      // User message
+      const userDiv = document.createElement('div');
+      userDiv.className = 'ai-msg user';
+      userDiv.textContent = text;
+      msgs.appendChild(userDiv);
+      msgs.scrollTop = msgs.scrollHeight;
+
+      // Typing indicator
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'ai-msg bot typing';
+      typingDiv.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+      msgs.appendChild(typingDiv);
+      msgs.scrollTop = msgs.scrollHeight;
+
+      chatHistory.push({ role: 'user', content: text });
+
+      try {
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            system: PIYUSH_CONTEXT,
+            messages: chatHistory.slice(-10)
+          })
+        });
+        const data = await resp.json();
+        const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response right now.";
+        chatHistory.push({ role: 'assistant', content: reply });
+        typingDiv.remove();
+        const botDiv = document.createElement('div');
+        botDiv.className = 'ai-msg bot';
+        botDiv.textContent = reply;
+        msgs.appendChild(botDiv);
+        msgs.scrollTop = msgs.scrollHeight;
+      } catch(err) {
+        typingDiv.remove();
+        const errDiv = document.createElement('div');
+        errDiv.className = 'ai-msg bot';
+        errDiv.textContent = "I'm having trouble connecting right now. You can reach Piyush directly at piyush.bhati680@gmail.com!";
+        msgs.appendChild(errDiv);
+        msgs.scrollTop = msgs.scrollHeight;
+      }
+    };
+  })();
+
+  // ── ACTIVE NAV SECTION HIGHLIGHT ────────────────────────
+  (function() {
+    const sections = ['about','research','projects','skills','contact'];
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(a => {
+            a.classList.toggle('nav-active', a.getAttribute('href') === '#' + id);
+          });
+          mobileNavItems.forEach(a => {
+            const href = a.getAttribute('href');
+            a.classList.toggle('active', href === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  })();
+
+  // ── REVEAL-SCALE OBSERVER ────────────────────────────────
+  (function() {
+    const revealEls = document.querySelectorAll('.reveal-scale');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => obs.observe(el));
+  })();
+
+  </script>
 
   <!-- KEYBOARD HINT BUBBLE -->
   <div class="term-kbd-hint" id="term-kbd-hint">press &#96; to open shell</div>
