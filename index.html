@@ -3767,11 +3767,67 @@
     const iconPlaying = document.getElementById('icon-playing');
     audio.volume = 0.3;
     let playing = false;
-    btn.addEventListener('click', () => {
-      if (playing) { audio.pause(); btn.classList.remove('playing'); iconMuted.style.display = ''; iconPlaying.style.display = 'none'; }
-      else { audio.play().catch(() => { }); btn.classList.add('playing'); iconMuted.style.display = 'none'; iconPlaying.style.display = ''; }
-      playing = !playing;
+
+    function playMusic() {
+      audio.play().then(() => {
+        playing = true;
+        btn.classList.add('playing');
+        iconMuted.style.display = 'none';
+        iconPlaying.style.display = '';
+        const hint = document.getElementById('music-hint');
+        if (hint) {
+          hint.style.display = 'none';
+        }
+        removeInteractionListeners();
+      }).catch(() => {
+        // Silent catch for autoplay blocking
+      });
+    }
+
+    function pauseMusic() {
+      audio.pause();
+      playing = false;
+      btn.classList.remove('playing');
+      iconMuted.style.display = '';
+      iconPlaying.style.display = 'none';
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Avoid triggering interaction listener if not playing yet
+      if (playing) {
+        pauseMusic();
+      } else {
+        playMusic();
+      }
     });
+
+    function handleFirstInteraction() {
+      if (!playing) {
+        playMusic();
+      }
+    }
+
+    function removeInteractionListeners() {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+    }
+
+    // Setup interactive play fallbacks
+    window.addEventListener('click', handleFirstInteraction);
+    window.addEventListener('keydown', handleFirstInteraction);
+    window.addEventListener('scroll', handleFirstInteraction);
+    window.addEventListener('touchstart', handleFirstInteraction);
+
+    // Autoplay attempt on load
+    window.addEventListener('DOMContentLoaded', () => {
+      playMusic();
+    });
+    // Fallback if DOMContentLoaded already fired
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      playMusic();
+    }
 
     window.isMusicPlaying = () => playing;
     window.toggleMusic = () => { btn.click(); };
