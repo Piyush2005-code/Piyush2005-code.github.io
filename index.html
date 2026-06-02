@@ -1452,7 +1452,7 @@
 
       .proj-modal-imgs img {
         width: 100%;
-        height: 155px;
+        height: 240px;
         object-fit: cover;
         display: block;
         filter: saturate(.9);
@@ -3064,7 +3064,6 @@
             <span class="rc-tag">CFD Surrogate Modeling</span>
             <span class="rc-tag">Deep Learning</span>
           </div>
-        </div>
       </div>
     </div>
   </section>
@@ -3144,6 +3143,23 @@
             <div class="proj-card-meta">2026 · DL / LLMs / Backend · [git:prod]</div>
             <h3 class="proj-card-title">Counsel.ai — Student Advisory</h3>
             <p class="proj-card-desc">AI-driven platform for college counselling using adaptive conversational guidance and NCDM trait estimation.</p>
+            <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
+          </div>
+        </div>
+        <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(8)">
+          <div class="proj-card-img"><img src="src/detext1.jpeg" alt="Detext Benchmark"
+              onerror="this.style.display='none'" />
+            <div class="proj-card-img-ov"></div>
+          </div>
+          <div class="proj-card-body">
+            <div class="card-hacker-perm">-rwxr-xr-x</div>
+            <div class="proj-card-meta">Machine Learning · [git:benchmark]</div>
+            <h3 class="proj-card-title">WiLI-2018 Language Identification</h3>
+            <p class="proj-card-desc">Benchmarking a suite of language identification models on the WiLI-2018 dataset across 235 languages, evaluating classical ML and neural architectures.</p>
             <div class="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -3724,6 +3740,13 @@
         desc: 'Complete design and development of a custom quadcopter with detailed CAD modeling, structural analysis, and modular component integration for autonomous flight capabilities.',
         ach: ['Designed full assembly CAD model with structural optimization for weight and rigidity', 'Optimized frame geometry for payload capacity and flight stability', 'Implemented modular component design for easy maintenance and upgrades'],
         tags: ['CAD', 'UAV Design', 'Fusion 360', 'Robotics', 'Autonomous Systems'], link: null
+      },
+      {
+        meta: 'Machine Learning \u00b7 Benchmarking', title: 'WiLI-2018 Language Identification \u2014 Benchmark & Model Export',
+        imgs: ['src/detext1.jpeg'],
+        desc: 'Benchmarking a comprehensive suite of language identification (LangID) models on the WiLI-2018 dataset, covering 235 languages. Compared classical machine learning approaches and modern neural architectures.',
+        ach: ['Evaluated Classical ML (Complement NB, SGD, Passive Aggressive, Ridge, Linear SVC) and Neural models (fastText, GlotLID, CLD3, CharCNN)', 'GlotLID achieved the highest Macro F1 (0.9706) with a wider n-gram range and larger embedding dimension', 'Identified Passive Aggressive as the best efficiency trade-off with 0.963 F1 in just 108 seconds of training', 'Exported models for downstream use in an inference backend with FastAPI backend and React frontend'],
+        tags: ['Machine Learning', 'NLP', 'PyTorch', 'scikit-learn', 'Language Identification'], link: 'https://github.com/Piyush2005-code/Language_Detection_PRML_Group_10'
       }
     ];
     function openModal(idx) {
