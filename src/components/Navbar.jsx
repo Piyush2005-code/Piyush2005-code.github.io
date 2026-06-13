@@ -6,10 +6,6 @@ const Navbar = () => {
       <nav id="navbar">
     <div className="nav-inner">
       <a href="#" className="nav-logo"><span className="brace">&lt;</span>PSB<span className="brace">/&gt;</span></a>
-      <div className="nav-status-badge">
-        <span className="pulse-dot"></span>
-        <span>piyush_os: active</span>
-      </div>
       <div className="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
