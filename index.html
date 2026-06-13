@@ -1964,85 +1964,7 @@
         pointer-events: none;
         background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, .03) 2px, rgba(0, 0, 0, .03) 4px);
       }
-
-      /* ── MUSIC BUTTON ── */
-      #music-btn {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        z-index: 200;
-        width: 46px;
-        height: 46px;
-        border: 1px solid var(--border2);
-        background: rgba(6, 13, 26, 0.85);
-        backdrop-filter: blur(14px);
-        border-radius: 3px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: border-color .25s, background .25s, box-shadow .25s;
-        color: var(--muted);
-      }
-
-      #music-btn:hover {
-        border-color: var(--cyan);
-        color: var(--cyan);
-        background: rgba(0, 212, 255, .07);
-        box-shadow: 0 0 20px rgba(0, 212, 255, .12);
-      }
-
-      #music-btn.playing {
-        border-color: rgba(0, 212, 255, .4);
-        color: var(--cyan);
-        background: rgba(0, 212, 255, .08);
-        box-shadow: 0 0 24px rgba(0, 212, 255, .15);
-      }
-
-      #music-btn svg {
-        width: 18px;
-        height: 18px;
-        transition: transform .2s
-      }
-
-      #music-btn.playing svg {
-        animation: music-pulse 1.5s ease-in-out infinite
-      }
-
-      @keyframes music-pulse {
-
-        0%,
-        100% {
-          transform: scale(1)
-        }
-
-        50% {
-          transform: scale(1.12)
-        }
-      }
-
-      #music-hint {
-        position: fixed;
-        bottom: 5.5rem;
-        right: 2rem;
-        z-index: 200;
-        font-family: var(--font-mono);
-        font-size: .62rem;
-        color: var(--dim);
-        letter-spacing: .08em;
-        background: rgba(6, 13, 26, .9);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border);
-        border-radius: 2px;
-        padding: .35rem .7rem;
-        white-space: nowrap;
-        pointer-events: none;
-        animation: hint-fade 3s 2s forwards;
-        opacity: 0;
-        animation-fill-mode: both;
-      }
-
-      @keyframes hint-fade {
+@keyframes hint-fade {
         0% {
           opacity: 0;
           transform: translateY(4px)
@@ -2810,28 +2732,7 @@
 </head>
 
 <body>
-
-
-
-
-
-  <!-- BACKGROUND MUSIC -->
-  <audio id="bg-audio" src="audio/background-music.mp3" loop preload="auto"></audio>
-  <div id="music-hint">click for music</div>
-  <button id="music-btn" aria-label="Toggle background music">
-    <svg id="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <line x1="23" y1="9" x2="17" y2="15" />
-      <line x1="17" y1="9" x2="23" y2="15" />
-    </svg>
-    <svg id="icon-playing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-      style="display:none">
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
-    </svg>
-  </button>
-  
-  <button class="floating-term-launcher" aria-label="Open Command Line Interface" onclick="openTerminalWidget()" title="Open Terminal">
+<button class="floating-term-launcher" aria-label="Open Command Line Interface" onclick="openTerminalWidget()" title="Open Terminal">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
       <polyline points="4 17 10 11 4 5"></polyline>
       <line x1="12" y1="19" x2="20" y2="19"></line>
@@ -2976,7 +2877,7 @@
                 <span class="portrait-corner bl"></span>
                 <span class="portrait-corner br"></span>
                 <span class="portrait-frame">
-                  <img src="src/Portrait.png" alt="Piyush Singh Bhati"
+                  <img src="public/Portrait.png" alt="Piyush Singh Bhati"
                     onerror="this.style.minHeight='400px';this.style.background='var(--card2)'" />
                   <span class="portrait-chip">
                     <span class="portrait-chip-tag">// AI Systems Engineering</span>
@@ -3080,7 +2981,7 @@
       </div>
       <div class="proj-grid">
         <div class="proj-card reveal" onclick="openModal(0)">
-          <div class="proj-card-img"><img src="src/Embedded_Hardware.avif" alt="ARM64"
+          <div class="proj-card-img"><img src="public/Embedded_Hardware.avif" alt="ARM64"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3098,7 +2999,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(2)">
-          <div class="proj-card-img"><img src="src/os-scheduler.png" alt="OS Scheduler"
+          <div class="proj-card-img"><img src="public/os-scheduler.png" alt="OS Scheduler"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3116,7 +3017,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.15s" onclick="openModal(3)">
-          <div class="proj-card-img"><img src="src/jarvis-interface.png" alt="JARVIS"
+          <div class="proj-card-img"><img src="public/jarvis-interface.png" alt="JARVIS"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3134,7 +3035,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.05s" onclick="openModal(1)">
-          <div class="proj-card-img"><img src="src/CounselAI.png" alt="Counsel.AI"
+          <div class="proj-card-img"><img src="public/CounselAI.png" alt="Counsel.AI"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3151,7 +3052,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(8)">
-          <div class="proj-card-img"><img src="src/detext1.jpeg" alt="Detext Benchmark"
+          <div class="proj-card-img"><img src="public/detext1.jpeg" alt="Detext Benchmark"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3168,7 +3069,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.2s" onclick="openModal(4)">
-          <div class="proj-card-img"><img src="src/llm-chart-generator.png" alt="LLM Charts"
+          <div class="proj-card-img"><img src="public/llm-chart-generator.png" alt="LLM Charts"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3186,7 +3087,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.25s" onclick="openModal(5)">
-          <div class="proj-card-img"><img src="src/Farm_top_image.jpg" alt="Crop Detection"
+          <div class="proj-card-img"><img src="public/Farm_top_image.jpg" alt="Crop Detection"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3204,7 +3105,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.3s" onclick="openModal(6)">
-          <div class="proj-card-img"><img src="src/Wing_Side_view.jpeg" alt="Wing Design"
+          <div class="proj-card-img"><img src="public/Wing_Side_view.jpeg" alt="Wing Design"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3222,7 +3123,7 @@
           </div>
         </div>
         <div class="proj-card reveal" style="transition-delay:.35s" onclick="openModal(7)">
-          <div class="proj-card-img"><img src="src/quadcopter-isometric.png" alt="Quadcopter"
+          <div class="proj-card-img"><img src="public/quadcopter-isometric.png" alt="Quadcopter"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3681,14 +3582,14 @@
     const PROJECTS = [
       {
         meta: '2025\u2013Ongoing \u00b7 Embedded Systems / OS', title: 'ARM64 Unikernel for ML Inference',
-        imgs: ['src/Embedded_Hardware.avif'],
+        imgs: ['public/Embedded_Hardware.avif'],
         desc: 'Architected a bare-metal ARM64 unikernel (<256KB) for deterministic ML inference, featuring a custom zero-dependency ONNX runtime and optimized SIMD kernels for microsecond-level execution.',
         ach: ['Implemented ARMv8-A boot (EL3\u2192EL1), MMU setup, GICv2, and timer with full interrupt handling', 'Designed a cooperative priority scheduler with custom 104B context switching and sub-8\u00b5s switch latency', 'Developed a zero-dependency ONNX runtime (40+ ops) with custom protobuf parser and 128MB pre-allocated tensor arena (no runtime malloc)', 'Optimized Conv2D/GEMM kernels (cache-aligned, NEON SIMD) with hardware-timer profiling for \u00b5s-level analysis', 'Achieved ~269\u00b5s inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines'],
         tags: ['C11', 'ARM64 Assembly', 'NEON SIMD', 'QEMU', 'GCC'], link: 'https://github.com/Piyush2005-code/MiniOS'
       },
       {
         meta: '2026 \u00b7 Deep Learning / LLMs / Backend / Deployment', title: 'Counsel.ai - Student Advisory Platform for College Counselling',
-        imgs: ['src/CounselAI.png'],
+        imgs: ['public/CounselAI.png'],
         desc: 'Counsel.AI is an AI-driven student advisory platform designed to help students make informed branch and college decisions through adaptive conversational guidance, personalized interest assessment, and data-driven recommendation systems.',
         ach: [
           'Engineered a Mistral-powered conversational engine with adaptive multi-turn counselling workflows',
@@ -3701,49 +3602,49 @@
       },
       {
         meta: '2025 \u00b7 Systems Programming', title: 'OS Scheduling Algorithm Simulator',
-        imgs: ['src/os-scheduler.png'],
+        imgs: ['public/os-scheduler.png'],
         desc: 'Implemented classical OS scheduling algorithms with interactive UI-based visualization. Features real-time Gantt chart generation for analyzing scheduling behavior and algorithm comparison.',
         ach: ['Implemented FCFS, Round Robin, and Priority scheduling algorithms with configurable parameters', 'Built real-time Gantt chart visualization for process scheduling analysis', 'Created interactive UI for comparing algorithm performance metrics', 'Developed desktop application using Electron for cross-platform support'],
         tags: ['React', 'TypeScript', 'Electron', 'Algorithm Visualization', 'Operating Systems'], link: 'https://github.com/Piyush2005-code/Operating-System-Scheduling-Algorithms.git'
       },
       {
         meta: '2025 \u00b7 AI/ML Project', title: 'JARVIS Voice Assistant',
-        imgs: ['src/jarvis-interface.png'],
+        imgs: ['public/jarvis-interface.png'],
         desc: 'Engineered a real-time voice assistant with sub-second latency leveraging GPU-accelerated inference pipelines. Built end-to-end ML infrastructure for audio processing, NLU, and context-aware response generation.',
         ach: ['Implemented GPU inference on NVIDIA A5000 with sub-second latency using optimized CUDA kernels', 'Deployed containerized ML inference stack supporting 500+ concurrent users with 98% uptime', 'Integrated Retrieval-Augmented Generation (RAG) for context-aware, knowledge-grounded responses', 'Built real-time audio processing pipeline using AudioFlamingo3 for voice-to-text transcription'],
         tags: ['NVIDIA AudioFlamingo3', 'vLLM', 'RAG', 'Docker', 'Kubernetes', 'PyTorch'], link: 'https://github.com/AISocietyIITJ/Jarvis2.O'
       },
       {
         meta: '2025 \u00b7 Deep Learning Project', title: 'LLM-Based Chart Generation Web App',
-        imgs: ['src/llm-chart-generator.png'],
+        imgs: ['public/llm-chart-generator.png'],
         desc: 'Built an automated chart generation pipeline using LLMs to analyze uploaded PDF documents and generate meaningful data visualizations, leveraging NLP for document understanding and automated insight extraction.',
         ach: ['Implemented LLM-based document parsing using transformer architectures for semantic understanding', 'Built NLP pipeline for extracting structured data from unstructured PDF content', 'Designed automated chart selection algorithm using ML-based data type classification', 'Created responsive frontend-backend workflow with real-time data visualization rendering'],
         tags: ['LLMs', 'NLP', 'PDF Parsing', 'React', 'Node.js', 'Data Visualization'], link: 'https://github.com/Piyush2005-code/Chart-Generation-using-LLMs.git'
       },
       {
         meta: '2025 \u00b7 Computer Vision / Deep Learning', title: 'Crop Stress Detection \u2014 U-Net Semantic Segmentation',
-        imgs: ['src/Farm_top_image.jpg', 'src/Crop_Detection_Segmentation_mask.jpg', 'src/Crop_Detection_YOLO_Object_Detection.png', 'src/UNet model.png'],
+        imgs: ['public/Farm_top_image.jpg', 'public/Crop_Detection_Segmentation_mask.jpg', 'public/Crop_Detection_YOLO_Object_Detection.png', 'public/UNet model.png'],
         desc: 'A computer vision system for detecting and segmenting stressed crop regions from aerial imagery using a U-Net CNN generating pixel-wise binary masks, with a full pipeline from synthetic dataset generation to real-time video inference.',
         ach: ['Designed a U-Net-based segmentation model (~7.7M params) with skip connections for pixel-level crop stress detection', 'Built a synthetic dataset pipeline using Gaussian blending and rotational augmentation (4\u00d7 expansion)', 'Full training pipeline with AdamW optimizer, BCEWithLogitsLoss, Dice coefficient tracking, 80/10/10 split', 'Developed real-time video inference pipeline (OpenCV + batch processing) generating overlay MP4 outputs'],
         tags: ['PyTorch', 'U-Net', 'OpenCV', 'Semantic Segmentation', 'Synthetic Data', 'CUDA / MPS'], link: 'https://github.com/Piyush2005-code/Computer-Vision-for-stressed-crop-detection.git'
       },
       {
         meta: 'Inter IIT Tech Meet 14.0 \u00b7 Aeronautics', title: 'Fixed-Wing STOL Aircraft Wing Design',
-        imgs: ['src/Wing_Side_view.jpeg', 'src/wing-drawing.png', 'src/pressure-contours.png', 'src/cfd-simulation.png'],
+        imgs: ['public/Wing_Side_view.jpeg', 'public/wing-drawing.png', 'public/pressure-contours.png', 'public/cfd-simulation.png'],
         desc: 'Surveyed high-lift wing configurations targeting CL > 5, benchmarking against state-of-the-art designs. Designed complete end-to-end CAD model and validated aerodynamic performance through iterative CFD simulations.',
         ach: ['Studied fixed-wing flight dynamics and surveyed high-lift configurations achieving CL > 5', 'Achieved a maximum lift coefficient of 8.1258 under realistic thrust-device interaction conditions', 'Designed the complete end-to-end CAD model of the full wing assembly', 'Validated aerodynamic performance through iterative CFD simulations using ANSYS Fluent'],
         tags: ['CAD', 'CFD', 'ANSYS Fluent', 'Aerodynamics', 'Wing Design'], link: null
       },
       {
         meta: 'Personal Project \u00b7 Robotics', title: 'Quadcopter CAD Design & Development',
-        imgs: ['src/quadcopter-isometric.png', 'src/quadcopter-front.png'],
+        imgs: ['public/quadcopter-isometric.png', 'public/quadcopter-front.png'],
         desc: 'Complete design and development of a custom quadcopter with detailed CAD modeling, structural analysis, and modular component integration for autonomous flight capabilities.',
         ach: ['Designed full assembly CAD model with structural optimization for weight and rigidity', 'Optimized frame geometry for payload capacity and flight stability', 'Implemented modular component design for easy maintenance and upgrades'],
         tags: ['CAD', 'UAV Design', 'Fusion 360', 'Robotics', 'Autonomous Systems'], link: null
       },
       {
         meta: 'Machine Learning \u00b7 Benchmarking', title: 'WiLI-2018 Language Identification \u2014 Benchmark & Model Export',
-        imgs: ['src/detext1.jpeg'],
+        imgs: ['public/detext1.jpeg'],
         desc: 'Benchmarking a comprehensive suite of language identification (LangID) models on the WiLI-2018 dataset, covering 235 languages. Compared classical machine learning approaches and modern neural architectures.',
         ach: ['Evaluated Classical ML (Complement NB, SGD, Passive Aggressive, Ridge, Linear SVC) and Neural models (fastText, GlotLID, CLD3, CharCNN)', 'GlotLID achieved the highest Macro F1 (0.9706) with a wider n-gram range and larger embedding dimension', 'Identified Passive Aggressive as the best efficiency trade-off with 0.963 F1 in just 108 seconds of training', 'Exported models for downstream use in an inference backend with FastAPI backend and React frontend'],
         tags: ['Machine Learning', 'NLP', 'PyTorch', 'scikit-learn', 'Language Identification'], link: 'https://github.com/Piyush2005-code/Language_Detection_PRML_Group_10'
@@ -3782,23 +3683,6 @@
       document.body.style.overflow = '';
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-    // ── MUSIC ──
-    const audio = document.getElementById('bg-audio');
-    const btn = document.getElementById('music-btn');
-    const iconMuted = document.getElementById('icon-muted');
-    const iconPlaying = document.getElementById('icon-playing');
-    audio.volume = 0.3;
-    let playing = false;
-    btn.addEventListener('click', () => {
-      if (playing) { audio.pause(); btn.classList.remove('playing'); iconMuted.style.display = ''; iconPlaying.style.display = 'none'; }
-      else { audio.play().catch(() => { }); btn.classList.add('playing'); iconMuted.style.display = 'none'; iconPlaying.style.display = ''; }
-      playing = !playing;
-    });
-
-    window.isMusicPlaying = () => playing;
-    window.toggleMusic = () => { btn.click(); };
-
 
     // ── RETRO TERMINAL INTERACTIVE SHELL ──
     (function() {
