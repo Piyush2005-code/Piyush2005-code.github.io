@@ -1,5 +1,12 @@
 import React from 'react';
 
+const copyIcon = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="9" y="9" width="13" height="13" rx="2" />
+    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+  </svg>
+);
+
 const Contact = () => {
   return (
     <>
@@ -24,8 +31,9 @@ const Contact = () => {
                 <div className="contact-card-label">Email</div>
                 <div className="contact-card-val">piyush.bhati680@gmail.com</div>
               </div>
+              <button type="button" className="contact-copy-btn" data-copy="piyush.bhati680@gmail.com" aria-label="Copy email">{copyIcon}</button>
             </a>
-            <a href="https://github.com/Piyush2005-code" target="_blank" className="contact-card">
+            <a href="https://github.com/Piyush2005-code" target="_blank" rel="noopener" className="contact-card">
               <div className="contact-card-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path
@@ -36,8 +44,9 @@ const Contact = () => {
                 <div className="contact-card-label">GitHub</div>
                 <div className="contact-card-val">Piyush2005-code</div>
               </div>
+              <button type="button" className="contact-copy-btn" data-copy="https://github.com/Piyush2005-code" aria-label="Copy GitHub URL">{copyIcon}</button>
             </a>
-            <a href="https://linkedin.com/in/piyush-singh-bhati-5a074929a" target="_blank" className="contact-card">
+            <a href="https://linkedin.com/in/piyush-singh-bhati-5a074929a" target="_blank" rel="noopener" className="contact-card">
               <div className="contact-card-icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path
@@ -48,6 +57,7 @@ const Contact = () => {
                 <div className="contact-card-label">LinkedIn</div>
                 <div className="contact-card-val">piyush-singh-bhati</div>
               </div>
+              <button type="button" className="contact-copy-btn" data-copy="https://linkedin.com/in/piyush-singh-bhati-5a074929a" aria-label="Copy LinkedIn URL">{copyIcon}</button>
             </a>
             <div className="contact-card" style={{ cursor: "default" }}>
               <div className="contact-card-icon">
@@ -60,6 +70,7 @@ const Contact = () => {
                 <div className="contact-card-label">Location</div>
                 <div className="contact-card-val">IIT Jodhpur, Rajasthan, India</div>
               </div>
+              <button type="button" className="contact-copy-btn" data-copy="IIT Jodhpur, Rajasthan, India" aria-label="Copy location">{copyIcon}</button>
             </div>
           </div>
         </div>

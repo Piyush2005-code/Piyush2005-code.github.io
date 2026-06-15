@@ -190,9 +190,115 @@ export function initPortfolioScripts() {
 
     // ── NAV SCROLL ──
     const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scroll-progress');
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      if (scrollProgress) scrollProgress.style.width = progress + '%';
+    }
+
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
+      updateScrollProgress();
+    }, { passive: true });
+    updateScrollProgress();
+
+    // ── ACTIVE NAV SECTION ──
+    const sectionIds = ['about', 'research', 'projects', 'skills', 'contact'];
+    const navSectionLinks = document.querySelectorAll('.nav-links a[href^="#"], .nav-mobile a[href^="#"]');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navSectionLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-80px 0px -55% 0px' });
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) sectionObserver.observe(el);
     });
+
+    // ── PROJECT FILTER ──
+    const projFilterBar = document.getElementById('proj-filter-bar');
+    if (projFilterBar) {
+      projFilterBar.addEventListener('click', e => {
+        const btn = e.target.closest('.proj-filter-btn');
+        if (!btn) return;
+        const filter = btn.dataset.filter;
+        projFilterBar.querySelectorAll('.proj-filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.proj-card[data-category]').forEach(card => {
+          const cats = card.dataset.category.split(' ');
+          card.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none';
+        });
+      });
+    }
+
+    // ── COPY TO CLIPBOARD ──
+    document.querySelectorAll('.contact-copy-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const text = btn.dataset.copy;
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.classList.add('copied');
+          const label = btn.getAttribute('aria-label');
+          btn.setAttribute('aria-label', 'Copied!');
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.setAttribute('aria-label', label);
+          }, 2000);
+        } catch {
+          /* clipboard unavailable */
+        }
+      });
+    });
+
+    // ── KEYBOARD SHORTCUTS OVERLAY ──
+    const shortcutsOverlay = document.getElementById('shortcuts-overlay');
+    function toggleShortcuts(show) {
+      if (!shortcutsOverlay) return;
+      const isOpen = show ?? !shortcutsOverlay.classList.contains('open');
+      shortcutsOverlay.classList.toggle('open', isOpen);
+    }
+    window.toggleShortcuts = toggleShortcuts;
+
+    function isTypingContext() {
+      const active = document.activeElement;
+      if (!active) return false;
+      if (active.classList?.contains('term-widget-input')) return true;
+      if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return true;
+      return false;
+    }
+
+    const SECTION_KEYS = { '1': 'about', '2': 'research', '3': 'projects', '4': 'skills', '5': 'contact' };
+
+    document.addEventListener('keydown', e => {
+      if (isTypingContext()) return;
+      if (e.key === '?' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        toggleShortcuts();
+        return;
+      }
+      if (e.key === 'm' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        window.toggleMusic?.();
+        return;
+      }
+      const sectionId = SECTION_KEYS[e.key];
+      if (sectionId && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    shortcutsOverlay?.addEventListener('click', e => {
+      if (e.target === shortcutsOverlay) toggleShortcuts(false);
+    });
+    document.getElementById('shortcuts-close')?.addEventListener('click', () => toggleShortcuts(false));
 
     // ── HAMBURGER ──
     const hamburger = document.getElementById('hamburger');
@@ -329,7 +435,14 @@ export function initPortfolioScripts() {
       document.body.classList.remove('modal-open');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      if (shortcutsOverlay?.classList.contains('open')) {
+        toggleShortcuts(false);
+        return;
+      }
+      closeModal();
+    });
 
     // ── MUSIC ──
     const audio = document.getElementById('bg-audio');

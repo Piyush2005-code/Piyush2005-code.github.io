@@ -11,6 +11,7 @@ import ProjectModal from './components/ProjectModal';
 import Terminal from './components/Terminal';
 import MusicPlayer from './components/MusicPlayer';
 import FloatingTermLauncher from './components/FloatingTermLauncher';
+import ShortcutsOverlay from './components/ShortcutsOverlay';
 import { initPortfolioScripts } from './scripts.js';
 import './index.css';
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <div id="scroll-progress" aria-hidden="true" />
       <Navbar />
       <Hero />
       <About />
@@ -34,6 +36,7 @@ function App() {
       <Terminal />
       <MusicPlayer />
       <FloatingTermLauncher />
+      <ShortcutsOverlay />
     </div>
   );
 }

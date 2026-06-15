@@ -5,6 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Piyush Singh Bhati — AI Systems Engineer</title>
+  <meta name="description" content="Portfolio of Piyush Singh Bhati — AI Systems Engineer at IIT Jodhpur. Projects in bare-metal ML inference, GPU systems, robotics, and deep learning." />
+  <meta property="og:title" content="Piyush Singh Bhati — AI Systems Engineer" />
+  <meta property="og:description" content="Building at the intersection of AI, computing hardware, and autonomous systems. IIT Jodhpur CSE." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="public/Portrait.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Piyush Singh Bhati — AI Systems Engineer" />
+  <meta name="twitter:description" content="AI Systems Engineer · IIT Jodhpur · Bare-metal ML, GPU inference, robotics." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -226,6 +234,29 @@
 
       .nav-links a:hover::after {
         transform: scaleX(1)
+      }
+
+      .nav-links a.active,
+      .nav-mobile a.active {
+        color: var(--cyan);
+      }
+
+      .nav-links a.active::after,
+      .nav-mobile a.active::after {
+        transform: scaleX(1);
+      }
+
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 0;
+        background: linear-gradient(90deg, var(--cyan2), var(--cyan), var(--accent));
+        z-index: 200;
+        pointer-events: none;
+        transition: width .1s linear;
+        box-shadow: 0 0 8px var(--glow-c);
       }
 
       .nav-cta {
@@ -1186,6 +1217,45 @@
         background: var(--bg)
       }
 
+      .proj-filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .5rem;
+        margin-top: 1.5rem;
+        font-family: var(--font-mono);
+        font-size: .72rem;
+      }
+
+      .proj-filter-prompt {
+        color: var(--dim);
+        margin-right: .25rem;
+      }
+
+      .proj-filter-btn {
+        padding: .35rem .75rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--muted);
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
+        letter-spacing: .04em;
+        transition: border-color .2s, color .2s, background .2s;
+      }
+
+      .proj-filter-btn:hover {
+        border-color: var(--border2);
+        color: var(--txt2);
+      }
+
+      .proj-filter-btn.active {
+        border-color: rgba(0, 212, 255, .35);
+        background: rgba(0, 212, 255, .08);
+        color: var(--cyan);
+      }
+
       .proj-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1766,6 +1836,39 @@
         border-radius: 3px;
         text-decoration: none;
         transition: border-color .25s, background .25s, transform .2s;
+        position: relative;
+      }
+
+      .contact-copy-btn {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--border);
+        background: transparent;
+        border-radius: 2px;
+        color: var(--dim);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color .2s, color .2s, background .2s;
+      }
+
+      .contact-copy-btn:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+        background: rgba(0, 212, 255, .06);
+      }
+
+      .contact-copy-btn.copied {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .contact-copy-btn svg {
+        width: 14px;
+        height: 14px;
       }
 
       .contact-card:hover {
@@ -2728,10 +2831,116 @@
       .telemetry-log-line {
         margin-bottom: 2px;
       }
+
+      /* ── KEYBOARD SHORTCUTS OVERLAY ── */
+      .shortcuts-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        background: rgba(4, 8, 15, .75);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .2s, visibility .2s;
+      }
+
+      .shortcuts-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .shortcuts-panel {
+        width: min(420px, 100%);
+        border: 1px solid var(--border2);
+        background: var(--card);
+        border-radius: 4px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+      }
+
+      .shortcuts-header {
+        font-family: var(--font-mono);
+        font-size: .75rem;
+        color: var(--cyan);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+
+      .shortcuts-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: .6rem;
+      }
+
+      .shortcuts-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: .85rem;
+        color: var(--txt2);
+      }
+
+      .shortcuts-list kbd {
+        font-family: var(--font-mono);
+        font-size: .68rem;
+        padding: .2rem .5rem;
+        border: 1px solid var(--border2);
+        background: var(--bg2);
+        border-radius: 2px;
+        color: var(--cyan);
+        white-space: nowrap;
+      }
+
+      .shortcuts-close {
+        margin-top: 1.25rem;
+        width: 100%;
+        padding: .5rem;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: .7rem;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: border-color .2s, color .2s;
+      }
+
+      .shortcuts-close:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+
+        body::after {
+          display: none;
+        }
+      }
   </style>
 </head>
 
 <body>
+<div id="scroll-progress" aria-hidden="true"></div>
 <button class="floating-term-launcher" aria-label="Open Command Line Interface" onclick="openTerminalWidget()" title="Open Terminal">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
       <polyline points="4 17 10 11 4 5"></polyline>
@@ -2975,9 +3184,16 @@
         <div class="section-label">Featured Work</div>
         <h2 class="section-title">Projects</h2>
       </div>
+      <div class="proj-filter-bar reveal" id="proj-filter-bar">
+        <span class="proj-filter-prompt">$ ls projects/ --filter=</span>
+        <button type="button" class="proj-filter-btn active" data-filter="all">all</button>
+        <button type="button" class="proj-filter-btn" data-filter="systems">systems</button>
+        <button type="button" class="proj-filter-btn" data-filter="ml">ml</button>
+        <button type="button" class="proj-filter-btn" data-filter="robotics">robotics</button>
+      </div>
       <div class="proj-grid">
-        <div class="proj-card reveal" onclick="openModal(0)">
-          <div class="proj-card-img"><img src="public/Embedded_Hardware.avif" alt="ARM64"
+        <div class="proj-card reveal" data-category="systems" onclick="openModal(0)">
+          <div class="proj-card-img"><img src="public/Embedded_Hardware.avif" alt="ARM64" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -2994,8 +3210,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(2)">
-          <div class="proj-card-img"><img src="public/os-scheduler.png" alt="OS Scheduler"
+        <div class="proj-card reveal" data-category="systems" style="transition-delay:.1s" onclick="openModal(2)">
+          <div class="proj-card-img"><img src="public/os-scheduler.png" alt="OS Scheduler" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3012,8 +3228,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.15s" onclick="openModal(3)">
-          <div class="proj-card-img"><img src="public/jarvis-interface.png" alt="JARVIS"
+        <div class="proj-card reveal" data-category="ml" style="transition-delay:.15s" onclick="openModal(3)">
+          <div class="proj-card-img"><img src="public/jarvis-interface.png" alt="JARVIS" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3030,8 +3246,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.05s" onclick="openModal(1)">
-          <div class="proj-card-img"><img src="public/CounselAI.png" alt="Counsel.AI"
+        <div class="proj-card reveal" data-category="ml" style="transition-delay:.05s" onclick="openModal(1)">
+          <div class="proj-card-img"><img src="public/CounselAI.png" alt="Counsel.AI" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3047,8 +3263,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.1s" onclick="openModal(8)">
-          <div class="proj-card-img"><img src="public/detext1.jpeg" alt="Detext Benchmark"
+        <div class="proj-card reveal" data-category="ml" style="transition-delay:.1s" onclick="openModal(8)">
+          <div class="proj-card-img"><img src="public/detext1.jpeg" alt="Detext Benchmark" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3064,8 +3280,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.2s" onclick="openModal(4)">
-          <div class="proj-card-img"><img src="public/llm-chart-generator.png" alt="LLM Charts"
+        <div class="proj-card reveal" data-category="ml" style="transition-delay:.2s" onclick="openModal(4)">
+          <div class="proj-card-img"><img src="public/llm-chart-generator.png" alt="LLM Charts" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3082,8 +3298,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.25s" onclick="openModal(5)">
-          <div class="proj-card-img"><img src="public/Farm_top_image.jpg" alt="Crop Detection"
+        <div class="proj-card reveal" data-category="ml" style="transition-delay:.25s" onclick="openModal(5)">
+          <div class="proj-card-img"><img src="public/Farm_top_image.jpg" alt="Crop Detection" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3100,8 +3316,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.3s" onclick="openModal(6)">
-          <div class="proj-card-img"><img src="public/Wing_Side_view.jpeg" alt="Wing Design"
+        <div class="proj-card reveal" data-category="robotics" style="transition-delay:.3s" onclick="openModal(6)">
+          <div class="proj-card-img"><img src="public/Wing_Side_view.jpeg" alt="Wing Design" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3118,8 +3334,8 @@
               </svg></div>
           </div>
         </div>
-        <div class="proj-card reveal" style="transition-delay:.35s" onclick="openModal(7)">
-          <div class="proj-card-img"><img src="public/quadcopter-isometric.png" alt="Quadcopter"
+        <div class="proj-card reveal" data-category="robotics" style="transition-delay:.35s" onclick="openModal(7)">
+          <div class="proj-card-img"><img src="public/quadcopter-isometric.png" alt="Quadcopter" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3275,6 +3491,7 @@
                 <div class="contact-card-label">Email</div>
                 <div class="contact-card-val">piyush.bhati680@gmail.com</div>
               </div>
+              <button type="button" class="contact-copy-btn" data-copy="piyush.bhati680@gmail.com" aria-label="Copy email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </a>
             <a href="https://github.com/Piyush2005-code" target="_blank" class="contact-card">
               <div class="contact-card-icon">
@@ -3287,6 +3504,7 @@
                 <div class="contact-card-label">GitHub</div>
                 <div class="contact-card-val">Piyush2005-code</div>
               </div>
+              <button type="button" class="contact-copy-btn" data-copy="https://github.com/Piyush2005-code" aria-label="Copy GitHub URL"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </a>
             <a href="https://linkedin.com/in/piyush-singh-bhati-5a074929a" target="_blank" class="contact-card">
               <div class="contact-card-icon">
@@ -3299,6 +3517,7 @@
                 <div class="contact-card-label">LinkedIn</div>
                 <div class="contact-card-val">piyush-singh-bhati</div>
               </div>
+              <button type="button" class="contact-copy-btn" data-copy="https://linkedin.com/in/piyush-singh-bhati-5a074929a" aria-label="Copy LinkedIn URL"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </a>
             <div class="contact-card" style="cursor:default">
               <div class="contact-card-icon">
@@ -3311,6 +3530,7 @@
                 <div class="contact-card-label">Location</div>
                 <div class="contact-card-val">IIT Jodhpur, Rajasthan, India</div>
               </div>
+              <button type="button" class="contact-copy-btn" data-copy="IIT Jodhpur, Rajasthan, India" aria-label="Copy location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
         </div>
@@ -3539,9 +3759,113 @@
 
     // ── NAV SCROLL ──
     const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scroll-progress');
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      if (scrollProgress) scrollProgress.style.width = progress + '%';
+    }
+
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
+      updateScrollProgress();
+    }, { passive: true });
+    updateScrollProgress();
+
+    // ── ACTIVE NAV SECTION ──
+    const sectionIds = ['about', 'research', 'projects', 'skills', 'contact'];
+    const navSectionLinks = document.querySelectorAll('.nav-links a[href^="#"], .nav-mobile a[href^="#"]');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navSectionLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-80px 0px -55% 0px' });
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) sectionObserver.observe(el);
     });
+
+    // ── PROJECT FILTER ──
+    const projFilterBar = document.getElementById('proj-filter-bar');
+    if (projFilterBar) {
+      projFilterBar.addEventListener('click', e => {
+        const btn = e.target.closest('.proj-filter-btn');
+        if (!btn) return;
+        const filter = btn.dataset.filter;
+        projFilterBar.querySelectorAll('.proj-filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.proj-card[data-category]').forEach(card => {
+          const cats = card.dataset.category.split(' ');
+          card.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none';
+        });
+      });
+    }
+
+    // ── COPY TO CLIPBOARD ──
+    document.querySelectorAll('.contact-copy-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const text = btn.dataset.copy;
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.classList.add('copied');
+          const label = btn.getAttribute('aria-label');
+          btn.setAttribute('aria-label', 'Copied!');
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.setAttribute('aria-label', label);
+          }, 2000);
+        } catch { /* clipboard unavailable */ }
+      });
+    });
+
+    // ── KEYBOARD SHORTCUTS OVERLAY ──
+    const shortcutsOverlay = document.getElementById('shortcuts-overlay');
+    function toggleShortcuts(show) {
+      if (!shortcutsOverlay) return;
+      const isOpen = show ?? !shortcutsOverlay.classList.contains('open');
+      shortcutsOverlay.classList.toggle('open', isOpen);
+    }
+    window.toggleShortcuts = toggleShortcuts;
+
+    function isTypingContext() {
+      const active = document.activeElement;
+      if (!active) return false;
+      if (active.classList?.contains('term-widget-input')) return true;
+      if (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT') return true;
+      return false;
+    }
+
+    const SECTION_KEYS = { '1': 'about', '2': 'research', '3': 'projects', '4': 'skills', '5': 'contact' };
+
+    document.addEventListener('keydown', e => {
+      if (isTypingContext()) return;
+      if (e.key === '?' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        toggleShortcuts();
+        return;
+      }
+      if (e.key === 'm' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        window.toggleMusic?.();
+        return;
+      }
+      const sectionId = SECTION_KEYS[e.key];
+      if (sectionId && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    shortcutsOverlay?.addEventListener('click', e => {
+      if (e.target === shortcutsOverlay) toggleShortcuts(false);
+    });
+    document.getElementById('shortcuts-close')?.addEventListener('click', () => toggleShortcuts(false));
 
     // ── HAMBURGER ──
     const hamburger = document.getElementById('hamburger');
@@ -3678,7 +4002,14 @@
       document.body.classList.remove('modal-open');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      if (shortcutsOverlay?.classList.contains('open')) {
+        toggleShortcuts(false);
+        return;
+      }
+      closeModal();
+    });
 
     // ── RETRO TERMINAL INTERACTIVE SHELL ──
     (function() {
@@ -5001,7 +5332,25 @@ Toggle this console anytime with the backtick (<span class="term-out-success">`<
   </div>
 
   <!-- KEYBOARD HINT BUBBLE -->
-  <div class="term-kbd-hint" id="term-kbd-hint">press &#96; to open shell</div>
+  <div class="term-kbd-hint" id="term-kbd-hint">press &#96; for shell · ? for shortcuts</div>
+
+  <div class="shortcuts-overlay" id="shortcuts-overlay" role="dialog" aria-label="Keyboard shortcuts">
+    <div class="shortcuts-panel">
+      <div class="shortcuts-header">// keyboard shortcuts</div>
+      <ul class="shortcuts-list">
+        <li><span>Open shell console</span><kbd>`</kbd></li>
+        <li><span>Show this menu</span><kbd>?</kbd></li>
+        <li><span>Toggle music</span><kbd>m</kbd></li>
+        <li><span>Jump to About</span><kbd>1</kbd></li>
+        <li><span>Jump to Research</span><kbd>2</kbd></li>
+        <li><span>Jump to Projects</span><kbd>3</kbd></li>
+        <li><span>Jump to Skills</span><kbd>4</kbd></li>
+        <li><span>Jump to Contact</span><kbd>5</kbd></li>
+        <li><span>Close overlay / modal</span><kbd>Esc</kbd></li>
+      </ul>
+      <button class="shortcuts-close" id="shortcuts-close" type="button">Close (Esc)</button>
+    </div>
+  </div>
 
 </body>
 

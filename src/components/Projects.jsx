@@ -10,10 +10,17 @@ const Projects = () => {
         <div className="section-label">Featured Work</div>
         <h2 className="section-title">Projects</h2>
       </div>
+      <div className="proj-filter-bar reveal" id="proj-filter-bar">
+        <span className="proj-filter-prompt">$ ls projects/ --filter=</span>
+        <button type="button" className="proj-filter-btn active" data-filter="all">all</button>
+        <button type="button" className="proj-filter-btn" data-filter="systems">systems</button>
+        <button type="button" className="proj-filter-btn" data-filter="ml">ml</button>
+        <button type="button" className="proj-filter-btn" data-filter="robotics">robotics</button>
+      </div>
       <div className="proj-grid">
-        <div className="proj-card reveal" onClick={(e) => { window.openModal(0) }}>
-          <div className="proj-card-img"><img src="/Embedded_Hardware.avif" alt="ARM64"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="systems" onClick={(e) => { window.openModal(0) }}>
+          <div className="proj-card-img"><img src="/Embedded_Hardware.avif" alt="ARM64" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -29,9 +36,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".1s" }} onClick={(e) => { window.openModal(2) }}>
-          <div className="proj-card-img"><img src="/os-scheduler.png" alt="OS Scheduler"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="systems" style={{ transitionDelay: ".1s" }} onClick={(e) => { window.openModal(2) }}>
+          <div className="proj-card-img"><img src="/os-scheduler.png" alt="OS Scheduler" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -47,9 +54,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".15s" }} onClick={(e) => { window.openModal(3) }}>
-          <div className="proj-card-img"><img src="/jarvis-interface.png" alt="JARVIS"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="ml" style={{ transitionDelay: ".15s" }} onClick={(e) => { window.openModal(3) }}>
+          <div className="proj-card-img"><img src="/jarvis-interface.png" alt="JARVIS" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -65,9 +72,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".05s" }} onClick={(e) => { window.openModal(1) }}>
-          <div className="proj-card-img"><img src="/CounselAI.png" alt="Counsel.AI"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="ml" style={{ transitionDelay: ".05s" }} onClick={(e) => { window.openModal(1) }}>
+          <div className="proj-card-img"><img src="/CounselAI.png" alt="Counsel.AI" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -82,9 +89,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".1s" }} onClick={(e) => { window.openModal(8) }}>
-          <div className="proj-card-img"><img src="/detext1.jpeg" alt="Detext Benchmark"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="ml" style={{ transitionDelay: ".1s" }} onClick={(e) => { window.openModal(8) }}>
+          <div className="proj-card-img"><img src="/detext1.jpeg" alt="Detext Benchmark" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -99,9 +106,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".2s" }} onClick={(e) => { window.openModal(4) }}>
-          <div className="proj-card-img"><img src="/llm-chart-generator.png" alt="LLM Charts"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="ml" style={{ transitionDelay: ".2s" }} onClick={(e) => { window.openModal(4) }}>
+          <div className="proj-card-img"><img src="/llm-chart-generator.png" alt="LLM Charts" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -117,9 +124,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".25s" }} onClick={(e) => { window.openModal(5) }}>
-          <div className="proj-card-img"><img src="/Farm_top_image.jpg" alt="Crop Detection"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="ml" style={{ transitionDelay: ".25s" }} onClick={(e) => { window.openModal(5) }}>
+          <div className="proj-card-img"><img src="/Farm_top_image.jpg" alt="Crop Detection" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -135,9 +142,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".3s" }} onClick={(e) => { window.openModal(6) }}>
-          <div className="proj-card-img"><img src="/Wing_Side_view.jpeg" alt="Wing Design"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="robotics" style={{ transitionDelay: ".3s" }} onClick={(e) => { window.openModal(6) }}>
+          <div className="proj-card-img"><img src="/Wing_Side_view.jpeg" alt="Wing Design" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">
@@ -153,9 +160,9 @@ const Projects = () => {
               </svg></div>
           </div>
         </div>
-        <div className="proj-card reveal" style={{ transitionDelay: ".35s" }} onClick={(e) => { window.openModal(7) }}>
-          <div className="proj-card-img"><img src="/quadcopter-isometric.png" alt="Quadcopter"
-              onerror="this.style.display='none'" />
+        <div className="proj-card reveal" data-category="robotics" style={{ transitionDelay: ".35s" }} onClick={(e) => { window.openModal(7) }}>
+          <div className="proj-card-img"><img src="/quadcopter-isometric.png" alt="Quadcopter" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
             <div className="proj-card-img-ov"></div>
           </div>
           <div className="proj-card-body">

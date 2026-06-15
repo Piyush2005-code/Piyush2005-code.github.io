@@ -77,7 +77,7 @@ Toggle this console anytime with the backtick (<span className="term-out-success
   </div>
 
   {/* KEYBOARD HINT BUBBLE */}
-  <div className="term-kbd-hint" id="term-kbd-hint">press &#96; to open shell</div>
+  <div className="term-kbd-hint" id="term-kbd-hint">press &#96; for shell · ? for shortcuts</div>
     </>
   );
 };
