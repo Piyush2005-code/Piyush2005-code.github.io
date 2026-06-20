@@ -127,6 +127,7 @@ export default function GithubChart() {
               style={{
                 gridTemplateColumns: `repeat(${weeks.length}, ${CELL}px)`,
                 gridTemplateRows: `repeat(7, ${CELL}px)`,
+                gridAutoFlow: 'column',
                 gap: GAP
               }}
             >

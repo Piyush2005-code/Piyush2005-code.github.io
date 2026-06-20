@@ -3953,7 +3953,7 @@
                 <div class="gh-day-labels">
                   ${DAY_LABELS.map((d, i) => `<span class="gh-day-label" style="height:${CELL}px;line-height:${CELL}px;margin-bottom:${GAP}px">${i%2===1?d:''}</span>`).join('')}
                 </div>
-                <div class="gh-grid" id="gh-grid" style="grid-template-columns:repeat(${weeks.length},${CELL}px);grid-template-rows:repeat(7,${CELL}px);gap:${GAP}px;">
+                <div class="gh-grid" id="gh-grid" style="grid-template-columns:repeat(${weeks.length},${CELL}px);grid-template-rows:repeat(7,${CELL}px);grid-auto-flow:column;gap:${GAP}px;">
                   ${weeks.map((week, wi) => week.map((cell, di) => {
                     const count = cell ? cell.count : 0;
                     const level = cell ? cell.level : 0;
