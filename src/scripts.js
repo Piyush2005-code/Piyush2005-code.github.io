@@ -287,10 +287,7 @@ export function initPortfolioScripts() {
         toggleShortcuts();
         return;
       }
-      if (e.key === 'm' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        window.toggleMusic?.();
-        return;
-      }
+
       const sectionId = SECTION_KEYS[e.key];
       if (sectionId && !e.ctrlKey && !e.metaKey && !e.altKey) {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -446,21 +443,7 @@ export function initPortfolioScripts() {
       closeModal();
     });
 
-    // ── MUSIC ──
-    const audio = document.getElementById('bg-audio');
-    const btn = document.getElementById('music-btn');
-    const iconMuted = document.getElementById('icon-muted');
-    const iconPlaying = document.getElementById('icon-playing');
-    audio.volume = 0.3;
-    let playing = false;
-    btn.addEventListener('click', () => {
-      if (playing) { audio.pause(); btn.classList.remove('playing'); iconMuted.style.display = ''; iconPlaying.style.display = 'none'; }
-      else { audio.play().catch(() => { }); btn.classList.add('playing'); iconMuted.style.display = 'none'; iconPlaying.style.display = ''; }
-      playing = !playing;
-    });
 
-    window.isMusicPlaying = () => playing;
-    window.toggleMusic = () => { btn.click(); };
 
 
     // ── RETRO TERMINAL INTERACTIVE SHELL ──
@@ -595,10 +578,7 @@ Personal Project. Complete design and development of a custom quadcopter with de
       let htopIntervalId = null;
 
       function getHtopProcesses() {
-        const isMusicRunning = window.isMusicPlaying ? window.isMusicPlaying() : false;
-        
         return [
-          { pid: 101, user: 'guest', pr: 20, ni: 0, virt: '14.2M', res: '3.1M', cpu: isMusicRunning ? (Math.random() * 0.8 + 0.6).toFixed(1) : '0.0', mem: '0.2', state: isMusicRunning ? 'R' : 'S', cmd: 'ambient-music', control: isMusicRunning ? 'KILL' : 'RUN' },
           { pid: 102, user: 'guest', pr: 20, ni: 0, virt: '8.5M', res: '2.4M', cpu: isMatrixRunning ? (Math.random() * 4.5 + 8.5).toFixed(1) : '0.0', mem: '0.1', state: isMatrixRunning ? 'R' : 'S', cmd: 'matrix-canvas', control: isMatrixRunning ? 'KILL' : 'RUN' },
           { pid: 103, user: 'guest', pr: 20, ni: 0, virt: '12.8M', res: '4.0M', cpu: (telemetryIntervalId ? (Math.random() * 1.5 + 0.5) : 0).toFixed(1), mem: '0.3', state: telemetryIntervalId ? 'R' : 'S', cmd: 'hud-telemetry', control: 'SYS' },
           { pid: 104, user: 'guest', pr: 20, ni: 0, virt: '32.0M', res: '8.2M', cpu: (Math.random() * 0.8 + 1.2).toFixed(1), mem: '0.6', state: 'R', cmd: 'window-manager', control: 'SYS' }
@@ -606,12 +586,7 @@ Personal Project. Complete design and development of a custom quadcopter with de
       }
 
       window.toggleHtopProcess = function(pid) {
-        if (pid === 101) {
-          if (window.toggleMusic) {
-            window.toggleMusic();
-            renderHtop();
-          }
-        } else if (pid === 102) {
+        if (pid === 102) {
           if (isMatrixRunning) {
             stopMatrixRain();
             writeLine("matrix screensaver terminated.", "term-out-dim");
@@ -626,16 +601,12 @@ Personal Project. Complete design and development of a custom quadcopter with de
         const container = document.getElementById('term-pane-htop');
         if (!container) return;
         
-        const isMusicRunning = window.isMusicPlaying ? window.isMusicPlaying() : false;
-        
         let cpuTotal = 1.2 + (Math.random() * 0.8);
-        if (isMusicRunning) cpuTotal += 1.2;
         if (isMatrixRunning) cpuTotal += 12.5;
         if (telemetryIntervalId) cpuTotal += 1.8;
         if (cpuTotal > 100) cpuTotal = 99.8;
         
         let memTotal = 29.4 + (Math.random() * 0.4);
-        if (isMusicRunning) memTotal += 0.5;
         if (isMatrixRunning) memTotal += 0.8;
         
         const cpuBarCount = Math.min(Math.floor(cpuTotal / 5), 20);

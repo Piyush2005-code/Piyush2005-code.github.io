@@ -8,7 +8,7 @@ const ShortcutsOverlay = () => {
         <ul className="shortcuts-list">
           <li><span>Open shell console</span><kbd>`</kbd></li>
           <li><span>Show this menu</span><kbd>?</kbd></li>
-          <li><span>Toggle music</span><kbd>m</kbd></li>
+
           <li><span>Jump to About</span><kbd>1</kbd></li>
           <li><span>Jump to Research</span><kbd>2</kbd></li>
           <li><span>Jump to Projects</span><kbd>3</kbd></li>

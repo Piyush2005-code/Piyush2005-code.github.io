@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectModal from './components/ProjectModal';
 import Terminal from './components/Terminal';
-import MusicPlayer from './components/MusicPlayer';
+
 import FloatingTermLauncher from './components/FloatingTermLauncher';
 import ShortcutsOverlay from './components/ShortcutsOverlay';
 import { initPortfolioScripts } from './scripts.js';
@@ -34,7 +34,6 @@ function App() {
       <Footer />
       <ProjectModal />
       <Terminal />
-      <MusicPlayer />
       <FloatingTermLauncher />
       <ShortcutsOverlay />
     </div>
