@@ -3466,6 +3466,20 @@
         </div>
       </div>
 
+      <div class="github-activity reveal" style="margin-top: 2.5rem;">
+        <div class="gh-section-header">
+          <span class="section-comment-header">// source: github.com · realtime</span>
+          <div class="section-label">Open Source Activity</div>
+          <h3 class="gh-section-title">Contribution <span class="grad">History</span></h3>
+        </div>
+        <div id="gh-chart-mount" class="gh-chart-wrapper">
+          <div class="gh-chart-loading">
+            <span class="gh-chart-pulse"></span>
+            <span>Fetching contribution data...</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -3872,6 +3886,130 @@
     const navMobile = document.getElementById('nav-mobile');
     hamburger.addEventListener('click', () => navMobile.classList.toggle('open'));
     function closeMobile() { navMobile.classList.remove('open') }
+
+    // ── GITHUB CONTRIBUTION CHART ──
+    (function() {
+      const GITHUB_USERNAME = 'Piyush2005-code';
+      const API_URL = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`;
+      const MONTH_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const DAY_LABELS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const CELL = 13, GAP = 3, STEP = CELL + GAP;
+
+      function groupByWeek(cells) {
+        const weeks = [];
+        let week = new Array(7).fill(null);
+        cells.forEach(cell => {
+          const dow = new Date(cell.date + 'T00:00:00').getDay();
+          week[dow] = cell;
+          if (dow === 6) { weeks.push(week); week = new Array(7).fill(null); }
+        });
+        if (week.some(Boolean)) weeks.push(week);
+        return weeks;
+      }
+
+      function renderChart(data) {
+        const mount = document.getElementById('gh-chart-mount');
+        if (!mount) return;
+        const cells = data.contributions || [];
+        const totalContribs = data.total?.lastYear ?? cells.reduce((s, c) => s + c.count, 0);
+        const weeks = groupByWeek(cells);
+        let streak = 0, cur = 0;
+        [...cells].reverse().forEach(c => { if (c.count > 0) { cur++; streak = Math.max(streak, cur); } else cur = 0; });
+
+        // Month positions
+        const monthPositions = [];
+        let lastMonth = -1;
+        weeks.forEach((week, wi) => {
+          const firstDay = week.find(Boolean);
+          if (firstDay) {
+            const mo = new Date(firstDay.date + 'T00:00:00').getMonth();
+            if (mo !== lastMonth) { monthPositions.push({ month: mo, weekIdx: wi }); lastMonth = mo; }
+          }
+        });
+
+        const ghIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>`;
+
+        mount.innerHTML = `
+          <div class="gh-stats-bar">
+            <div class="gh-stat">
+              <span class="gh-stat-val">${totalContribs}</span>
+              <span class="gh-stat-label">contributions this year</span>
+            </div>
+            <div class="gh-stat-sep"></div>
+            <div class="gh-stat">
+              <span class="gh-stat-val accent-green">${streak}</span>
+              <span class="gh-stat-label">longest streak</span>
+            </div>
+            <div class="gh-stat-sep"></div>
+            <div class="gh-stat">
+              <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener noreferrer" class="gh-profile-link">
+                ${ghIcon} @${GITHUB_USERNAME}
+              </a>
+            </div>
+          </div>
+          <div class="gh-scroll-outer" id="gh-scroll-outer">
+            <div class="gh-chart-inner">
+              <div class="gh-month-row" style="padding-left:32px;">
+                ${monthPositions.map(({month, weekIdx}) => `<span class="gh-month-label" style="left:${weekIdx*STEP}px">${MONTH_LABELS[month]}</span>`).join('')}
+              </div>
+              <div class="gh-grid-row">
+                <div class="gh-day-labels">
+                  ${DAY_LABELS.map((d, i) => `<span class="gh-day-label" style="height:${CELL}px;line-height:${CELL}px;margin-bottom:${GAP}px">${i%2===1?d:''}</span>`).join('')}
+                </div>
+                <div class="gh-grid" id="gh-grid" style="grid-template-columns:repeat(${weeks.length},${CELL}px);grid-template-rows:repeat(7,${CELL}px);gap:${GAP}px;">
+                  ${weeks.map((week, wi) => week.map((cell, di) => {
+                    const count = cell ? cell.count : 0;
+                    const level = cell ? cell.level : 0;
+                    const date  = cell ? cell.date  : '';
+                    return `<div class="gh-cell level-${level}" data-count="${count}" data-date="${date}" style="--delay:${(wi*7+di)*1.2}ms"></div>`;
+                  }).join('')).join('')}
+                </div>
+              </div>
+              <div class="gh-legend">
+                <span class="gh-legend-label">Less</span>
+                ${[0,1,2,3,4].map(l=>`<div class="gh-legend-cell level-${l}"></div>`).join('')}
+                <span class="gh-legend-label">More</span>
+              </div>
+              <div class="gh-tooltip" id="gh-tooltip" style="display:none;flex-direction:column;gap:2px;"></div>
+            </div>
+          </div>
+        `;
+
+        // Animate cells in
+        setTimeout(() => {
+          document.querySelectorAll('.gh-cell').forEach(el => el.classList.add('gh-cell-in'));
+        }, 50);
+
+        // Tooltip logic
+        const tooltip = document.getElementById('gh-tooltip');
+        const scrollOuter = document.getElementById('gh-scroll-outer');
+        document.querySelectorAll('.gh-cell[data-date]').forEach(el => {
+          el.addEventListener('mouseenter', function() {
+            const count = parseInt(this.dataset.count || '0');
+            const date  = this.dataset.date;
+            if (!date) return;
+            const r  = this.getBoundingClientRect();
+            const pr = scrollOuter.getBoundingClientRect();
+            const label    = count === 0 ? 'No' : count;
+            const plural   = count !== 1 ? 's' : '';
+            const formatted = new Date(date + 'T00:00:00').toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+            tooltip.innerHTML = `<strong>${label} contribution${plural}</strong><span>${formatted}</span>`;
+            tooltip.style.display = 'flex';
+            tooltip.style.left = (r.left - pr.left + scrollOuter.scrollLeft + r.width / 2) + 'px';
+            tooltip.style.top  = (r.top  - pr.top  - 8) + 'px';
+          });
+          el.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+        });
+      }
+
+      fetch(API_URL)
+        .then(r => r.json())
+        .then(data => renderChart(data))
+        .catch(() => {
+          const mount = document.getElementById('gh-chart-mount');
+          if (mount) mount.innerHTML = '<div class="gh-chart-error"><span>⚠ Could not load contribution data.</span></div>';
+        });
+    })();
 
     // ── SCROLL REVEAL ──
     const observer = new IntersectionObserver(entries => {

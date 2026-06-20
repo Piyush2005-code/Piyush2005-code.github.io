@@ -1,4 +1,5 @@
 import React from 'react';
+import GithubChart from './GithubChart';
 
 const Skills = () => {
   return (
@@ -111,6 +112,15 @@ const Skills = () => {
           <span className="coursework-pill">Software Engineering</span>
           <span className="coursework-pill">Pattern Recognition and Machine Learning</span>
         </div>
+      </div>
+
+      <div className="github-activity reveal" style={{ marginTop: '2.5rem' }}>
+        <div className="gh-section-header">
+          <span className="section-comment-header">// source: github.com · realtime</span>
+          <div className="section-label">Open Source Activity</div>
+          <h3 className="gh-section-title">Contribution <span className="grad">History</span></h3>
+        </div>
+        <GithubChart />
       </div>
 
     </div>
