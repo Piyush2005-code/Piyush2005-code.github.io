@@ -14,7 +14,7 @@ const Hero = () => {
     <div className="hero-orb-2"></div>
 
     <div className="hero-content">
-      <div className="hero-tag">AI Systems Engineer &nbsp;·&nbsp; IIT Jodhpur &nbsp;·&nbsp; CSE</div>
+      <div className="hero-tag">Systems Engineer &nbsp;·&nbsp; IIT Jodhpur &nbsp;·&nbsp; CSE</div>
 
       <h1 className="hero-name">
         Piyush<br /><span className="highlight">Singh Bhati</span>
