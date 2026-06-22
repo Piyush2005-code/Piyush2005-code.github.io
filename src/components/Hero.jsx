@@ -6,7 +6,7 @@ const Hero = () => {
       <section id="hero">
     <div className="hero-scanlines"></div>
     <div className="hero-video-wrap">
-      <video autoplay loop muted playsInline>
+      <video autoPlay loop muted playsInline>
         <source src="videos/quadcopter-demo.mp4" type="video/mp4" />
       </video>
     </div>

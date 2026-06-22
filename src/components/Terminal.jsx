@@ -17,7 +17,7 @@ const Terminal = () => {
           <button className="term-widget-layout-btn" onClick={(e) => { window.toggleTerminalTiling() }} id="term-layout-btn" title="Toggle Tmux Tiling Mode (Ctrl+Alt+T)">
             tmux: off
           </button>
-          <select className="term-widget-theme-select" id="term-theme-select" onchange="changeTerminalTheme(this.value)">
+          <select className="term-widget-theme-select" id="term-theme-select" onChange={(e) => window.changeTerminalTheme(e.target.value)}>
             <option value="default">default</option>
             <option value="matrix">matrix</option>
             <option value="amber">amber</option>
@@ -45,7 +45,7 @@ Toggle this console anytime with the backtick (<span className="term-out-success
               <span className="term-widget-prompt-lbl">guest@piyush_os:~$</span>
               <div style={{ position: "relative", flex: "1", display: "flex", alignItems: "center", overflow: "hidden" }}>
                 <span className="term-widget-hint" id="term-widget-hint" style={{ position: "absolute", left: "0", top: "50%", transform: "translateY(-50%)", fontFamily: "inherit", fontSize: "inherit", color: "var(--dim)", opacity: "0.45", pointerEvents: "none", whiteSpace: "pre", zIndex: "1" }}></span>
-                <input type="text" className="term-widget-input" id="term-widget-input" style={{ width: "100%", background: "transparent", border: "none", outline: "none", color: "inherit", fontFamily: "inherit", fontSize: "inherit", caretColor: "transparent", position: "relative", zIndex: "3" }} autoComplete="off" spellcheck="false" />
+                <input type="text" className="term-widget-input" id="term-widget-input" style={{ width: "100%", background: "transparent", border: "none", outline: "none", color: "inherit", fontFamily: "inherit", fontSize: "inherit", caretColor: "transparent", position: "relative", zIndex: "3" }} autoComplete="off" spellCheck={false} />
                 <span className="term-widget-caret" id="term-widget-caret" style={{ position: "absolute", width: "7.5px", height: "14px", background: "currentColor", zIndex: "2", pointerEvents: "none", top: "50%", transform: "translateY(-50%)" }}></span>
                 <span id="term-widget-measure" style={{ position: "absolute", visibility: "hidden", whiteSpace: "pre", fontFamily: "inherit", fontSize: "inherit" }}></span>
               </div>

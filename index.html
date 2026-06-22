@@ -3082,7 +3082,7 @@
                 <span class="portrait-corner bl"></span>
                 <span class="portrait-corner br"></span>
                 <span class="portrait-frame">
-                  <img src="public/Portrait.png" alt="Piyush Singh Bhati"
+                  <img src="/Portrait.png" alt="Piyush Singh Bhati"
                     onerror="this.style.minHeight='400px';this.style.background='var(--card2)'" />
                   <span class="portrait-chip">
                     <span class="portrait-chip-tag">// AI Systems Engineering</span>
@@ -3193,7 +3193,7 @@
       </div>
       <div class="proj-grid">
         <div class="proj-card reveal" data-category="systems" onclick="openModal(0)">
-          <div class="proj-card-img"><img src="public/Embedded_Hardware.avif" alt="ARM64" loading="lazy"
+          <div class="proj-card-img"><img src="/Embedded_Hardware.avif" alt="ARM64" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3211,7 +3211,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="systems" style="transition-delay:.1s" onclick="openModal(2)">
-          <div class="proj-card-img"><img src="public/os-scheduler.png" alt="OS Scheduler" loading="lazy"
+          <div class="proj-card-img"><img src="/os-scheduler.png" alt="OS Scheduler" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3229,7 +3229,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="ml" style="transition-delay:.15s" onclick="openModal(3)">
-          <div class="proj-card-img"><img src="public/jarvis-interface.png" alt="JARVIS" loading="lazy"
+          <div class="proj-card-img"><img src="/jarvis-interface.png" alt="JARVIS" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3247,7 +3247,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="ml" style="transition-delay:.05s" onclick="openModal(1)">
-          <div class="proj-card-img"><img src="public/CounselAI.png" alt="Counsel.AI" loading="lazy"
+          <div class="proj-card-img"><img src="/CounselAI.png" alt="Counsel.AI" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3264,7 +3264,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="ml" style="transition-delay:.1s" onclick="openModal(8)">
-          <div class="proj-card-img"><img src="public/detext1.jpeg" alt="Detext Benchmark" loading="lazy"
+          <div class="proj-card-img"><img src="/detext1.jpeg" alt="Detext Benchmark" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3281,7 +3281,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="ml" style="transition-delay:.2s" onclick="openModal(4)">
-          <div class="proj-card-img"><img src="public/llm-chart-generator.png" alt="LLM Charts" loading="lazy"
+          <div class="proj-card-img"><img src="/llm-chart-generator.png" alt="LLM Charts" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3299,7 +3299,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="ml" style="transition-delay:.25s" onclick="openModal(5)">
-          <div class="proj-card-img"><img src="public/Farm_top_image.jpg" alt="Crop Detection" loading="lazy"
+          <div class="proj-card-img"><img src="/Farm_top_image.jpg" alt="Crop Detection" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3317,7 +3317,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="robotics" style="transition-delay:.3s" onclick="openModal(6)">
-          <div class="proj-card-img"><img src="public/Wing_Side_view.jpeg" alt="Wing Design" loading="lazy"
+          <div class="proj-card-img"><img src="/Wing_Side_view.jpeg" alt="Wing Design" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -3335,7 +3335,7 @@
           </div>
         </div>
         <div class="proj-card reveal" data-category="robotics" style="transition-delay:.35s" onclick="openModal(7)">
-          <div class="proj-card-img"><img src="public/quadcopter-isometric.png" alt="Quadcopter" loading="lazy"
+          <div class="proj-card-img"><img src="/quadcopter-isometric.png" alt="Quadcopter" loading="lazy"
               onerror="this.style.display='none'" />
             <div class="proj-card-img-ov"></div>
           </div>
@@ -4037,14 +4037,14 @@
     const PROJECTS = [
       {
         meta: '2025\u2013Ongoing \u00b7 Embedded Systems / OS', title: 'ARM64 Unikernel for ML Inference',
-        imgs: ['public/Embedded_Hardware.avif'],
+        imgs: ['/Embedded_Hardware.avif'],
         desc: 'Architected a bare-metal ARM64 unikernel (<256KB) for deterministic ML inference, featuring a custom zero-dependency ONNX runtime and optimized SIMD kernels for microsecond-level execution.',
         ach: ['Implemented ARMv8-A boot (EL3\u2192EL1), MMU setup, GICv2, and timer with full interrupt handling', 'Designed a cooperative priority scheduler with custom 104B context switching and sub-8\u00b5s switch latency', 'Developed a zero-dependency ONNX runtime (40+ ops) with custom protobuf parser and 128MB pre-allocated tensor arena (no runtime malloc)', 'Optimized Conv2D/GEMM kernels (cache-aligned, NEON SIMD) with hardware-timer profiling for \u00b5s-level analysis', 'Achieved ~269\u00b5s inference latency (Cortex-A53, QEMU), benchmarking against Linux/Unikraft baselines'],
         tags: ['C11', 'ARM64 Assembly', 'NEON SIMD', 'QEMU', 'GCC'], link: 'https://github.com/Piyush2005-code/MiniOS'
       },
       {
         meta: '2026 \u00b7 Deep Learning / LLMs / Backend / Deployment', title: 'Counsel.ai - Student Advisory Platform for College Counselling',
-        imgs: ['public/CounselAI.png'],
+        imgs: ['/CounselAI.png'],
         desc: 'Counsel.AI is an AI-driven student advisory platform designed to help students make informed branch and college decisions through adaptive conversational guidance, personalized interest assessment, and data-driven recommendation systems.',
         ach: [
           'Engineered a Mistral-powered conversational engine with adaptive multi-turn counselling workflows',
@@ -4057,49 +4057,49 @@
       },
       {
         meta: '2025 \u00b7 Systems Programming', title: 'OS Scheduling Algorithm Simulator',
-        imgs: ['public/os-scheduler.png'],
+        imgs: ['/os-scheduler.png'],
         desc: 'Implemented classical OS scheduling algorithms with interactive UI-based visualization. Features real-time Gantt chart generation for analyzing scheduling behavior and algorithm comparison.',
         ach: ['Implemented FCFS, Round Robin, and Priority scheduling algorithms with configurable parameters', 'Built real-time Gantt chart visualization for process scheduling analysis', 'Created interactive UI for comparing algorithm performance metrics', 'Developed desktop application using Electron for cross-platform support'],
         tags: ['React', 'TypeScript', 'Electron', 'Algorithm Visualization', 'Operating Systems'], link: 'https://github.com/Piyush2005-code/Operating-System-Scheduling-Algorithms.git'
       },
       {
         meta: '2025 \u00b7 AI/ML Project', title: 'JARVIS Voice Assistant',
-        imgs: ['public/jarvis-interface.png'],
+        imgs: ['/jarvis-interface.png'],
         desc: 'Engineered a real-time voice assistant with sub-second latency leveraging GPU-accelerated inference pipelines. Built end-to-end ML infrastructure for audio processing, NLU, and context-aware response generation.',
         ach: ['Implemented GPU inference on NVIDIA A5000 with sub-second latency using optimized CUDA kernels', 'Deployed containerized ML inference stack supporting 500+ concurrent users with 98% uptime', 'Integrated Retrieval-Augmented Generation (RAG) for context-aware, knowledge-grounded responses', 'Built real-time audio processing pipeline using AudioFlamingo3 for voice-to-text transcription'],
         tags: ['NVIDIA AudioFlamingo3', 'vLLM', 'RAG', 'Docker', 'Kubernetes', 'PyTorch'], link: 'https://github.com/AISocietyIITJ/Jarvis2.O'
       },
       {
         meta: '2025 \u00b7 Deep Learning Project', title: 'LLM-Based Chart Generation Web App',
-        imgs: ['public/llm-chart-generator.png'],
+        imgs: ['/llm-chart-generator.png'],
         desc: 'Built an automated chart generation pipeline using LLMs to analyze uploaded PDF documents and generate meaningful data visualizations, leveraging NLP for document understanding and automated insight extraction.',
         ach: ['Implemented LLM-based document parsing using transformer architectures for semantic understanding', 'Built NLP pipeline for extracting structured data from unstructured PDF content', 'Designed automated chart selection algorithm using ML-based data type classification', 'Created responsive frontend-backend workflow with real-time data visualization rendering'],
         tags: ['LLMs', 'NLP', 'PDF Parsing', 'React', 'Node.js', 'Data Visualization'], link: 'https://github.com/Piyush2005-code/Chart-Generation-using-LLMs.git'
       },
       {
         meta: '2025 \u00b7 Computer Vision / Deep Learning', title: 'Crop Stress Detection \u2014 U-Net Semantic Segmentation',
-        imgs: ['public/Farm_top_image.jpg', 'public/Crop_Detection_Segmentation_mask.jpg', 'public/Crop_Detection_YOLO_Object_Detection.png', 'public/UNet model.png'],
+        imgs: ['/Farm_top_image.jpg', '/Crop_Detection_Segmentation_mask.jpg', '/Crop_Detection_YOLO_Object_Detection.jpg', '/UNet model.png'],
         desc: 'A computer vision system for detecting and segmenting stressed crop regions from aerial imagery using a U-Net CNN generating pixel-wise binary masks, with a full pipeline from synthetic dataset generation to real-time video inference.',
         ach: ['Designed a U-Net-based segmentation model (~7.7M params) with skip connections for pixel-level crop stress detection', 'Built a synthetic dataset pipeline using Gaussian blending and rotational augmentation (4\u00d7 expansion)', 'Full training pipeline with AdamW optimizer, BCEWithLogitsLoss, Dice coefficient tracking, 80/10/10 split', 'Developed real-time video inference pipeline (OpenCV + batch processing) generating overlay MP4 outputs'],
         tags: ['PyTorch', 'U-Net', 'OpenCV', 'Semantic Segmentation', 'Synthetic Data', 'CUDA / MPS'], link: 'https://github.com/Piyush2005-code/Computer-Vision-for-stressed-crop-detection.git'
       },
       {
         meta: 'Inter IIT Tech Meet 14.0 \u00b7 Aeronautics', title: 'Fixed-Wing STOL Aircraft Wing Design',
-        imgs: ['public/Wing_Side_view.jpeg', 'public/wing-drawing.png', 'public/pressure-contours.png', 'public/cfd-simulation.png'],
+        imgs: ['/Wing_Side_view.jpeg', '/wing-drawing.png', '/pressure-contours.png', '/cfd-simulation.png'],
         desc: 'Surveyed high-lift wing configurations targeting CL > 5, benchmarking against state-of-the-art designs. Designed complete end-to-end CAD model and validated aerodynamic performance through iterative CFD simulations.',
         ach: ['Studied fixed-wing flight dynamics and surveyed high-lift configurations achieving CL > 5', 'Achieved a maximum lift coefficient of 8.1258 under realistic thrust-device interaction conditions', 'Designed the complete end-to-end CAD model of the full wing assembly', 'Validated aerodynamic performance through iterative CFD simulations using ANSYS Fluent'],
         tags: ['CAD', 'CFD', 'ANSYS Fluent', 'Aerodynamics', 'Wing Design'], link: null
       },
       {
         meta: 'Personal Project \u00b7 Robotics', title: 'Quadcopter CAD Design & Development',
-        imgs: ['public/quadcopter-isometric.png', 'public/quadcopter-front.png'],
+        imgs: ['/quadcopter-isometric.png', '/quadcopter-front.png'],
         desc: 'Complete design and development of a custom quadcopter with detailed CAD modeling, structural analysis, and modular component integration for autonomous flight capabilities.',
         ach: ['Designed full assembly CAD model with structural optimization for weight and rigidity', 'Optimized frame geometry for payload capacity and flight stability', 'Implemented modular component design for easy maintenance and upgrades'],
         tags: ['CAD', 'UAV Design', 'Fusion 360', 'Robotics', 'Autonomous Systems'], link: null
       },
       {
         meta: 'Machine Learning \u00b7 Benchmarking', title: 'WiLI-2018 Language Identification \u2014 Benchmark & Model Export',
-        imgs: ['public/detext1.jpeg'],
+        imgs: ['/detext1.jpeg'],
         desc: 'Benchmarking a comprehensive suite of language identification (LangID) models on the WiLI-2018 dataset, covering 235 languages. Compared classical machine learning approaches and modern neural architectures.',
         ach: ['Evaluated Classical ML (Complement NB, SGD, Passive Aggressive, Ridge, Linear SVC) and Neural models (fastText, GlotLID, CLD3, CharCNN)', 'GlotLID achieved the highest Macro F1 (0.9706) with a wider n-gram range and larger embedding dimension', 'Identified Passive Aggressive as the best efficiency trade-off with 0.963 F1 in just 108 seconds of training', 'Exported models for downstream use in an inference backend with FastAPI backend and React frontend'],
         tags: ['Machine Learning', 'NLP', 'PyTorch', 'scikit-learn', 'Language Identification'], link: 'https://github.com/Piyush2005-code/Language_Detection_PRML_Group_10'

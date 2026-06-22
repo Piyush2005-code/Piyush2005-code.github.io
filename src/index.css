@@ -33,6 +33,76 @@
       --font-head: 'Rajdhani', sans-serif;
     }
 
+    body[data-theme="matrix"] {
+      --cyan: #39ff14;
+      --cyan2: #00ff66;
+      --blue: #228b22;
+      --blue2: #006400;
+      --steel: #32cd32;
+      --muted: #8fbc8f;
+      --txt: #e0ffe0;
+      --txt2: #c0ebc0;
+      --accent: #00ff66;
+      --glow-c: rgba(57, 255, 20, 0.15);
+      --glow-b: rgba(0, 255, 102, 0.1);
+    }
+    
+    body[data-theme="amber"] {
+      --cyan: #ffb000;
+      --cyan2: #ff8800;
+      --blue: #d2691e;
+      --blue2: #8b4513;
+      --steel: #cd853f;
+      --muted: #deb887;
+      --txt: #fff5e6;
+      --txt2: #ffe4b5;
+      --accent: #ff8800;
+      --glow-c: rgba(255, 176, 0, 0.15);
+      --glow-b: rgba(255, 136, 0, 0.1);
+    }
+
+    body[data-theme="steel"] {
+      --cyan: #8db6cd;
+      --cyan2: #a4d3ee;
+      --blue: #4682b4;
+      --blue2: #104e8b;
+      --steel: #8db6cd;
+      --muted: #b0c4de;
+      --txt: #f0f8ff;
+      --txt2: #e0eeee;
+      --accent: #a4d3ee;
+      --glow-c: rgba(141, 182, 205, 0.15);
+      --glow-b: rgba(164, 211, 238, 0.1);
+    }
+
+    body[data-theme="hack"] {
+      --cyan: #00ff00;
+      --cyan2: #adff2f;
+      --blue: #3cb371;
+      --blue2: #2e8b57;
+      --steel: #98fb98;
+      --muted: #8fbc8f;
+      --txt: #f0fff0;
+      --txt2: #e0ffe0;
+      --accent: #adff2f;
+      --glow-c: rgba(0, 255, 0, 0.15);
+      --glow-b: rgba(173, 255, 47, 0.1);
+    }
+
+    body[data-theme="cyberpunk"] {
+      --cyan: #ff007f;
+      --cyan2: #ff1493;
+      --blue: #9400d3;
+      --blue2: #4b0082;
+      --steel: #ba55d3;
+      --muted: #dda0dd;
+      --txt: #fff0f5;
+      --txt2: #ffe4e1;
+      --accent: #ff1493;
+      --glow-c: rgba(255, 0, 127, 0.15);
+      --glow-b: rgba(148, 0, 211, 0.1);
+    }
+
     html {
       scroll-behavior: smooth;
       font-size: 16px
@@ -2303,88 +2373,19 @@
       }
 
       /* ── THEME ENHANCEMENTS ── */
-      /* default theme: cyan */
-      .term-theme-default {
+      /* All terminal themes now derive automatically from global CSS variables set via data-theme on body */
+      .term-widget-overlay {
         color: var(--cyan);
-        text-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
+        text-shadow: 0 0 4px var(--glow-c);
         --term-color: var(--cyan);
-        --term-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
-        --ascii-color-1: #00f0ff;
-        --ascii-color-2: #8a2be2;
-        --ascii-color-3: #ff007f;
+        --term-shadow: 0 0 4px var(--glow-c);
+        --ascii-color-1: var(--cyan);
+        --ascii-color-2: var(--blue);
+        --ascii-color-3: var(--accent);
         --ascii-color-4: #ffffff;
       }
-      .term-theme-default .term-widget-prompt-lbl { color: var(--accent); }
-      
-      /* matrix theme: green */
-      .term-theme-matrix {
-        color: #39ff14;
-        text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
-        --term-color: #39ff14;
-        --term-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
-        --ascii-color-1: #00ff66;
-        --ascii-color-2: #008833;
-        --ascii-color-3: #adff2f;
-        --ascii-color-4: #ffffff;
-      }
-      .term-theme-matrix .term-widget-prompt-lbl { color: #00ff66; }
-      .term-theme-matrix .term-widget-window { border-color: rgba(57, 255, 20, 0.3); }
-
-      /* amber theme: retro orange */
-      .term-theme-amber {
-        color: #ffb000;
-        text-shadow: 0 0 5px rgba(255, 176, 0, 0.6);
-        --term-color: #ffb000;
-        --term-shadow: 0 0 5px rgba(255, 176, 0, 0.6);
-        --ascii-color-1: #ffb000;
-        --ascii-color-2: #ff5500;
-        --ascii-color-3: #ffdd00;
-        --ascii-color-4: #ffffff;
-      }
-      .term-theme-amber .term-widget-prompt-lbl { color: #ff8800; }
-      .term-theme-amber .term-widget-window { border-color: rgba(255, 176, 0, 0.35); }
-
-      /* steel theme: ice blue */
-      .term-theme-steel {
-        color: #8db6cd;
-        text-shadow: 0 0 3px rgba(141, 182, 205, 0.4);
-        --term-color: #8db6cd;
-        --term-shadow: 0 0 3px rgba(141, 182, 205, 0.4);
-        --ascii-color-1: #8db6cd;
-        --ascii-color-2: #4682b4;
-        --ascii-color-3: #b0c4de;
-        --ascii-color-4: #ffffff;
-      }
-      .term-theme-steel .term-widget-prompt-lbl { color: #a4d3ee; }
-      .term-theme-steel .term-widget-window { border-color: rgba(141, 182, 205, 0.25); }
-
-      /* hack theme: bright terminal green-yellow */
-      .term-theme-hack {
-        color: #00ff00;
-        text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
-        --term-color: #00ff00;
-        --term-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
-        --ascii-color-1: #00ff00;
-        --ascii-color-2: #005500;
-        --ascii-color-3: #adff2f;
-        --ascii-color-4: #ffffff;
-      }
-      .term-theme-hack .term-widget-prompt-lbl { color: #adff2f; }
-      .term-theme-hack .term-widget-window { border-color: rgba(0, 255, 0, 0.25); }
-
-      /* cyberpunk theme: hot pink / neon purple */
-      .term-theme-cyberpunk {
-        color: #ff007f;
-        text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
-        --term-color: #ff007f;
-        --term-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
-        --ascii-color-1: #ff007f;
-        --ascii-color-2: #9d00ff;
-        --ascii-color-3: #00f0ff;
-        --ascii-color-4: #ffff00;
-      }
-      .term-theme-cyberpunk .term-widget-prompt-lbl { color: var(--neon-purple); }
-      .term-theme-cyberpunk .term-widget-window { border-color: rgba(255, 0, 127, 0.35); }
+      .term-widget-overlay .term-widget-prompt-lbl { color: var(--accent); }
+      .term-widget-overlay .term-widget-window { border-color: var(--glow-c); }
 
       /* Neofetch Custom Grid/Flex Layout styles */
       .neofetch-container {
@@ -2526,14 +2527,8 @@
         margin-bottom: 2px;
       }
       .ranger-item:hover {
-        background: rgba(0, 240, 255, 0.08);
-        color: var(--txt);
+        background: var(--glow-c);
       }
-      .term-theme-matrix .ranger-item:hover { background: rgba(57, 255, 20, 0.12); }
-      .term-theme-amber .ranger-item:hover { background: rgba(255, 176, 0, 0.12); }
-      .term-theme-steel .ranger-item:hover { background: rgba(141, 182, 205, 0.1); }
-      .term-theme-hack .ranger-item:hover { background: rgba(0, 255, 0, 0.12); }
-      .term-theme-cyberpunk .ranger-item:hover { background: rgba(255, 0, 127, 0.12); }
 
       /* Mobile responsiveness for floating companion window */
       @media (max-width: 640px) {

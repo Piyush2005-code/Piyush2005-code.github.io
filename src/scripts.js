@@ -375,7 +375,7 @@ export function initPortfolioScripts() {
       },
       {
         meta: '2025 \u00b7 Computer Vision / Deep Learning', title: 'Crop Stress Detection \u2014 U-Net Semantic Segmentation',
-        imgs: ['/Farm_top_image.jpg', '/Crop_Detection_Segmentation_mask.jpg', '/Crop_Detection_YOLO_Object_Detection.png', '/UNet model.png'],
+        imgs: ['/Farm_top_image.jpg', '/Crop_Detection_Segmentation_mask.jpg', '/Crop_Detection_YOLO_Object_Detection.jpg', '/UNet model.png'],
         desc: 'A computer vision system for detecting and segmenting stressed crop regions from aerial imagery using a U-Net CNN generating pixel-wise binary masks, with a full pipeline from synthetic dataset generation to real-time video inference.',
         ach: ['Designed a U-Net-based segmentation model (~7.7M params) with skip connections for pixel-level crop stress detection', 'Built a synthetic dataset pipeline using Gaussian blending and rotational augmentation (4\u00d7 expansion)', 'Full training pipeline with AdamW optimizer, BCEWithLogitsLoss, Dice coefficient tracking, 80/10/10 split', 'Developed real-time video inference pipeline (OpenCV + batch processing) generating overlay MP4 outputs'],
         tags: ['PyTorch', 'U-Net', 'OpenCV', 'Semantic Segmentation', 'Synthetic Data', 'CUDA / MPS'], link: 'https://github.com/Piyush2005-code/Computer-Vision-for-stressed-crop-detection.git'
@@ -958,8 +958,18 @@ Personal Project. Complete design and development of a custom quadcopter with de
           'term-theme-cyberpunk'
         );
         overlay.classList.add('term-theme-' + themeName);
+        document.body.dataset.theme = themeName;
+        localStorage.setItem('portfolio-theme', themeName);
         if (select) select.value = themeName;
       };
+
+      // Initialize terminal theme from localStorage
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme) {
+        window.changeTerminalTheme(savedTheme);
+      } else {
+        window.changeTerminalTheme('default');
+      }
 
       window.runCommandFromPage = function(cmdStr) {
         if (!overlay) initElements();
@@ -1250,12 +1260,8 @@ Personal Project. Complete design and development of a custom quadcopter with de
           ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           
-          let textColor = '#39ff14';
-          if (overlay.classList.contains('term-theme-amber')) textColor = '#ffb000';
-          else if (overlay.classList.contains('term-theme-steel')) textColor = '#8db6cd';
-          else if (overlay.classList.contains('term-theme-default')) textColor = '#00f0ff';
-          else if (overlay.classList.contains('term-theme-hack')) textColor = '#00ff00';
-          else if (overlay.classList.contains('term-theme-cyberpunk')) textColor = '#ff007f';
+          const computed = getComputedStyle(document.body);
+          let textColor = computed.getPropertyValue('--cyan').trim() || '#00f0ff';
           
           ctx.fillStyle = textColor;
           ctx.font = fontSize + 'px monospace';

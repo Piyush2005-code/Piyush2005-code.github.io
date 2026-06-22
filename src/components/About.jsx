@@ -16,7 +16,7 @@ const About = () => {
                 <span className="portrait-corner br"></span>
                 <span className="portrait-frame">
                   <img src="/Portrait.png" alt="Piyush Singh Bhati"
-                    onerror="this.style.minHeight='400px';this.style.background='var(--card2)'" />
+                    onError={(e) => { e.target.style.minHeight='400px'; e.target.style.background='var(--card2)'; }} />
                   <span className="portrait-chip">
                     <span className="portrait-chip-tag">// AI Systems Engineering</span>
                     <span className="portrait-chip-text">A quick look at the systems-minded builder behind the portfolio.</span>
