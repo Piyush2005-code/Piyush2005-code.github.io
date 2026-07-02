@@ -156,6 +156,27 @@
         mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
       }
 
+      .glass-pixel-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.82;
+        filter: saturate(1.08) contrast(1.04);
+      }
+
+      @media (max-width: 768px), (pointer: coarse) {
+        .glass-pixel-screen {
+          opacity: 0.42;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .glass-pixel-screen {
+          opacity: 0.5;
+        }
+      }
+
       /* ── NAV ── */
       nav {
         position: fixed;
