@@ -845,42 +845,8 @@ Personal Project. Complete design and development of a custom quadcopter with de
           }
         });
 
-        // Dynamic CLI Card Badge Injection
-        const cards = document.querySelectorAll('.proj-card');
-        const projectSlugs = [
-          'unikernel',
-          'counsel',
-          'scheduler',
-          'jarvis',
-          'chart',
-          'crop',
-          'wing',
-          'quadcopter'
-        ];
-        cards.forEach((card, idx) => {
-          const onClickAttr = card.getAttribute('onclick') || '';
-          const match = onClickAttr.match(/openModal\((\d+)\)/);
-          const projectIdx = match ? parseInt(match[1], 10) : idx;
-          const hintEl = card.querySelector('.proj-card-hint');
-          if (hintEl && !card.querySelector('.proj-card-cli-btn')) {
-            const btn = document.createElement('div');
-            btn.className = 'proj-card-cli-btn';
-            const slug = projectSlugs[projectIdx] || projectIdx.toString();
-            btn.setAttribute('onclick', `event.stopPropagation(); runCommandFromPage('open ${slug}')`);
-            btn.innerHTML = `<span class="proj-card-cli-symbol">&gt;_</span> open ${slug}`;
-            
-            const parent = hintEl.parentNode;
-            if (parent) {
-              parent.style.display = 'flex';
-              parent.style.alignItems = 'center';
-              parent.style.justifyContent = 'space-between';
-              parent.style.gap = '0.5rem';
-              parent.style.flexWrap = 'wrap';
-              parent.appendChild(btn);
-            }
-          }
-        });
-      }
+
+      }  // end initElements
 
       window.openTerminalWidget = function() {
         if (!overlay) initElements();
