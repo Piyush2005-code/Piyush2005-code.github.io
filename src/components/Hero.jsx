@@ -72,7 +72,7 @@ const Hero = () => {
       </div>
       <div className="hero-divider"></div>
       <div className="hero-stat">
-        <div className="hero-stat-num">2</div>
+        <div className="hero-stat-num">3</div>
         <div className="hero-stat-lbl">Research</div>
       </div>
       <div className="hero-divider"></div>
