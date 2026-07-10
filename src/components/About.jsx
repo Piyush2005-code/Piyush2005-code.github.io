@@ -27,7 +27,6 @@ const About = () => {
             </span>
 
             <span className="about-card-face about-card-back">
-              <span className="section-comment-header">// source: about.sh · status: verified</span>
               <span className="section-label">About Me</span>
               <span className="section-title" style={{ marginBottom: "1.5rem" }}>Engineering <span className="grad">AI Systems</span></span>
               <span className="about-text">
@@ -57,7 +56,6 @@ const About = () => {
           </span>
         </button>
         <div className="about-teaser reveal" style={{ transitionDelay: ".1s" }}>
-          <span className="section-comment-header">// source: about.sh · status: verified</span>
           <div className="section-label">About Me</div>
           <h2 className="section-title" style={{ marginBottom: "1.5rem" }}>Engineering <span className="grad">AI Systems</span></h2>
           <p className="about-teaser-text">A systems-focused CSE undergraduate at IIT Jodhpur building at the intersection

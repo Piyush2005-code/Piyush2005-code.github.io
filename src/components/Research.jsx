@@ -39,7 +39,6 @@ const Research = () => {
     <section id="research">
       <div className="section-max">
         <div className="section-head reveal">
-          <span className="section-comment-header">// module: research.c (kernel_space)</span>
           <div className="section-label">Academic Work</div>
           <h2 className="section-title">
             Research <span className="grad">Experience</span>
@@ -52,7 +51,6 @@ const Research = () => {
               key={`${item.institution}-${item.title}`}
               style={item.delay ? { transitionDelay: item.delay } : undefined}
             >
-              <div className="card-hacker-perm">drwxr-xr-x</div>
               <div className="rc-inst">{item.institution}</div>
               <div className="rc-title">{item.title}</div>
               <div className="rc-advisor">Advisor: {item.advisor}</div>

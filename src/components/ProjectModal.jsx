@@ -21,15 +21,6 @@ const ProjectModal = () => {
         <ul className="proj-modal-ach" id="pm-ach"></ul>
         <div className="proj-modal-tags" id="pm-tags"></div>
         <div className="proj-modal-links" id="pm-links"></div>
-        
-        {/* Live System Telemetry Console */}
-        <div className="proj-modal-telemetry">
-          <div className="telemetry-header">
-            <span id="telemetry-lbl">[SYS] Telemetry Diagnostic Console</span>
-            <span className="telemetry-status-dot"></span>
-          </div>
-          <div className="telemetry-console" id="pm-telemetry-console"></div>
-        </div>
       </div>
     </div>
   </div>

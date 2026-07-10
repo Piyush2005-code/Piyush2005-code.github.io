@@ -7,14 +7,12 @@ const Skills = () => {
       <section id="skills">
     <div className="section-max">
       <div className="section-head reveal">
-        <span className="section-comment-header">// thread_id: 0x7FFF0042 (active)</span>
         <div className="section-label">Technical Expertise</div>
         <h2 className="section-title">Skills & <span className="grad">Technologies</span></h2>
       </div>
 
       <div className="skills-grid">
         <div className="skill-card reveal">
-          <div className="card-hacker-perm">-rw-r--r--</div>
           <div className="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <polyline points="16 18 22 12 16 6" />
@@ -29,7 +27,6 @@ const Skills = () => {
           </div>
         </div>
         <div className="skill-card reveal" style={{ transitionDelay: ".06s" }}>
-          <div className="card-hacker-perm">-rw-r--r--</div>
           <div className="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <rect x="2" y="2" width="20" height="20" rx="2" />
@@ -44,7 +41,6 @@ const Skills = () => {
           </div>
         </div>
         <div className="skill-card reveal" style={{ transitionDelay: ".12s" }}>
-          <div className="card-hacker-perm">-rw-r--r--</div>
           <div className="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path
@@ -58,7 +54,6 @@ const Skills = () => {
           </div>
         </div>
         <div className="skill-card reveal" style={{ transitionDelay: ".18s" }}>
-          <div className="card-hacker-perm">-rw-r--r--</div>
           <div className="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="12" cy="12" r="3" />
@@ -73,7 +68,6 @@ const Skills = () => {
           </div>
         </div>
         <div className="skill-card reveal" style={{ transitionDelay: ".24s" }}>
-          <div className="card-hacker-perm">-rw-r--r--</div>
           <div className="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <polyline points="4 17 10 11 4 5" />
@@ -87,7 +81,6 @@ const Skills = () => {
           </div>
         </div>
         <div className="skill-card reveal" style={{ transitionDelay: ".3s" }}>
-          <div className="card-hacker-perm">-rw-r--r--</div>
           <div className="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -116,7 +109,6 @@ const Skills = () => {
 
       <div className="github-activity reveal" style={{ marginTop: '2.5rem' }}>
         <div className="gh-section-header">
-          <span className="section-comment-header">// source: github.com · realtime</span>
           <div className="section-label">Open Source Activity</div>
           <h3 className="gh-section-title">Contribution <span className="grad">History</span></h3>
         </div>

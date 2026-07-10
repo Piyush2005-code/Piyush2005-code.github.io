@@ -2616,7 +2616,7 @@
         50% { opacity: 0.37; }
       }
 
-      /* Card Corner ticks & Unix metadata styling */
+      /* Card Corner ticks */
       .research-card, .proj-card, .skill-card {
         position: relative;
       }
@@ -2639,45 +2639,6 @@
         transform: scale(1.1);
       }
       
-      .card-hacker-perm {
-        position: absolute;
-        top: 8px;
-        right: 12px;
-        font-family: var(--font-mono);
-        font-size: 0.58rem;
-        color: var(--dim);
-        user-select: none;
-        pointer-events: none;
-        transition: color 0.3s ease, text-shadow 0.3s ease;
-        opacity: 0.65;
-        letter-spacing: 0.05em;
-      }
-      
-      .research-card:hover .card-hacker-perm,
-      .proj-card:hover .card-hacker-perm,
-      .card-hacker-perm {
-        display: none;
-      }
-
-      /* Section header comments */
-      .section-comment-header {
-        font-family: var(--font-mono);
-        font-size: 0.65rem;
-        color: var(--dim);
-        margin-bottom: 0.4rem;
-        letter-spacing: 0.08em;
-        display: block;
-        transition: color 0.3s ease;
-      }
-      
-      .section-head:hover .section-comment-header,
-      .about-teaser:hover .section-comment-header,
-      .about-card-back:hover .section-comment-header {
-        color: var(--cyan);
-      }
-
-
-
       /* ASCII Character classes */
       .ascii-c1 {
         color: var(--ascii-color-1, var(--cyan));
@@ -2738,64 +2699,6 @@
         display: none;
         text-align: left;
         opacity: 0.95;
-      }
-
-      /* Telemetry Diagnostic Console in Modals */
-      .proj-modal-telemetry {
-        margin-top: 1.5rem;
-        border: 1px solid var(--border);
-        background: rgba(4, 8, 15, 0.95);
-        border-radius: 6px;
-        overflow: hidden;
-        font-family: var(--font-mono);
-        text-align: left;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-      }
-      .telemetry-header {
-        background: rgba(10, 20, 40, 0.8);
-        border-bottom: 1px solid var(--border);
-        padding: 0.4rem 0.8rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.6rem;
-        font-weight: bold;
-        color: var(--cyan);
-        user-select: none;
-      }
-      .telemetry-status-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #00ff7f;
-        box-shadow: 0 0 6px #00ff7f;
-        animation: pulse-telemetry 1.5s infinite alternate;
-      }
-      @keyframes pulse-telemetry {
-        0% { opacity: 0.4; }
-        100% { opacity: 1; }
-      }
-      .telemetry-console {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.6rem;
-        line-height: 1.5;
-        color: var(--txt2);
-        max-height: 130px;
-        overflow-y: auto;
-        min-height: 85px;
-        white-space: pre-wrap;
-        scrollbar-width: thin;
-        scrollbar-color: var(--border) transparent;
-      }
-      .telemetry-console::-webkit-scrollbar {
-        width: 4px;
-      }
-      .telemetry-console::-webkit-scrollbar-thumb {
-        background: var(--border);
-        border-radius: 2px;
-      }
-      .telemetry-log-line {
-        margin-bottom: 2px;
       }
 
       /* ── KEYBOARD SHORTCUTS OVERLAY ── */
