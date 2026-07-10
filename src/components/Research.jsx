@@ -6,7 +6,7 @@ const researchExperience = [
     title: 'Vision-Based Autonomous Systems Research',
     advisor: 'Prof. Debraj Chakraborty',
     description:
-      'Working on recurrent architectures and state-space models for spatio-temporal sensor fusion. Developed and deployed computer vision model training pipelines and deployment automation.',
+      'Working on Sequence modelling for sensor fusion into Computer Vision algorithms. Developed a complete training, inference, benchmarking and testing framework for CV/ML model training and export.',
     tags: [
       'State Space Models',
       'Computer Vision/Deep Learning',
