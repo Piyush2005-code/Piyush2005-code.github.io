@@ -410,25 +410,56 @@
         padding: 0 clamp(1.5rem, 5vw, 4rem);
       }
 
+      /* ── FIXED VIDEO BACKGROUND ── */
       .hero-video-wrap {
-        position: absolute;
+        position: fixed;
         inset: 0;
-        z-index: 1;
+        width: 100vw;
+        height: 100vh;
+        z-index: -10;
+        pointer-events: none;
       }
 
       .hero-video-wrap video {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: .28;
-        filter: grayscale(60%);
+        opacity: 0.20;
+        filter: grayscale(50%);
+        will-change: transform; /* promote to GPU layer for perf */
       }
 
+      /* Zero-JS static depth layer — creates the progressive veil as you scroll */
+      /* This is a single GPU-composited layer, zero repaints, perfectly smooth    */
       .hero-video-wrap::after {
-        content: '';
-        position: absolute;
+        display: none; /* handled by .bg-depth-layer below */
+      }
+
+      .bg-depth-layer {
+        position: fixed;
         inset: 0;
-        background: linear-gradient(to bottom, rgba(5, 11, 24, 0.6) 0%, rgba(5, 11, 24, 0.35) 40%, rgba(5, 11, 24, 1) 100%);
+        z-index: -9;
+        background: linear-gradient(
+          to bottom,
+          transparent                 0%,     /* hero: fully clear, video pops   */
+          rgba(5, 11, 24, 0.40)      18%,     /* about: just a whisper of tint   */
+          rgba(5, 11, 24, 0.55)      38%,     /* research: gentle veil           */
+          rgba(5, 11, 24, 0.65)      58%,     /* projects: medium depth          */
+          rgba(5, 11, 24, 0.78)      78%,     /* skills: deeper                  */
+          rgba(5, 11, 24, 0.90)     100%      /* footer: richest depth           */
+        );
+        pointer-events: none;
+        will-change: transform; /* own GPU layer, never repaints */
+      }
+
+      /* Sections — static lightweight background, NO backdrop-filter on the page */
+      section:not(#hero) {
+        background: rgba(5, 11, 24, 0.15);
+      }
+
+      /* Global glass overlay — removed, no longer needed */
+      .global-glass-overlay {
+        display: none;
       }
 
       .hero-orb-1 {

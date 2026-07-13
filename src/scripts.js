@@ -51,17 +51,16 @@ export function initPortfolioScripts() {
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
 
-    function updateScrollProgress() {
+    function handleScroll() {
+      const scrollY = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-      if (scrollProgress) scrollProgress.style.width = progress + '%';
+      const navProgress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      if (scrollProgress) scrollProgress.style.width = navProgress + '%';
+      if (navbar) navbar.classList.toggle('scrolled', scrollY > 60);
     }
 
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
-      updateScrollProgress();
-    }, { passive: true });
-    updateScrollProgress();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     // ── ACTIVE NAV SECTION ──
     const sectionIds = ['about', 'research', 'projects', 'skills', 'contact'];

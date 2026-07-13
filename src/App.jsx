@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectModal from './components/ProjectModal';
 import Terminal from './components/Terminal';
-import GlassPixelScreen from './components/GlassPixelScreen';
+
 
 import FloatingTermLauncher from './components/FloatingTermLauncher';
 import ShortcutsOverlay from './components/ShortcutsOverlay';
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <GlassPixelScreen />
+      <div className="bg-depth-layer" aria-hidden="true" />
       <div id="scroll-progress" aria-hidden="true" />
       <Navbar />
       <Hero />
