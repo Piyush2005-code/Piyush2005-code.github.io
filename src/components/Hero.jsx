@@ -21,9 +21,9 @@ const Hero = () => {
       </h1>
 
       <p className="hero-subtitle">
-         Building the future at the intersection of<br />
-        <strong>Artificial Intelligence</strong> &nbsp;×&nbsp; <strong>Computing Hardware</strong> &nbsp;×&nbsp;
-        <strong>Autonomous Systems</strong>
+         Passionate about Research & Engineering in <br />
+        <strong>Artificial Intelligence</strong> &nbsp;×&nbsp; <strong>Computer Systems</strong> &nbsp;×&nbsp;
+        <strong>Machine Learning</strong>
       </p>
 
       <div className="hero-meta">
@@ -31,8 +31,6 @@ const Hero = () => {
         <span>B.Tech CSE</span>
         <span style={{ color: "var(--border2)" }}>·</span>
         <span>IIT Jodhpur</span>
-        <span style={{ color: "var(--border2)" }}>·</span>
-        <span>AI Systems · OS · Robotics</span>
       </div>
 
 
