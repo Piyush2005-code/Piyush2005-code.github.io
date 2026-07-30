@@ -14,7 +14,7 @@ const Terminal = () => {
         </div>
         <div className="term-widget-title">guest@piyush_os: ~</div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <button className="term-widget-layout-btn" onClick={(e) => { window.toggleTerminalTiling() }} id="term-layout-btn" title="Toggle Tmux Tiling Mode (Ctrl+Alt+T)">
+          <button className="term-widget-layout-btn liquid-glass" onClick={(e) => { window.toggleTerminalTiling() }} id="term-layout-btn" title="Toggle Tmux Tiling Mode (Ctrl+Alt+T)">
             tmux: off
           </button>
           <select className="term-widget-theme-select" id="term-theme-select" onChange={(e) => window.changeTerminalTheme(e.target.value)}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import RobotPanel from './RobotPanel';
 
 const Hero = () => {
   return (
@@ -57,9 +58,9 @@ const Hero = () => {
       </div>
 
       <div className="hero-cta">
-        <a href="#projects" className="btn-primary">View Projects</a>
-        <a href="https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing" target="_blank" rel="noopener" className="btn-secondary">Resume</a>
-        <a href="#contact" className="btn-secondary">Contact Me</a>
+        <a href="#projects" className="btn-primary liquid-glass">View Projects</a>
+        <a href="https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing" target="_blank" rel="noopener" className="btn-secondary liquid-glass">Resume</a>
+        <a href="#contact" className="btn-secondary liquid-glass">Contact Me</a>
       </div>
     </div>
 
@@ -79,6 +80,8 @@ const Hero = () => {
         <div className="hero-stat-lbl">Jodhpur</div>
       </div>
     </div>
+
+    <RobotPanel />
 
     <div className="hero-scroll">
       <a href="#about">

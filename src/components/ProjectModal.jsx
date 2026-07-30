@@ -6,7 +6,7 @@ const ProjectModal = () => {
       <div className="proj-modal-ov" id="proj-modal" onClick={(e) => { if(e.target===e.currentTarget)window.closeModal() }}>
     <div className="proj-modal">
       <div className="proj-modal-header">
-        <button className="proj-modal-close" onClick={(e) => { window.closeModal() }}><svg viewBox="0 0 24 24" fill="none"
+        <button className="proj-modal-close liquid-glass" onClick={(e) => { window.closeModal() }}><svg viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />

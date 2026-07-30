@@ -864,6 +864,103 @@
         }
       }
 
+      /* ── HERO ROBOT PANEL (Spline scene) ── */
+      .hero-robot-panel {
+        position: absolute;
+        right: 2.5rem;
+        bottom: 6.5rem;
+        width: 300px;
+        height: 300px;
+        z-index: 6;
+        opacity: 0;
+        pointer-events: auto;
+        animation: fade-up .8s 1.3s forwards;
+      }
+
+      .ui-card--robot {
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+      }
+
+      @media (max-width: 1350px), (max-height: 760px) {
+        .hero-robot-panel {
+          width: 220px;
+          height: 220px;
+          right: 1.5rem;
+          bottom: 5.5rem;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero-robot-panel {
+          display: none;
+        }
+      }
+
+      /* ── UI CARD (shadcn Card port, plain CSS) ── */
+      .ui-card {
+        position: relative;
+        border-radius: 12px;
+        border: 1px solid var(--border2);
+        background: rgba(4, 7, 14, 0.78);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        overflow: hidden;
+        color: var(--txt);
+      }
+
+      .ui-card-header { display: flex; flex-direction: column; gap: .375rem; padding: 1.5rem; }
+      .ui-card-title { font-size: 1.25rem; font-weight: 600; line-height: 1; }
+      .ui-card-description { font-size: .875rem; color: var(--muted); }
+      .ui-card-content { padding: 1.5rem; padding-top: 0; }
+      .ui-card-footer { display: flex; align-items: center; padding: 1.5rem; padding-top: 0; }
+
+      /* ── SPOTLIGHT (mouse-follow glow) ── */
+      .spotlight {
+        pointer-events: none;
+        position: absolute;
+        border-radius: 9999px;
+        background: radial-gradient(circle at center, var(--spotlight-fill, #fff) 0%, transparent 80%);
+        filter: blur(28px);
+        opacity: 0;
+        transition: opacity .2s ease;
+        z-index: 1;
+      }
+
+      .spotlight.is-active {
+        opacity: 0.18;
+      }
+
+      /* ── SPLINE SCENE / LOADER ── */
+      .hero-robot-scene {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 2;
+      }
+
+      .spline-loader-wrap {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .loader {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid var(--border2);
+        border-top-color: var(--cyan);
+        animation: loader-spin .8s linear infinite;
+      }
+
+      @keyframes loader-spin {
+        to { transform: rotate(360deg); }
+      }
+
       /* ── SECTION SHARED ── */
       section {
         position: relative;
@@ -3146,4 +3243,116 @@
       @keyframes pulse-dot {
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.4; transform: scale(0.6); }
+      }
+
+      /* ══════════════════════════════════════════════════════════════
+         LIQUID GLASS — shared premium glass treatment for every button.
+         Appended last on purpose: same-specificity as each button's own
+         .btn-primary / .proj-filter-btn / etc rules above, so it wins the
+         cascade and layers a frosted, specular, depth-y glass surface on
+         top of whatever that button already does — no per-button rewrite.
+         ══════════════════════════════════════════════════════════════ */
+      .liquid-glass {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06) 100%),
+          rgba(10, 18, 34, 0.42);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.3),
+          inset 0 -10px 18px -12px rgba(255, 255, 255, 0.08),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 8px 24px rgba(0, 0, 0, 0.35);
+        transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease, border-color .3s ease, background .3s ease;
+      }
+
+      /* Cursor-tracked specular highlight — --mx/--my set in JS (initLiquidGlass) */
+      .liquid-glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(140px 140px at var(--mx, 50%) var(--my, 15%), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 70%);
+        opacity: .35;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+        transition: opacity .3s ease;
+        z-index: 0;
+      }
+
+      /* Static top-edge sheen — the "glass catching light from above" look */
+      .liquid-glass::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 55%);
+        opacity: .5;
+        pointer-events: none;
+        border-radius: inherit;
+        z-index: 0;
+      }
+
+      .liquid-glass > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .liquid-glass:hover,
+      .liquid-glass:focus-visible {
+        border-color: rgba(255, 255, 255, 0.38);
+        transform: translateY(-2px);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.45),
+          inset 0 -10px 22px -10px rgba(255, 255, 255, 0.12),
+          0 14px 34px rgba(0, 0, 0, 0.45),
+          0 0 26px rgba(147, 197, 253, 0.22);
+      }
+
+      .liquid-glass:hover::before {
+        opacity: .6;
+      }
+
+      .liquid-glass:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: .1s;
+      }
+
+      /* Primary CTA keeps its cyan identity, just refracted through glass
+         instead of a flat gradient fill. */
+      .btn-primary.liquid-glass {
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 50%),
+          linear-gradient(135deg, var(--cyan2), var(--blue));
+        color: var(--bg);
+      }
+
+      .btn-primary.liquid-glass:hover {
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 14px 34px rgba(0, 0, 0, 0.4),
+          0 0 34px rgba(0, 212, 255, .45);
+      }
+
+      /* Small/round icon buttons (contact copy, nav shell toggle) get a
+         lighter blur + tighter radius so the glass doesn't overpower them */
+      .contact-copy-btn.liquid-glass,
+      .term-widget-layout-btn.liquid-glass {
+        backdrop-filter: blur(10px) saturate(150%);
+        -webkit-backdrop-filter: blur(10px) saturate(150%);
+      }
+
+      .nav-term-btn.liquid-glass {
+        border-radius: 20px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .liquid-glass {
+          transition: none;
+        }
+        .liquid-glass:hover {
+          transform: none;
+        }
       }

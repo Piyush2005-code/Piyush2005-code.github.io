@@ -1465,4 +1465,30 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
       }
     })();
   window.openModal = openModal; window.closeModal = closeModal; window.closeMobile = closeMobile;
+
+  initLiquidGlass();
+}
+
+// ── LIQUID GLASS — cursor-tracked specular highlight ──
+// Sets --mx/--my (percentages) on every .liquid-glass element as the pointer
+// moves over it, driving the radial-gradient highlight in .liquid-glass::before.
+// Delegated to `document` so it also works for buttons that mount later
+// (project filters, modal, terminal widget) without re-binding listeners.
+function initLiquidGlass() {
+  if (window.__liquidGlassInit) return;
+  window.__liquidGlassInit = true;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) return;
+
+  document.addEventListener('pointermove', (e) => {
+    const target = e.target.closest ? e.target.closest('.liquid-glass') : null;
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    const mx = ((e.clientX - rect.left) / rect.width) * 100;
+    const my = ((e.clientY - rect.top) / rect.height) * 100;
+    target.style.setProperty('--mx', `${mx}%`);
+    target.style.setProperty('--my', `${my}%`);
+  }, { passive: true });
 }

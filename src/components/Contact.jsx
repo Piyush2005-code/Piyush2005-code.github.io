@@ -31,7 +31,7 @@ const Contact = () => {
                 <div className="contact-card-label">Email</div>
                 <div className="contact-card-val">piyush.bhati680@gmail.com</div>
               </div>
-              <button type="button" className="contact-copy-btn" data-copy="piyush.bhati680@gmail.com" aria-label="Copy email">{copyIcon}</button>
+              <button type="button" className="contact-copy-btn liquid-glass" data-copy="piyush.bhati680@gmail.com" aria-label="Copy email">{copyIcon}</button>
             </a>
             <a href="https://github.com/Piyush2005-code" target="_blank" rel="noopener" className="contact-card">
               <div className="contact-card-icon">
@@ -44,7 +44,7 @@ const Contact = () => {
                 <div className="contact-card-label">GitHub</div>
                 <div className="contact-card-val">Piyush2005-code</div>
               </div>
-              <button type="button" className="contact-copy-btn" data-copy="https://github.com/Piyush2005-code" aria-label="Copy GitHub URL">{copyIcon}</button>
+              <button type="button" className="contact-copy-btn liquid-glass" data-copy="https://github.com/Piyush2005-code" aria-label="Copy GitHub URL">{copyIcon}</button>
             </a>
             <a href="https://linkedin.com/in/piyush-singh-bhati-5a074929a" target="_blank" rel="noopener" className="contact-card">
               <div className="contact-card-icon">
@@ -57,7 +57,7 @@ const Contact = () => {
                 <div className="contact-card-label">LinkedIn</div>
                 <div className="contact-card-val">piyush-singh-bhati</div>
               </div>
-              <button type="button" className="contact-copy-btn" data-copy="https://linkedin.com/in/piyush-singh-bhati-5a074929a" aria-label="Copy LinkedIn URL">{copyIcon}</button>
+              <button type="button" className="contact-copy-btn liquid-glass" data-copy="https://linkedin.com/in/piyush-singh-bhati-5a074929a" aria-label="Copy LinkedIn URL">{copyIcon}</button>
             </a>
             <div className="contact-card" style={{ cursor: "default" }}>
               <div className="contact-card-icon">
@@ -70,7 +70,7 @@ const Contact = () => {
                 <div className="contact-card-label">Location</div>
                 <div className="contact-card-val">IIT Jodhpur, Rajasthan, India</div>
               </div>
-              <button type="button" className="contact-copy-btn" data-copy="IIT Jodhpur, Rajasthan, India" aria-label="Copy location">{copyIcon}</button>
+              <button type="button" className="contact-copy-btn liquid-glass" data-copy="IIT Jodhpur, Rajasthan, India" aria-label="Copy location">{copyIcon}</button>
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ const Contact = () => {
             <div className="contact-cta-title">Ready to Collaborate?</div>
             <p className="contact-cta-desc">Whether it's a research project, internship opportunity, or just a tech
               discussion — I'd love to hear from you.</p>
-            <a href="mailto:piyush.bhati680@gmail.com?subject=Portfolio Inquiry" className="btn-primary"
+            <a href="mailto:piyush.bhati680@gmail.com?subject=Portfolio Inquiry" className="btn-primary liquid-glass"
               style={{ display: "inline-block" }}>Send Email</a>
           </div>
         </div>

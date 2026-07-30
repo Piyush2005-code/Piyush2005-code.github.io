@@ -11,10 +11,10 @@ const Projects = () => {
       </div>
       <div className="proj-filter-bar reveal" id="proj-filter-bar">
         <span className="proj-filter-prompt">$ ls projects/ --filter=</span>
-        <button type="button" className="proj-filter-btn active" data-filter="all">all</button>
-        <button type="button" className="proj-filter-btn" data-filter="systems">systems</button>
-        <button type="button" className="proj-filter-btn" data-filter="ml">ml</button>
-        <button type="button" className="proj-filter-btn" data-filter="robotics">robotics</button>
+        <button type="button" className="proj-filter-btn liquid-glass active" data-filter="all">all</button>
+        <button type="button" className="proj-filter-btn liquid-glass" data-filter="systems">systems</button>
+        <button type="button" className="proj-filter-btn liquid-glass" data-filter="ml">ml</button>
+        <button type="button" className="proj-filter-btn liquid-glass" data-filter="robotics">robotics</button>
       </div>
       <div className="proj-grid">
         <div className="proj-card reveal" data-category="systems" onClick={(e) => { window.openModal(0) }}>
