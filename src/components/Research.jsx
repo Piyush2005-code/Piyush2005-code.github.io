@@ -6,7 +6,8 @@ const researchExperience = [
     title: 'Vision-Based Autonomous Systems Research',
     advisor: 'Prof. Debraj Chakraborty',
     description:
-      'Working on Sequence modelling for sensor fusion into Computer Vision algorithms. Developed a complete training, inference, benchmarking and testing framework for CV/ML model training and export.',
+      'Worked on Sequence modelling for sensor fusion into Computer Vision algorithms. Developed a complete training, inference, benchmarking and testing framework for CV/ML model training and export.',
+    link: 'https://drive.google.com/file/d/1PfK5I9B_Hqz1jJwf1qThTB5vHuKhQGz_/view?usp=sharing',
     tags: [
       'State Space Models',
       'Computer Vision/Deep Learning',
@@ -55,6 +56,11 @@ const Research = () => {
               <div className="rc-title">{item.title}</div>
               <div className="rc-advisor">Advisor: {item.advisor}</div>
               <div className="rc-desc">{item.description}</div>
+              {item.link && (
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="rc-btn">
+                  View Document
+                </a>
+              )}
               <div className="rc-tags">
                 {item.tags.map((tag) => (
                   <span className="rc-tag" key={tag}>
