@@ -241,7 +241,7 @@ export function initPortfolioScripts() {
         imgs: ['/Wing_Side_view.jpeg', '/wing-drawing.png', '/pressure-contours.png', '/cfd-simulation.png'],
         desc: 'Surveyed high-lift wing configurations targeting CL > 5, benchmarking against state-of-the-art designs. Designed complete end-to-end CAD model and validated aerodynamic performance through iterative CFD simulations.',
         ach: ['Studied fixed-wing flight dynamics and surveyed high-lift configurations achieving CL > 5', 'Achieved a maximum lift coefficient of 8.1258 under realistic thrust-device interaction conditions', 'Designed the complete end-to-end CAD model of the full wing assembly', 'Validated aerodynamic performance through iterative CFD simulations using ANSYS Fluent'],
-        tags: ['CAD', 'CFD', 'ANSYS Fluent', 'Aerodynamics', 'Wing Design'], link: null
+        tags: ['CAD', 'CFD', 'ANSYS Fluent', 'Aerodynamics', 'Wing Design'], link: 'https://drive.google.com/file/d/1Ld1ZZanVCtlR_LdbzEOx0HuMkWPsHSjN/view?usp=sharing'
       },
       {
         meta: 'Personal Project \u00b7 Robotics', title: 'Quadcopter CAD Design & Development',
@@ -272,7 +272,9 @@ export function initPortfolioScripts() {
       document.getElementById('pm-ach').innerHTML = p.ach.map(a => `<li>${a}</li>`).join('');
       document.getElementById('pm-tags').innerHTML = p.tags.map(t => `<span class="proj-modal-tag">${t}</span>`).join('');
       
-      document.getElementById('pm-links').innerHTML = p.link ? `<a class="proj-modal-link" href="${p.link}" target="_blank">${GH} Source Code</a>` : '';
+      const isDrive = p.link && p.link.includes('drive.google.com');
+      const linkHtml = isDrive ? 'View Report' : `${GH} Source Code`;
+      document.getElementById('pm-links').innerHTML = p.link ? `<a class="proj-modal-link" href="${p.link}" target="_blank">${linkHtml}</a>` : '';
 
       document.getElementById('proj-modal').classList.add('open');
       document.body.classList.add('modal-open');
