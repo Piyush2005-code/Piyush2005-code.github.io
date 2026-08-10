@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Receive the redirect from 404.html and restore the original path
+    (function() {
+      var qs = window.location.search;
+      var p = new URLSearchParams(qs).get('p');
+      if (p) {
+        window.history.replaceState(null, '', p);
+      }
+    })();
+  </script>
   <title>Piyush Singh Bhati — AI Systems Engineer</title>
   <meta name="description" content="Portfolio of Piyush Singh Bhati — AI Systems Engineer at IIT Jodhpur. Projects in bare-metal ML inference, GPU systems, robotics, and deep learning." />
   <meta property="og:title" content="Piyush Singh Bhati — AI Systems Engineer" />

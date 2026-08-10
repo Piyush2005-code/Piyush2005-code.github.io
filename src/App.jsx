@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
+import { Routes, Route } from 'react-router-dom';
+
 import Hero from './components/Hero';
 import About from './components/About';
 import Research from './components/Research';
@@ -9,16 +10,31 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectModal from './components/ProjectModal';
 import Terminal from './components/Terminal';
-
-
 import FloatingTermLauncher from './components/FloatingTermLauncher';
 import ShortcutsOverlay from './components/ShortcutsOverlay';
 import { initPortfolioScripts } from './scripts.js';
+
+// Blog pages
+import BlogIndex from './components/blog/BlogIndex';
+import BlogPost from './components/blog/BlogPost';
+
 import './index.css';
 
-function App() {
+// Replace old Navbar with new one
+import { GlassmorphismNavBar } from './components/ui/glassmorphism-navigation';
+import { Home, User, Briefcase, FileText, Code } from 'lucide-react';
+
+const navItems = [
+  { name: "Home", url: "#", icon: Home },
+  { name: "About", url: "#about", icon: User },
+  { name: "Projects", url: "#projects", icon: Briefcase },
+  { name: "Resume", url: "https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing", icon: FileText },
+  { name: "Writing", url: "/#/blog", icon: Code }
+];
+
+// ── Portfolio (single-page) ───────────────────────────────────────────────────
+function Portfolio() {
   useEffect(() => {
-    // Initialize vanilla JS logic once all components mount
     initPortfolioScripts();
   }, []);
 
@@ -26,7 +42,6 @@ function App() {
     <div className="app-container">
       <div className="bg-depth-layer" aria-hidden="true" />
       <div id="scroll-progress" aria-hidden="true" />
-      <Navbar />
       <Hero />
       <About />
       <Research />
@@ -39,6 +54,20 @@ function App() {
       <FloatingTermLauncher />
       <ShortcutsOverlay />
     </div>
+  );
+}
+
+// ── Root router ───────────────────────────────────────────────────────────────
+function App() {
+  return (
+    <>
+      <GlassmorphismNavBar items={navItems} />
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+    </>
   );
 }
 
