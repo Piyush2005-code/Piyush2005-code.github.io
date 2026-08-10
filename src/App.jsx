@@ -20,17 +20,9 @@ import BlogPost from './components/blog/BlogPost';
 
 import './index.css';
 
-// Replace old Navbar with new one
-import { GlassmorphismNavBar } from './components/ui/glassmorphism-navigation';
-import { Home, User, Briefcase, FileText, Code } from 'lucide-react';
+import Navbar from './components/Navbar';
 
-const navItems = [
-  { name: "Home", url: "#", icon: Home },
-  { name: "About", url: "#about", icon: User },
-  { name: "Projects", url: "#projects", icon: Briefcase },
-  { name: "Resume", url: "https://drive.google.com/file/d/1LAI1kfhdqLb9dbIbFyj0eLZaw3rWrrI8/view?usp=sharing", icon: FileText },
-  { name: "Writing", url: "/#/blog", icon: Code }
-];
+
 
 // ── Portfolio (single-page) ───────────────────────────────────────────────────
 function Portfolio() {
@@ -61,7 +53,7 @@ function Portfolio() {
 function App() {
   return (
     <>
-      <GlassmorphismNavBar items={navItems} />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/blog" element={<BlogIndex />} />

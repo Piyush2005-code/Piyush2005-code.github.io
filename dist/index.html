@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Receive the redirect from 404.html and restore the original path
+    (function() {
+      var qs = window.location.search;
+      var p = new URLSearchParams(qs).get('p');
+      if (p) {
+        window.history.replaceState(null, '', p);
+      }
+    })();
+  </script>
   <title>Piyush Singh Bhati — AI Systems Engineer</title>
   <meta name="description" content="Portfolio of Piyush Singh Bhati — AI Systems Engineer at IIT Jodhpur. Projects in bare-metal ML inference, GPU systems, robotics, and deep learning." />
   <meta property="og:title" content="Piyush Singh Bhati — AI Systems Engineer" />
@@ -17,8 +27,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
-  <script type="module" crossorigin src="/assets/app-huWnc1FQ.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/app-sCLhHGF8.css">
+  <script type="module" crossorigin src="/assets/app-DAlrTNfa.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/app-CmJUbn-C.css">
 </head>
 <body>
   <div id="root"></div>
