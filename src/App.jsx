@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Featured from './components/Featured';
 import Research from './components/Research';
 import Projects from './components/Projects';
-import Publications from './components/Publications';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -30,8 +30,8 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Featured />
       <Research />
-      <Publications />
       <Projects />
       <Skills />
       <Contact />
