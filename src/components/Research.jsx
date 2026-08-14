@@ -30,6 +30,8 @@ const researchExperience = [
     advisor: 'Prof. Harshal D. Akolekar',
     description:
       'Working on Physics-Informed Neural Networks and CFD surrogate modeling for scientific computing applications.',
+    link: 'https://arxiv.org/pdf/2608.13490',
+    linkText: 'Preprint Available',
     tags: ['PINNs', 'Scientific Computing', 'CFD Surrogate Modeling', 'Deep Learning'],
     delay: '.12s',
   },
@@ -58,7 +60,7 @@ const Research = () => {
               <div className="rc-desc">{item.description}</div>
               {item.link && (
                 <a href={item.link} target="_blank" rel="noopener noreferrer" className="rc-btn">
-                  View Document
+                  {item.linkText || 'View Document'}
                 </a>
               )}
               <div className="rc-tags">
