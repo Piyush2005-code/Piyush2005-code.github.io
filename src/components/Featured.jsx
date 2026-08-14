@@ -4,7 +4,7 @@ const featuredData = {
   achievements: [
     {
       title: 'Vehant All India Computer Vision Hackathon',
-      date: '2025',
+      date: '2026',
       subscript: '🏅 Achieved 2nd Rank',
       description: 'Designed and developed a real-time Computer Vision pipeline for vehicle counting using strictly classical computer vision techniques.',
     },
@@ -18,23 +18,23 @@ const featuredData = {
     },
     {
       title: 'DD-RNO: Neural Operators for Airfoil Flow Prediction',
-      date: '2025 · Under Review',
+      date: '2026 · Under Review',
       subscript: 'T.A. Mehta, P.S. Bhati, H.D. Akolekar',
       description: 'Domain-Decomposed Routed Neural Operators for airfoil flow prediction; preprint published on arXiv.',
       link: 'https://arxiv.org/pdf/2608.13490',
       linkText: 'View Preprint',
     },
-    {
-      title: 'CRARL: Certified Risk-Averse RL for Aerodynamic Shape Optimization',
-      date: '2025 · Under Review',
-      subscript: 'P.S. Bhati, T.A. Mehta, H.D. Akolekar',
-      description: 'Certified risk-averse reinforcement learning framework for aerodynamic shape optimization with provably valid geometry constraints.',
-    },
+    // {
+    //   title: 'CRARL: Certified Risk-Averse RL for Aerodynamic Shape Optimization',
+    //   date: '2025 · Under Review',
+    //   subscript: 'P.S. Bhati, T.A. Mehta, H.D. Akolekar',
+    //   description: 'Certified risk-averse reinforcement learning framework for aerodynamic shape optimization with provably valid geometry constraints.',
+    // },
   ],
   activities: [
     {
       title: "Student's International Relations Cell, IIT Jodhpur",
-      date: '2025',
+      date: '2025 - 2026',
       subscript: 'Coordinator',
       description: 'Managed accommodations and hospitality for delegates from all IITs during International Relations Conclave 2025.',
     },
@@ -51,6 +51,14 @@ const featuredData = {
       description: 'Contributed to the technical progress of the Robotics Society and cultivated a research culture among peers.',
     },
     {
+      title: 'Robotics Club Website — IIT Jodhpur',
+      date: '2026',
+      subscript: 'Developer · roboticsclubiitj.github.io',
+      description: 'Designed and developed the official website for the IIT Jodhpur Robotics Club, serving as the digital home for the club\'s projects, events, and team.',
+      link: 'https://roboticsclubiitj.github.io',
+      linkText: 'View Website',
+    },
+    {
       title: "Tech Exhibition, Prometeo'26 — IIT Jodhpur",
       date: '2026',
       subscript: 'Assistant Head',
@@ -58,26 +66,6 @@ const featuredData = {
     },
   ],
 };
-
-const icons = {
-  achievements: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="8" r="6" /><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
-    </svg>
-  ),
-  activities: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-    </svg>
-  ),
-};
-
-const SubsectionLabel = ({ label, text }) => (
-  <div className="ft-sub-label">
-    <span className="ft-sub-icon">{icons[label]}</span>
-    <span>{text}</span>
-  </div>
-);
 
 const TimelineItem = ({ item, isLast }) => (
   <div className={`ft-item${isLast ? ' ft-item--last' : ''}`}>
@@ -125,7 +113,7 @@ const Featured = () => {
         <div className="ft-columns">
           {/* LEFT: Achievements */}
           <div className="ft-col reveal">
-            <SubsectionLabel label="achievements" text="Achievements & Publications" />
+            <div className="ft-sub-label">Achievements & Publications</div>
             <div className="ft-timeline">
               {featuredData.achievements.map((item, i) => (
                 <TimelineItem
@@ -138,8 +126,8 @@ const Featured = () => {
           </div>
 
           {/* RIGHT: Activities */}
-          <div className="ft-col reveal" style={{ transitionDelay: '.1s' }}>
-            <SubsectionLabel label="activities" text="Leadership & Activities" />
+          <div className="ft-col reveal" style={{ transitionDelay: '.12s' }}>
+            <div className="ft-sub-label">Leadership & Activities</div>
             <div className="ft-timeline">
               {featuredData.activities.map((item, i) => (
                 <TimelineItem
