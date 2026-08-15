@@ -14,16 +14,16 @@ const Hero = () => {
     <div className="hero-orb-2"></div>
 
     <div className="hero-content">
-      <div className="hero-tag">Systems Engineer &nbsp;·&nbsp; IIT Jodhpur &nbsp;·&nbsp; CSE</div>
+      <div className="hero-tag">Computer Scientist &nbsp;·&nbsp; IIT Jodhpur &nbsp;·&nbsp; CSE</div>
 
       <h1 className="hero-name">
         Piyush<br /><span className="highlight">Singh Bhati</span>
       </h1>
 
       <p className="hero-subtitle">
-         Passionate about Research & Engineering in <br />
-        <strong>Artificial Intelligence</strong> &nbsp;×&nbsp; <strong>Computer Systems</strong> &nbsp;×&nbsp;
-        <strong>Machine Learning</strong>
+         Building at the foundations of <br />
+        <strong>Computer Science</strong> &nbsp;×&nbsp; <strong>Systems Software</strong> &nbsp;×&nbsp;
+        <strong>Backend Engineering</strong>
       </p>
 
       <div className="hero-meta">

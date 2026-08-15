@@ -18,8 +18,8 @@ const About = () => {
                   <img src="/Portrait.png" alt="Piyush Singh Bhati"
                     onError={(e) => { e.target.style.minHeight='400px'; e.target.style.background='var(--card2)'; }} />
                   <span className="portrait-chip">
-                    <span className="portrait-chip-tag">// AI Systems Engineering</span>
-                    <span className="portrait-chip-text">A quick look at the systems-minded builder behind the portfolio.</span>
+                    <span className="portrait-chip-tag">// Computer Science & Systems</span>
+                    <span className="portrait-chip-text">A CS undergraduate who builds things from the ground up.</span>
                     <span className="about-front-hint">Click photo to read about me</span>
                   </span>
                 </span>
@@ -28,38 +28,28 @@ const About = () => {
 
             <span className="about-card-face about-card-back">
               <span className="section-label">About Me</span>
-              <span className="section-title" style={{ marginBottom: "1.5rem" }}>Engineering <span className="grad">AI Systems</span></span>
+              <span className="section-title" style={{ marginBottom: "1.5rem" }}>Built on <span className="grad">Computer Science</span></span>
               <span className="about-text">
-                <span>I am an undergraduate <span className="hl">Computer Science</span> student at <span className="accent">IIT
-                    Jodhpur</span> focused on <span className="hl">AI systems</span>, operating systems, and computer
-                  architecture.</span>
-                <span>My work explores how modern AI workloads interact with hardware and system software. I build
-                  infrastructure for machine learning — including <span className="hl">GPU-accelerated inference
-                    pipelines</span>, <span className="hl">lightweight operating systems for ML workloads</span>, and <span
-                    className="hl">distributed AI systems</span>.</span>
-                <span>My interests include <span className="accent">ML systems</span>, <span className="hl">GPU architecture</span>,
-                  <span className="hl">AI inference infrastructure</span>, and <span className="accent">operating system
-                    design</span> for high-performance and low-power computing environments.
-                </span>
-                <span>I also have a keen passion for design and aesthetics expressed through <span className="hl">CAD
-                    Modelling</span> in the domain of <span className="hl">Robotics</span>.</span>
+                <span>I'm a <span className="hl">Computer Science</span> undergrad at <span className="accent">IIT Jodhpur</span>. I'm drawn to the parts of computing most people take for granted — how an OS schedules work, how a program becomes machine code, why one algorithm beats another by an order of magnitude.</span>
+                <span>I build <span className="hl">systems software</span> — bare-metal kernels, runtimes, backend services. The problems I find most satisfying are the ones that require thinking carefully about <span className="hl">correctness and performance</span> at the same time.</span>
+                <span>I've also done research in <span className="accent">ML systems</span> and <span className="hl">scientific computing</span>, and spent time studying <span className="hl">GPU architecture</span> and building distributed inference infrastructure.</span>
+                <span>On the side, <span className="hl">robotics</span> and <span className="hl">mechanical design</span> are where I take the software instincts into the physical world.</span>
               </span>
               <span className="about-tags">
-                <span className="about-tag">--ai-systems</span>
+                <span className="about-tag">--algorithms</span>
                 <span className="about-tag">--operating-systems</span>
-                <span className="about-tag">--gpu-architecture</span>
+                <span className="about-tag">--systems-software</span>
+                <span className="about-tag">--backend-engineering</span>
+                <span className="about-tag">--computer-architecture</span>
                 <span className="about-tag">--robotics</span>
-                <span className="about-tag">--comp-architecture</span>
-                <span className="about-tag">--embedded-systems</span>
               </span>
             </span>
           </span>
         </button>
         <div className="about-teaser reveal" style={{ transitionDelay: ".1s" }}>
           <div className="section-label">About Me</div>
-          <h2 className="section-title" style={{ marginBottom: "1.5rem" }}>Engineering <span className="grad">AI Systems</span></h2>
-          <p className="about-teaser-text">A systems-focused CSE undergraduate at IIT Jodhpur building at the intersection
-            of AI infrastructure, operating systems, hardware-aware ML, and robotics design.</p>
+          <h2 className="section-title" style={{ marginBottom: "1.5rem" }}>Built on <span className="grad">Computer Science</span></h2>
+          <p className="about-teaser-text">CS undergrad at IIT Jodhpur. I like understanding how things actually work — operating systems, compilers, hardware. I've also done research in ML systems, GPU architecture, and scientific computing.</p>
         </div>
       </div>
     </div>

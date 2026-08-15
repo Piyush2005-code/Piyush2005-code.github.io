@@ -6,7 +6,7 @@ const researchExperience = [
     title: 'Vision-Based Autonomous Systems Research',
     advisor: 'Prof. Debraj Chakraborty',
     description:
-      'Worked on Sequence modelling for sensor fusion into Computer Vision algorithms. Developed a complete training, inference, benchmarking and testing framework for CV/ML model training and export.',
+      'Built the full training, inference, and benchmarking stack for a Mamba-Transformer object detection and tracking pipeline on NVIDIA Jetson Orin, targeting sub-30ms latency under occlusion and motion-blur conditions.',
     link: 'https://drive.google.com/file/d/1PfK5I9B_Hqz1jJwf1qThTB5vHuKhQGz_/view?usp=sharing',
     tags: [
       'State Space Models',
@@ -21,7 +21,7 @@ const researchExperience = [
     title: 'AI Systems Research',
     advisor: 'Prof. Sidharth Sharma',
     description:
-      'Working on AI systems and GPU architecture, focusing on system-level optimization for machine learning workloads and studying the NVIDIA Hopper architecture.',
+      'Investigating the NVIDIA Hopper architecture — Tensor Cores, async execution, memory hierarchy — and how these primitives behave under ML inference workloads. Writing microbenchmarks to measure kernel scheduling and memory access patterns.',
     tags: ['AI Systems', 'GPU Architecture', 'ML Optimization', 'NVIDIA Hopper'],
   },
   {
@@ -29,7 +29,7 @@ const researchExperience = [
     title: 'Scientific Machine Learning Research',
     advisor: 'Prof. Harshal D. Akolekar',
     description:
-      'Working on Physics-Informed Neural Networks and CFD surrogate modeling for scientific computing applications.',
+      'Building neural operators and RL-based optimizers for aerodynamic shape design and fluid flow prediction — problems where classical numerical solvers are too slow for iterative design exploration.',
     link: 'https://arxiv.org/pdf/2608.13490',
     linkText: 'Preprint Available',
     tags: ['PINNs', 'Scientific Computing', 'CFD Surrogate Modeling', 'Deep Learning'],
