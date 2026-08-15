@@ -256,6 +256,21 @@ export function initPortfolioScripts() {
         desc: 'Benchmarking a comprehensive suite of language identification (LangID) models on the WiLI-2018 dataset, covering 235 languages. Compared classical machine learning approaches and modern neural architectures.',
         ach: ['Evaluated Classical ML (Complement NB, SGD, Passive Aggressive, Ridge, Linear SVC) and Neural models (fastText, GlotLID, CLD3, CharCNN)', 'GlotLID achieved the highest Macro F1 (0.9706) with a wider n-gram range and larger embedding dimension', 'Identified Passive Aggressive as the best efficiency trade-off with 0.963 F1 in just 108 seconds of training', 'Exported models for downstream use in an inference backend with FastAPI backend and React frontend'],
         tags: ['Machine Learning', 'NLP', 'PyTorch', 'scikit-learn', 'Language Identification'], link: 'https://github.com/Piyush2005-code/Language_Detection_PRML_Group_10'
+      },
+      {
+        meta: '2026\u2013Ongoing \u00b7 Systems Software / Desktop Engineering',
+        title: 'Lumina \u2014 Local-First Agentic IDE & AI Runtime',
+        imgs: ['/lumina-logo.png'],
+        desc: 'Lumina is a cross-platform, local-first agentic IDE built around a modular TypeScript/Node.js orchestration runtime, Electron + React desktop interface, and an interoperable MCP/A2A agent architecture. The core design separates the chat layer, agent runtime, model providers, tool execution, persistence, scheduling, and observability so that models and tools can be added or replaced without rewriting the system. MCP handles every agent-to-tool boundary; A2A handles agent-to-agent delegation; the Lumina Agent Runtime sits above both as the orchestration layer.',
+        ach: [
+          'Designed a provider-agnostic inference contract routing requests across Groq, Gemini, and local LLMs \u2014 schedulable by capability, latency, cost, and historical telemetry',
+          'Built an MCP runtime mediating all tool execution (filesystem, shell, Git, web, browser, email) without embedding tool logic into agents',
+          'Implemented A2A layer for dynamic instantiation and delegation to specialized Research, Coding, and Email agents',
+          'Streaming model responses, async agent tasks, reusable provider connections, event-driven execution, and persistent task state via SQLite/Drizzle',
+          'Structured observability with OpenTelemetry \u2014 execution traces, approval policies, retries, and telemetry-driven scheduling'
+        ],
+        tags: ['Electron', 'React', 'TypeScript', 'Node.js / Express', 'SQLite / Drizzle', 'MCP', 'A2A', 'Groq / Gemini', 'OpenTelemetry', 'Python FastMCP'],
+        link: null
       }
     ];
     function openModal(idx) {

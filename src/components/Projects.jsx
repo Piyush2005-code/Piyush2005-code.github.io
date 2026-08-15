@@ -17,6 +17,22 @@ const Projects = () => {
         <button type="button" className="proj-filter-btn" data-filter="robotics">robotics</button>
       </div>
       <div className="proj-grid">
+        <div className="proj-card reveal" data-category="systems" onClick={(e) => { window.openModal(9) }}>
+          <div className="proj-card-img"><img src="/lumina-logo.png" alt="Lumina IDE" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
+            <div className="proj-card-img-ov"></div>
+          </div>
+          <div className="proj-card-body">
+            <div className="proj-card-meta">2026–Ongoing · Systems Software / Desktop Engineering</div>
+            <h3 className="proj-card-title">Lumina — Agentic IDE & AI Runtime</h3>
+            <p className="proj-card-desc">Local-first agentic IDE with a modular TypeScript orchestration runtime. MCP handles agent-to-tool execution; A2A handles agent-to-agent delegation; Lumina's runtime orchestrates both.</p>
+            <div className="proj-card-hint">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></div>
+          </div>
+        </div>
         <div className="proj-card reveal" data-category="systems" onClick={(e) => { window.openModal(0) }}>
           <div className="proj-card-img"><img src="/Embedded_Hardware.avif" alt="ARM64" loading="lazy"
               onError={(e) => { e.target.style.display = 'none'; }} />
