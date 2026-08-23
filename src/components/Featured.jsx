@@ -9,7 +9,7 @@ const featuredData = {
       description: 'Designed and developed a real-time Computer Vision pipeline for vehicle counting using strictly classical computer vision techniques.',
     },
     {
-      title: 'Edge AI Research Intern — IIT Bombay',
+      title: 'Summer Research Internship(On-Site) — IIT Bombay',
       date: 'Summer 2026',
       subscript: 'Prof. Debraj Chakraborty · Systems & Control Engineering',
       description: 'Designed a Mamba-Transformer hybrid object detection and multi-object tracking pipeline targeting sub-30ms inference on NVIDIA Jetson Orin under occlusion and motion-blur conditions.',

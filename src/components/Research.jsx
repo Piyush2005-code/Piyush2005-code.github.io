@@ -3,7 +3,7 @@ import React from 'react';
 const researchExperience = [
   {
     institution: 'IIT Bombay',
-    title: 'Vision-Based Autonomous Systems Research',
+    title: 'Summer Research Internship(On-Site)',
     advisor: 'Prof. Debraj Chakraborty',
     description:
       'Built the full training, inference, and benchmarking stack for a Mamba-Transformer object detection and tracking pipeline on NVIDIA Jetson Orin, targeting sub-30ms latency under occlusion and motion-blur conditions.',
