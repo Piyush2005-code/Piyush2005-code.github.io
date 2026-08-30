@@ -247,6 +247,7 @@ Key Focus Areas:
 Email:    piyush.bhati680@gmail.com
 GitHub:   github.com/Piyush2005-code
 LinkedIn: linkedin.com/in/piyush-singh-bhati-5a074929a
+Scholar:  scholar.google.com/citations?user=j5paDZAAAAAJ&hl=en
 Location: IIT Jodhpur, Rajasthan, India`,
 
         '/publications.txt': `Academic Foundations & Coursework
@@ -1066,7 +1067,7 @@ Personal Project. Complete design and development of a custom quadcopter with de
   resume         Open my resume in a new tab
   scroll <sec>   Scroll to page section (about, research, projects, skills, contact)
   open <item>    Open project details or resume (e.g. open unikernel, open resume)
-  social <plt>   Open external profile in new tab (github, linkedin, email)
+  social <plt>   Open external profile in new tab (github, linkedin, scholar, email)
   tmux           Toggle tiling window workspace layout (split panes)
   htop           Open system monitor in side pane (shows CPU/processes)
   ranger         Open file explorer in side pane (browse project source)
@@ -1332,10 +1333,11 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
           const socials = {
             'github': 'https://github.com/Piyush2005-code',
             'linkedin': 'https://linkedin.com/in/piyush-singh-bhati-5a074929a',
+            'scholar': 'https://scholar.google.com/citations?user=j5paDZAAAAAJ&hl=en',
             'email': 'mailto:piyush.bhati680@gmail.com'
           };
           if (!target) {
-            writeLine(`Usage: social <github|linkedin|email>`, "term-out-info");
+            writeLine(`Usage: social <github|linkedin|scholar|email>`, "term-out-info");
             return;
           }
           if (socials[target]) {
@@ -1345,12 +1347,14 @@ Type 'ls projects' or look at the main page for project names.`, "term-out-error
                 window.profileTabs.github = window.open(socials[target], '_blank');
               } else if (target === 'linkedin') {
                 window.profileTabs.linkedin = window.open(socials[target], '_blank');
+              } else if (target === 'scholar') {
+                window.profileTabs.scholar = window.open(socials[target], '_blank');
               } else {
                 window.open(socials[target], '_blank');
               }
             }, 400);
           } else {
-            writeLine(`social: unknown platform '${target}'. Available: github, linkedin, email`, "term-out-error");
+            writeLine(`social: unknown platform '${target}'. Available: github, linkedin, scholar, email`, "term-out-error");
           }
           return;
         }

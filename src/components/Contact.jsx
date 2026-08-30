@@ -59,6 +59,18 @@ const Contact = () => {
               </div>
               <button type="button" className="contact-copy-btn" data-copy="https://linkedin.com/in/piyush-singh-bhati-5a074929a" aria-label="Copy LinkedIn URL">{copyIcon}</button>
             </a>
+            <a href="https://scholar.google.com/citations?user=j5paDZAAAAAJ&hl=en" target="_blank" rel="noopener" className="contact-card">
+              <div className="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z" />
+                </svg>
+              </div>
+              <div>
+                <div className="contact-card-label">Google Scholar</div>
+                <div className="contact-card-val">Publications</div>
+              </div>
+              <button type="button" className="contact-copy-btn" data-copy="https://scholar.google.com/citations?user=j5paDZAAAAAJ&hl=en" aria-label="Copy Scholar URL">{copyIcon}</button>
+            </a>
             <div className="contact-card" style={{ cursor: "default" }}>
               <div className="contact-card-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
