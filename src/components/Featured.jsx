@@ -9,6 +9,12 @@ const featuredData = {
       description: 'Designed and developed a real-time Computer Vision pipeline for vehicle counting using strictly classical computer vision techniques.',
     },
     {
+      title: 'Adobe University Hackathon 2026',
+      date: '2026',
+      subscript: '🏅 Among the top 416 runner up from 3,01,054 candidates',
+      description: 'Cleared screening rounds based on AI-Agent crawlers and content-discoverability, developed an Agentic-Skills Framework for aiding AI-Agents in detecting inefficiencies of content/brand discoverability from AI-Crawlers.'
+    },
+    {
       title: 'Summer Research Internship(On-Site) — IIT Bombay',
       date: 'Summer 2026',
       subscript: 'Prof. Debraj Chakraborty · Systems & Control Engineering',
